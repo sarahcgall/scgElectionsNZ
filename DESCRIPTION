@@ -1,0 +1,20 @@
+Package: scgElectionsNZ
+Title: New Zealand General Election Data Explorer
+Version: 0.0.1
+Authors@R: 
+    person("Sarah", "Gall", , "sarahcgall@outlook.com", role = c("aut", "cre"))
+Description: This package allows you to download and explore New Zealand general election data between 1996 and 2023.
+License: MIT + file LICENSE
+URL: https://sarahcgall.r-lib.org/, https://github.com/r-lib/sarahcgall
+BugReports: https://github.com/r-lib/sarahcgall/issues
+Imports:
+    dplyr,
+    utils,
+    rlang
+LazyData: true
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 3.5.0)
