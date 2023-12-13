@@ -639,7 +639,8 @@ Additional datasets will include by-election data and the following datasets:
 * `split_electorate`: split voting by electorate (2005 - 2023 only)
 
 In future updates, the following functions will be added:
-* `amend_boundary`: a function to convert boundaries into current boundaries for a better comparison across multiple elections (this will replace the `update_EName` function which is not )
+* `amend_boundary`: a function to convert boundaries into current boundaries for a better comparison across multiple elections (this will replace the `update_EName`
+function which is ok for general tracking of electorates but not for statistical purposes)
 * `plot_parliament`: a function to visualise the number of seats (parliament graph)
 * `plot_cartogram`: a function to visualise the vote by electorate (cartogram)
 

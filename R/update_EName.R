@@ -30,6 +30,7 @@ update_EName <- function(..., column1=Electorate, column2=Election) {
     # pre 2020 changes
     {{ column1 }} == "Albany" ~ "East Coast Bays",
     {{ column1 }} == "Aoraki" ~ "Rangitata",
+    {{ column1 }} == "Hunua" & {{ column2 }} %in% c(1996, 1999) ~ "Papakura",
     {{ column1 }} == "Clevedon" ~ "Papakura",
     {{ column1 }} %in% c("Karapiro", "Piako") ~ "Waikato",
     {{ column1 }} == "Mahia" ~ "East Coast",
