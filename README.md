@@ -639,7 +639,11 @@ Additional datasets will include by-election data and the following datasets:
 * `split_electorate`: split voting by electorate (2005 - 2023 only)
 
 In future updates, the following functions will be added:
-* `amend_boundary`: a function to convert boundaries into current boundaries for a better comparison across multiple elections
-* `plot_split`: a function to visualise split voting (sankey graph)
+* `amend_boundary`: a function to convert boundaries into current boundaries for a better comparison across multiple elections (this will replace the `update_EName` function which is not )
 * `plot_parliament`: a function to visualise the number of seats (parliament graph)
 * `plot_cartogram`: a function to visualise the vote by electorate (cartogram)
+
+For any suggested additions or amendments, please get in touch!
+
+## Other Packages
+* [`scgUtils`](https://github.com/sarahcgall/scgUtils): a package which provides functions and plotting capabilities

@@ -7,4 +7,4 @@
 #' @name scgElectionsNZ
 NULL
 
-globalVariables(c("Electorate", "Region", "Electorate_Type"))
+globalVariables(c("Electorate", "Region", "Electorate_Type", "Election"))

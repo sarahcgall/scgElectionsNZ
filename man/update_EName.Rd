@@ -4,12 +4,14 @@
 \alias{update_EName}
 \title{Update Electorate Names}
 \usage{
-update_EName(..., column = Electorate)
+update_EName(..., column1 = Electorate, column2 = Election)
 }
 \arguments{
 \item{...}{Name of dataset}
 
-\item{column}{Name of column with electorates}
+\item{column1}{Name of column with electorates}
+
+\item{column2}{Name of column with election years}
 }
 \value{
 A data frame with an additional region column.
