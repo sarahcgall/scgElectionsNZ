@@ -1,4 +1,4 @@
-scgElectionsNZ
+scgElectionsNZ <a href="https://github.com/sarahcgall/scgElectionsNZ"><img src="man/figures/logo.png" align="right" height="138" /></a>
 ================
 Development version: 0.0.1
 <!-- badges: start -->
