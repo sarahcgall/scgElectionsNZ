@@ -1,9 +1,9 @@
-scgElectionsNZ <a href="https://github.com/sarahcgall/scgElectionsNZ"><img src="man/figures/logo.png" align="right" height="138" /></a>
+scgElectionsNZ <a href="https://github.com/sarahcgall/scgElectionsNZ"><img src="man/figures/logo.png" align="right" height="175" /></a>
 ================
 Development version: 0.0.1
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/sarahcgall/scgElectionsNZ/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sarahcgall/scgElectionsNZ/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/sarahcgall/scgElectionsNZ/branch/main/graph/badge.svg)](https://app.codecov.io/gh/sarahcgall/scgElectionsNZ?branch=main)
+[![codecov](https://codecov.io/gh/sarahcgall/scgElectionsNZ/graph/badge.svg?token=KRX0FWHUAO)](https://codecov.io/gh/sarahcgall/scgElectionsNZ)
 <!-- badges: end -->
 
 ## Overview
