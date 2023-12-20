@@ -31,7 +31,8 @@ In addition to the datasets listed above, a number of helper functions exist to 
 * `get_data()`: provides ability to save dataset with a name of your choosing.
 * `add_region()`: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) against a dataset containing electorates.
 * `add_type()`: adds an Electorate_Type column (i.e., General or Maori) against a dataset containing electorates.
-* `update_EName()`: in 2020, 10 electorates underwent name changes. This function therefore converts pre-2020 electorate names to match these changes.
+* `update_EName()`: this function converts pre-2020 electorate names to match post-2020 electorate names so that seats can 
+be tracked from 1996 until 2023 with one exception of Waipareira which merged with Waitakere in 1999 but then split into Kelston and Upper Harbour.
 
 ``` r
 # Load datasets by using the following helper function:
