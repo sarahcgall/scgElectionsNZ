@@ -1,5 +1,10 @@
 scgElectionsNZ
 ================
+Development version: 0.0.1
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/sarahcgall/scgElectionsNZ/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sarahcgall/scgElectionsNZ/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/sarahcgall/scgElectionsNZ/branch/main/graph/badge.svg)](https://app.codecov.io/gh/sarahcgall/scgElectionsNZ?branch=main)
+<!-- badges: end -->
 
 ## Overview
 
