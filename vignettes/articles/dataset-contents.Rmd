@@ -1,0 +1,103 @@
+---
+title: "Datasets"
+---
+
+## Contents
+The datasets have been divided into categories based on intended use of the data and contain election data from across
+all elections years for ease of comparison. In addition, all special characters have been removed from the data (e.g.,
+M&amacr;ori is now Maori) and party names have been standardised across elections. A full list of amended party names
+can be found in data-raw\utils.R.
+
+The column names within these datasets are uniform for ease of combining multiple datasets together (see table below).
+
+| Column Name            | Column Type    | `summary` | `turnout` | `vote_type` | `party_votes`<sup>1</sup> | `candidate_votes` | `majority` | `split_total`<sup>1</sup> | `preMMP_results` | `historic_turnout` |
+|:-----------------------|----------------|:---------:|:---------:|:-----------:|:-------------------------:|:-----------------:|:----------:|:-------------------------:|:----------------:|:------------------:|
+| Election               | Numeric (year) | &#10004;  | &#10004;  |  &#10004;   |         &#10004;          |     &#10004;      |  &#10004;  |         &#10004;          |     &#10004;     |      &#10004;      |
+| Ballot<sup>2</sup>     | Character      | &#10004;  | &#10004;  |  &#10004;   |         &#10004;          |     &#10004;      |            |                           |                  |                    |
+| MPs                    | Numeric (n)    |           |           |             |                           |                   |            |                           |                  |      &#10004;      |
+| Electorate             | Character      |           | &#10004;  |  &#10004;   |         &#10004;          |     &#10004;      |  &#10004;  |         &#10004;          |                  |                    |
+| Electors               | Numeric (n)    |           | &#10004;  |             |                           |                   |            |                           |                  |      &#10004;      |
+| Turnout                | Numeric (%)    |           | &#10004;  |             |                           |                   |            |                           |                  |      &#10004;      |
+| Total<sup>3</sup>      | Numeric (n)    |           | &#10004;  |             |                           |                   |            |                           |                  |                    |
+| Informal               | Numeric (n)    |           | &#10004;  |             |                           |                   |            |                           |                  |                    |
+| Validity               | Character      |           |           |  &#10004;   |                           |                   |            |                           |                  |                    |
+| Vote_Type              | Character      |           |           |  &#10004;   |                           |                   |            |                           |                  |                    |
+| Party                  | Character      | &#10004;  |           |             |         &#10004;          |     &#10004;      |  &#10004;  |                           |     &#10004;     |                    |
+| List_Party             | Character      |           |           |             |                           |                   |            |         &#10004;          |                  |                    |
+| Electorate_Party       | Character      |           |           |             |                           |                   |            |         &#10004;          |                  |                    |
+| Candidate<sup>4</sup>  | Character      |           |           |             |                           |                   |  &#10004;  |                           |                  |                    |
+| Seats                  | Numeric (n)    | &#10004;  |           |             |                           |                   |            |                           |     &#10004;     |                    |
+| Votes                  | Numeric (n)    | &#10004;  |           |  &#10004;   |         &#10004;          |     &#10004;      |            |         &#10004;          |                  |                    |
+| Percentage             | Numeric (%)    | &#10004;  |           |             |                           |     &#10004;      |            |         &#10004;          |     &#10004;     |                    |
+| Party_List<sup>5</sup> | Character      |           |           |             |                           |                   |  &#10004;  |                           |                  |                    |
+| Nominated<sup>6</sup>  | Character      | &#10004;  |           |             |                           |                   |            |                           |                  |                    |
+| Registered<sup>7</sup> | Character      | &#10004;  |           |             |                           |                   |            |                           |                  |                    |
+| Successful<sup>8</sup> | Character      | &#10004;  |           |             |                           |                   |            |                           |                  |                    |
+
+1 Dataset includes Informal Votes under Party column.<br>
+2 Ballot includes "Party", "Candidate", or "Total" (Party + Candidate for Seats or Party only for Vote/Percentage).<br>
+3 Total refers to the total number of votes cast (Valid + Informal).<br>
+4 Candidate column contains the name of the winning candidate for that electorate.<br>
+5 Party_List column contains Yes or No values and refers to whether the candidate running in the electorate is also on the Party List.<br>
+6 Nominated column refers to the number of candidates nominated as electorate candidates or the number on a party list depending on Vote_Type.<br>
+7 Registered column contains Yes or No values and refers to whether the party is a registered party with a list or an unregistered party without a list.<br>
+8 Successful column contains Yes or No values and refers to whether or not a party achieved the 5% Party_Vote threshold or won at least one electorate.<br>
+
+## Sources
+The election data available within the `scgElectionsNZ` package can be found in the tables below.
+Data have been sourced from the [New Zealand Electoral Commission](https://electionresults.govt.nz/) and are up-to-date as at 3 December, 2023.
+
+#### General Elections
+| Date        | Election                    | Data Included? |
+|:------------|:----------------------------|:--------------:|
+| 1879 - 1993 | General Elections (pre-MMP) |      Yes*      |
+| 12 Oct 1996 | 1996 General Election       |     Yes**      |
+| 27 Nov 1999 | 1999 General Election       |     Yes**      |
+| 27 Jul 2002 | 2002 General Election       |     Yes**      |
+| 17 Sep 2005 | 2005 General Election       |      Yes       |
+| 08 Nov 2008 | 2008 General Election       |      Yes       |
+| 26 Nov 2011 | 2011 General Election       |      Yes       |
+| 20 Sep 2014 | 2014 General Election       |      Yes       |
+| 23 Sep 2017 | 2017 General Election       |      Yes       |
+| 17 Oct 2020 | 2020 General Election       |      Yes       |
+| 14 Oct 2023 | 2023 General Election       |      Yes       |
+
+*Data found in the `preMMP_results` and `historic_turnout` datasets only.<br>
+**Split voting data not included (`split_total` dataset).
+<br>
+<br>
+
+#### By-Elections
+
+| Date        | Election                          | Included?  | Notes/Context                                                                                                                                                                           |
+|:------------|:----------------------------------|:----------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 13 Aug 1994 | Selwyn By-Election                |     No     | The by-election was triggered by the death of the sitting National MP. National held the seat.                                                                                          |
+| 02 May 1998 | Taranaki-King Country By-Election |     No     | The by-election was triggered by the resignation of the sitting National MP after he was replaced as Prime Minister. National held the seat.                                            |
+| 10 Jul 2004 | Te Tai Hauauru By-Election        |     No     | The by-election was triggered by the resignation of the sitting MP from the seat after she quit the Labour Party in protest and helped form the Maori Party. The same MP held the seat. |
+| 13 Jun 2009 | Mt Albert By-Election             |     No     | The by-election was triggered by the resignation of the sitting Labour MP and former Prime Minister, Helen Clark. Labour held the seat.                                                 |
+| 20 Nov 2010 | Mana By-Election                  |     No     | The by-election was triggered by the resignation of the sitting Labour MP after he was appointed Assistant Vice Chancellor Pasifika at Victoria University. Labour held the seat.       |
+| 05 Mar 2011 | Botany By-Election                |     No     | The by-election was triggered by the resignation of the sitting National MP following allegations that her husband misused taxpayer money. National held the seat.                      |
+| 25 Jun 2011 | Te Tai Tokerau By-Election        |     No     | The by-election was triggered by the resignation of the sitting MP from the seat after he resigned from the Maori Party to form his own party, Mana Party. The same MP held the seat.   |
+| 29 Jun 2013 | Ikaroa Rawhiti By-Election        |     No     | The by-election was triggered by the death of the sitting Labour MP. Labour held the seat.                                                                                              |
+| 30 Nov 2013 | Christchurch East By-Election     |     No     | The by-election was triggered by the resignation of the sitting Labour MP after she was elected Mayor of Christchurch. Labour held the seat.                                            |
+| 28 Mar 2015 | Northland By-Election             |     No     | The by-election was triggered by the resignation of the sitting National MP. NZ First won the seat, electing Winston Peters.                                                            |
+| 06 Dec 2016 | Mt Roskill By-Election            |     No     | The by-election was triggered by the resignation of the sitting Labour MP after he was elected Mayor of Auckland. Labour held the seat.                                                 |
+| 25 Feb 2017 | Mt Albert By-Election             |     No     | The by-election was triggered by the resignation of the sitting Labour MP and former leader of the Labour Party. Labour held the seat, electing Jacinda Ardern.                         |
+| 09 Jun 2018 | Northcote By-Election             |     No     | The by-election was triggered by the resignation of the sitting National MP. National held the seat.                                                                                    |
+| 18 Jun 2022 | Tauranga By-Election              |     No     | The by-election was triggered by the resignation of the sitting National MP. National held the seat.                                                                                    |
+| 10 Dec 2022 | Hamilton West By-Election         |     No     | The by-election was triggered by the resignation of the sitting Labour MP who had made allegations of bullying within the party and was subsequently expelled. Labour lost the seat.    |
+| 25 Nov 2023 | Port Waikato By-Election          |     No     | The by-election was triggered by the death of the ACT Party candidate after the close of candidate nominations and before the 2023 general election polling day. National won the seat. |
+
+#### Referendums
+| Date        | Election                                                                      | Included? | Referendum Question                                                                                                                                                                                                                 |
+|:------------|:------------------------------------------------------------------------------|:---------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 02 Dec 1995 | 1995 Citizens Initiated Referendum                                            |    No     | "Should the number of professional firefighters employed full time in the New Zealand Fire Service be reduced below the number employed on 1 January 1995?"                                                                         |
+| 27 Nov 1999 | 1999 Citizens Initiated Referendum - Reform of the Criminal Justice System    |    No     | "Should there be a reform of our justice system placing greater emphasis on the needs of victims, providing restitution and compensation for them and imposing minimum sentences and hard labour for all serious violent offences?" |
+| 27 Nov 1999 | 1999 Citizens Initiated Referendum - Reducing the Number of MPs in Parliament |    No     | "Should the size of the House of Representatives be reduced from 120 members to 99 members?"                                                                                                                                        |
+| 25 Aug 2009 | 1995 Citizens Initiated Referendum                                            |    No     | "Should a smack as part of good parental correction be a criminal offence in New Zealand?"                                                                                                                                          |
+| 26 Nov 2011 | 2011 Referendum on the Voting System                                          |    No     | "Should New Zealand keep the Mixed Member Proportional (MMP) voting system?"                                                                                                                                                        |
+| 17 Dec 2013 | 2013 Citizens Initiated Referendum                                            |    No     | "Do you support the Government selling up to 49% of Meridian Energy, Mighty River Power, Genesis Power, Solid Energy and Air New Zealand?"                                                                                          |
+| 15 Dec 2015 | 2015 First Referendum on the New Zealand Flag                                 |    No     | "If the New Zealand flag changes, which flag would you prefer?"                                                                                                                                                                     |
+| 30 Mar 2016 | 2016 Second Referendum on the New Zealand Flag                                |    No     | "What is your choice for the New Zealand flag?"                                                                                                                                                                                     |
+| 17 Oct 2020 | 2020 Cannabis Referendum                                                      |    No     | "Do you support the proposed Cannabis Legalisation and Control Bill?"                                                                                                                                                               |
+| 17 Oct 2020 | 2020 End of Life Choice Referendum                                            |    No     | "Do you support the End of Life Choice Act 2019 coming into force?"                                                                                                                                                                 |
