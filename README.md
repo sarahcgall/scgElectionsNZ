@@ -11,7 +11,8 @@ scgElectionsNZ <a href="https://github.com/sarahcgall/scgElectionsNZ"><img src="
 `scgElectionsNZ` is an R package which provides data and functions for
 exploring New Zealand’s general election results. All data are from elections occuring between 1996 and 2023, unless stated otherwise.
 
-This package provides the following datasets: 
+This package provides the following datasets:
+
 * `summary`: overall results at the national-level by party
 * `turnout`: turnout and informal vote by electorate and ballot type (candidate and party)
 * `vote_type`: valdidity and vote type by electorate and ballot type (candidate and party)
@@ -33,6 +34,7 @@ devtools::install_github("sarahcgall/scgElectionsNZ")
 
 ## Usage
 In addition to the datasets listed above, a number of helper functions exist to aid in the analysis of the data. These include:
+
 * `get_data()`: provides ability to save dataset with a name of your choosing.
 * `add_region()`: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) against a dataset containing electorates.
 * `add_type()`: adds an Electorate_Type column (i.e., General or Maori) against a dataset containing electorates.
@@ -58,12 +60,18 @@ df <- update_EName(df, column=Electorate)
 For more in-depth examples of using each dataset included in the `scgElectionsNZ` package, view 
 [Using the scgElectionsNZ datasets](). For more information on the data that is included, view [Datatsets]().
 
+## Data Sources
+The election data available within the `scgElectionsNZ` package can be found in the tables below.
+Data have been sourced from the [New Zealand Electoral Commission](https://electionresults.govt.nz/) and are up-to-date as at 3 December, 2023.
+
 ## Future Additions and Updates
 Additional datasets will include by-election data and the following datasets:
+
 * `results_by_booths`: TBC 
 * `split_electorate`: split voting by electorate (2005 - 2023 only)
 
 In future updates, the following functions will be added:
+
 * `amend_boundary`: a function to convert boundaries into current boundaries for a better comparison across multiple elections (this will replace the `update_EName`
 function which is ok for general tracking of electorates but not for statistical purposes)
 * `plot_parliament`: a function to visualise the number of seats (parliament graph)

@@ -3,3 +3,6 @@
 ^data-raw$
 ^NEWS\.md$
 ^vignettes/articles$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
