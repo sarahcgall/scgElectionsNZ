@@ -1,7 +1,7 @@
-scgElectionsNZ <a href="https://github.com/sarahcgall/scgElectionsNZ"><img src="man/figures/logo.png" align="right" height="175" /></a>
+scgElectionsNZ <a href="https://github.com/sarahcgall/scgElectionsNZ"><img src="man/figures/logo.png" align="right" height="138" alt="" /></a>
 ================
-Development version: 0.0.1
 <!-- badges: start -->
+[![Release](https://img.shields.io/badge/Release-development%20version%200&#46;0&#46;1-1c75bc)](https://github.com/sarahcgall/scgElectionsNZ/blob/master/NEWS.md)
 [![R-CMD-check](https://github.com/sarahcgall/scgElectionsNZ/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sarahcgall/scgElectionsNZ/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/sarahcgall/scgElectionsNZ/graph/badge.svg?token=KRX0FWHUAO)](https://codecov.io/gh/sarahcgall/scgElectionsNZ)
 <!-- badges: end -->

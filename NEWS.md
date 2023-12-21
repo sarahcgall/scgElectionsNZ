@@ -1,3 +1,3 @@
-# scgElectionsNZ 0.0.1
+# scgElectionsNZ (development version 0.0.1)
 
-* Initial GitHub upload.
+This is the initial release. 
