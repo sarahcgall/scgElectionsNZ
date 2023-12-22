@@ -35,6 +35,11 @@ reference:
   - get_data
   - update_EName
 
+- title: Package
+  desc: >
+  contents:
+  - scgElectionsNZ
+
 articles:
 - title: Building plots
   navbar: ~
