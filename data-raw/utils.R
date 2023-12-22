@@ -6,11 +6,11 @@ library("tidyverse")
 # FUNCTIONS
 # Function to upload data files
 upload <- function(year, file, row_no){
-  df <- read.csv(paste0("data-raw", "/", year, "/", file, ".csv"), skip = row_no,
+  df <- read.csv(paste0("data-raw/vote-data", "/", year, "/", file, ".csv"), skip = row_no,
                  encoding = "UTF-8") # remove all special characters
 }
 # for loops to add to one document
-year <- c("2023","2020","2017","2014","2011","2008","2005","2002","1999","1996")
+year <- c("2023", "2020", "2017", "2014", "2011", "2008", "2005", "2002", "1999", "1996")
 
 # Function to amend party names to be the same across all elections
 amend_parties <- function(df, column) {

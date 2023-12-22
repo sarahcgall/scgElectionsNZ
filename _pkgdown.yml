@@ -1,4 +1,52 @@
 url: https://sarahcgall.github.io/scgElectionsNZ/
+
 template:
+  package: tidytemplate
   bootstrap: 5
 
+development:
+  mode: auto
+
+authors:
+  Sarah Gall:
+    href: https://sarahcgall.co.uk/
+
+reference:
+- title: Datasets
+  desc: >
+    Datasets available within the package.
+  contents:
+  - candidate_votes
+  - historic_turnout
+  - majority
+  - party_votes
+  - preMMP_results
+  - split_total
+  - summary
+  - turnout
+  - vote_type
+
+- title: Helper Functions
+  desc: >
+    Functions to add help with the datasets.
+  contents:
+  - add_region
+  - add_type
+  - get_data
+  - update_EName
+
+articles:
+- title: Building plots
+  navbar: ~
+  contents:
+  - using-scgElectionsNZ
+  - dataset-contents
+
+- title: Analyses
+  navbar: Analyses
+  contents:
+  - election-results23
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]

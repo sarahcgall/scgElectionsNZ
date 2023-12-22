@@ -6,7 +6,7 @@ source("data-raw/utils.R")
 # =====================================#
 # 5.1b All Electorates
 split_total <- data.frame()
-for (i in c("2023","2020","2017","2014","2011","2008","2005")) {
+for (i in c("2023", "2020", "2017", "2014", "2011", "2008", "2005")) {
   df <- upload(i, "split-votes-all", 0)
   df <- df %>%
     pivot_longer(cols=2:length(df), names_to="Electorate_Party",values_to="Votes") %>%
