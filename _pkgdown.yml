@@ -39,13 +39,13 @@ articles:
 - title: Building plots
   navbar: ~
   contents:
-  - using-scgElectionsNZ
-  - dataset-contents
+  - articles/using-scgElectionsNZ
+  - articles/dataset-contents
 
 - title: Analyses
   navbar: Analyses
   contents:
-  - election-results23
+  - articles/election-results23
 
 navbar:
   structure:
