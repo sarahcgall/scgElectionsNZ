@@ -14,17 +14,28 @@ authors:
 reference:
 - title: Datasets
   desc: >
-    Datasets available within the package.
+    scgElectionsNZ comes with the below datasets. For ease, they have been
+    been divided into two categories, referring to the data level
+    (National-level or Electorate-leve).
+
+- subtitle: National-level
+  desc: >
+    National-level datasets include both post-MMP and pre-MMP datasets.
   contents:
-  - candidate_votes
-  - historic_turnout
-  - majority
-  - party_votes
-  - preMMP_results
-  - split_total
   - summary
+  - preMMP_results
+  - historic_turnout
+
+- subtitle: Electorate-level
+  desc: >
+    Electorate-level datasets include both post-MMP datasets only.
+  contents:
   - turnout
   - vote_type
+  - party_votes
+  - candidate_votes
+  - majority
+  - split_total
 
 - title: Helper Functions
   desc: >
@@ -38,7 +49,7 @@ reference:
 - title: Package
   desc: >
   contents:
-  - scgElectionsNZ
+  -
 
 articles:
 - title: Building plots
