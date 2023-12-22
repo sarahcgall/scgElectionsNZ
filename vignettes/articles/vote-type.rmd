@@ -1,0 +1,107 @@
+---
+title: "Party and Candidate Votes"
+---
+```{=html}
+<style>
+  .content h3 {
+    margin-top: -30px !important;
+  }
+
+  details {
+    margin-bottom: 40px;
+  }
+</style>
+```
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+<br>
+This article provides examples of using each the `vote_type` dataset.
+<br>
+
+```{r setup, eval = TRUE, include = FALSE}
+library(scgElectionsNZ)
+library(tidyverse)
+```
+### Vote Type
+The `vote_type` dataset contains the validity of the vote (Disallowed, Informal, and Valid) and the vote type (Ordinary,
+Special - NZ, and Special - Overseas) by electorate and ballot type (Candidate and Party).
+<br>
+<br>
+**View percent of disallowed votes by electorate and ballot:**
+```{r vote-type1, eval = TRUE}
+df <- get_data("vote_type")
+
+df %>%
+  filter(Election == 2023) %>%
+  group_by(Ballot, Electorate, Validity) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Ballot, Electorate) %>%
+  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  ungroup() %>%
+  filter(Validity == "Disallowed") %>%
+  arrange(-Percentage) %>%
+  head(n = 10)
+# ...
+```
+<br>
+
+**View percentage of voters overseas by electorate:**
+```{r vote-type2, eval = TRUE}
+df %>%
+        # including only valid and informal votes
+  filter(Election == 2023, Validity != "Disallowed") %>%
+  group_by(Ballot, Electorate, Vote_Type) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Ballot, Electorate) %>%
+  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  ungroup() %>%
+  filter(Vote_Type == "Special - Overseas") %>%
+  arrange(-Percentage) %>%
+  head(n = 10)
+```
+<br>
+
+**Add a region column to dataset::**
+```{r vote-type3}
+df <- add_region(df)
+df <- df %>%
+   # including only valid and informal votes
+  filter(Ballot == "Party", Validity != "Disallowed") %>%
+  group_by(Election, Region, Vote_Type) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Election, Region) %>%
+  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  ungroup() %>%
+  filter(Vote_Type == "Special - Overseas") %>%
+  arrange(-Percentage)
+
+df %>%
+  ggplot(aes(x=as.character(Election), y=Percentage, group=Region, colour=Region)) +
+  geom_line() +
+  geom_point() +
+  gghighlight::gghighlight(use_direct_label = F) +
+  facet_wrap(.~reorder(Region, -Percentage)) +
+  scale_colour_manual(values = c("#374e8e", "#e3b13e", "#df7c18", "#ac004f",
+                                 "#704600", "#1b87aa", "#478c5b"),
+                      breaks = c("South Island", "Wellington / Wairarapa",
+                                 "Taranaki / Whanganui / Manawatu",
+                                 "Bay of Plenty / Hawke's Bay / Gisborne",
+                                 "Waikato", "Auckland", "Northland")) +
+  labs(title = "Proportion of Overseas Special Party Votes\nby Region over Time (1996 - 2023)",
+       y = "Percentage (%)\n",
+       x = "Election") +
+  scgUtils::theme_scg() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
+        legend.position = "none")
+```
+```{r OverseasVotes, eval = TRUE, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/plot_OverseasVotes.png")
+```
