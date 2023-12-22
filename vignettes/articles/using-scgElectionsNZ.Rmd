@@ -1,7 +1,17 @@
 ---
 title: "Using the scgElectionsNZ datasets"
 ---
+```{=html}
+<style>
+  .content h3 {
+    margin-top: -30px !important;
+  }
 
+  details {
+    margin-bottom: 40px;
+  }
+</style>
+```
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

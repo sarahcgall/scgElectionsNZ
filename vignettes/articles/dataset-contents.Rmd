@@ -1,7 +1,17 @@
 ---
 title: "Dataset content and sources"
 ---
+```{=html}
+<style>
+  .content h3 {
+    margin-top: -30px !important;
+  }
 
+  details {
+    margin-bottom: 40px;
+  }
+</style>
+```
 ## Contents
 The datasets have been divided into categories based on intended use of the data and contain election data from across
 all elections years for ease of comparison. In addition, all special characters have been removed from the data (e.g.,
