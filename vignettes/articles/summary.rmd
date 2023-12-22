@@ -16,14 +16,14 @@ title: "Summary"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 <br>
-This article provides examples of using each the `summary` and `preMMP_results` datasets.
+This article explores the `summary` and `preMMP_results` datasets.
 <br>
 
-```{r setup, eval = TRUE, include = FALSE}
+```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
 ```
@@ -34,12 +34,21 @@ The `summary` dataset contains the overall results at the national-level by Elec
 *NB overhang seats occur when the Party Vote entitles that party to fewer seats than the number of electorate seats that it won.*
 <br>
 <br>
-**View the Party Vote and Candidate Vote for 2023:**
-```{r summary1, eval = TRUE}
+
+#### Upload data
+View the shape of data frame.
+```{r summary}
 # Load datasets by using the following helper function:
 df <- get_data("summary")
 # Alternatively, use: data("summary")
+head(df)
+```
+<br>
 
+#### Explore data subsets
+**2023 Party and Candidate Votes:**<br>
+This removes the `Total` ballot type from the dataset, leaving just the Party vote and Candidate vote. The data has been further filtered for the most recent election.
+```{r summary1}
 df %>%
   filter(Ballot != "Total", Election == 2023) %>%
   arrange(-Percentage) %>%
@@ -47,8 +56,9 @@ df %>%
 ```
 <br>
 
-**View the Party Vote (%) of successful parties only to determine where the overhang seats in 2023 can be attributed to:**
-```{r summary2, eval = TRUE}
+**2023 Overhang Seats**<br>
+Filtering to include only the `Total` ballot type and whether the party was successful (i.e., achieved the eligibility requirements), means that you are able to determine where the overhang seats can be attributed to. The data has been further filtered for the most recent election.
+```{r summary2}
 df %>%
   filter(Successful == "Yes", Ballot == "Total", Election == 2023) %>%
   group_by(Election) %>%
@@ -58,8 +68,9 @@ df %>%
 ```
 <br>
 
-**Plot the number of seats won by party at each election:**
-```{r summary3}
+#### Plot
+Visualise the number of seats won by party at each election using a stacked bar chart.
+```{r summary3, eval = FALSE}
 df %>%
   # remove parties which did not win a seat
   filter(Successful == "Yes", Ballot == "Total") %>%
@@ -93,8 +104,20 @@ knitr::include_graphics("img/plot_SeatsByElection.png")
 
 ### preMMP Results
 This dataset can be combined with the `preMMP_results` dataset which contains the overall results between 1890 and 1993 by party at the national-level.
+<br>
+<br>
 
+#### Upload data
+View the shape of data frame.
 ```{r preMMP}
+df1 <- get_data("preMMP_results")
+head(df)
+```
+<br>
+
+#### Merge datasets
+To match the `preMMP_results` dataset, the `summary` dataset is filtered by the ballot variable to include `Total` only.
+```{r preMMP1}
 df <- df %>%
   filter(Ballot == "Total") %>%
   mutate(Party = ifelse(Successful == "Yes", Party, "Other")) %>%
@@ -102,12 +125,19 @@ df <- df %>%
   summarise(Seats = sum(Seats), Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Election) %>%
-  mutate(Percentage = round(Votes/sum(Votes)*100),2) %>%
+  mutate(Percentage = Votes/sum(Votes)*100) %>%
   ungroup() %>%
   select(Election, Party, Seats, Percentage)
-df1 <- get_data("preMMP_results")
 df2 <- rbind(df, df1)
 
+# view dataset
+head(df2)
+```
+<br>
+
+#### Plot
+Visualise the number of party vote at each election using a stacked bar chart.
+```{r preMMP2, eval = FALSE}
 df2 <- df2 %>%
   # filter 1935 until current time (since the beginning of the National and Labour parties)
   filter(Election >= 1935) %>%
@@ -182,6 +212,6 @@ df2 %>%
         axis.text.x = element_blank()
   )
 ```
-```{r PartyVoteByElection, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r PartyVoteByElection, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_PartyVoteByElection.png")
 ```

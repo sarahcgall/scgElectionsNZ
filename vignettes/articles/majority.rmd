@@ -16,26 +16,52 @@ title: "Majority"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 <br>
-This article provides examples of using each the `majority` dataset.
+This article explores the `majority` dataset and its potential uses.
 <br>
 
-```{r setup, eval = TRUE, include = FALSE}
+```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
 ```
 ### Majority
-The `majority` dataset contains the winning candidate and the margin of victory by electorate.
+The `majority` dataset contains the winning candidate and the margin of victory by electorate. The majority is calculated by subtracting the number of votes of the winning candidate form the number of votes of the second candidate. The margin of victory divides this number by the total votes cast to create a percentage figure.
+<br>
+<br>
 
+#### Upload data
+View the shape of data frame.
 ```{r majority}
+# Load dataset
 df <- get_data("majority")
-# Convert pre-2020 electorate names to match name changes that occurred in 2020
-df <- update_EName(df, column=Electorate)
-# Add Electorate Type and filter for General electorates only
+head(df)
+```
+<br>
+
+#### Update electorate names
+Update of the names of electorates so that they can be traced back through name changes.
+```{r majority1}
+# Convert pre-2020 electorate names to match name changes that occurred in 2020 and view
+df <- update_EName(df, column1=Electorate, column2=Election)
+head(df)
+```
+<br>
+
+#### Add type of electorate
+Add a column of the electorate type to filter out Maori electorates.
+```{r majority2}
+# Add Electorate Type and filter for General electorates only and view
 df <- add_type(df)
+head(df)
+```
+<br>
+
+#### Plot
+Create a parallel coordinates plot to track and visualise how electorates have changed hands and their margins increase or decrease across all MMP elections.
+```{r majority3, eval = FALSE}
 df %>%
   filter(Electorate_Type == "General") %>%
   # Remove electorates that had fewer than 7 elections
@@ -73,6 +99,6 @@ df %>%
         axis.text.x.top = element_text(vjust = 4)
   )
 ```
-```{r MarginOfVictory, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r MarginOfVictory, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_MarginOfVictory.png")
 ```

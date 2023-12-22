@@ -16,14 +16,14 @@ title: "Turnout"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 <br>
-This article provides examples of using each the `turnout` and `turnout_historic` datasets.
+This article explores the `turnout` and `turnout_historic` datasets.
 <br>
 
-```{r setup, eval = TRUE, include = FALSE}
+```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
 ```
@@ -36,16 +36,29 @@ national-level for all elections between 1879 and 2023. It also contains the tot
 election, and the total number of electors.
 <br>
 <br>
-**Compare electorate-level turnout to national-level:**
+
+#### Upload data
+View the shape of data frame.
 ```{r turnout}
 df <- get_data("turnout")
+head(df)
+```
+<br>
+
+#### Merge datasets
+**Compare electorate-level turnout to national-level:**
+```{r turnout1}
 df1 <- get_data("turnout_historic")
 df2 <- left_join(df, df1, by = "Election")
 
 df2 <- df2 %>%
   filter(Ballot == "Party", Election == 2023) %>%
   mutate(Turnout = Turnout.x - Turnout.y)
+```
+<br.
 
+#### Plot
+```{r turnout2, eval = FALSE}
 df2 %>%
   ggplot(aes(x=Turnout, y=reorder(Electorate, Turnout), fill = ifelse(Turnout < 0,
                                                                       "Underperformed",
@@ -60,14 +73,22 @@ df2 %>%
   scgUtils::theme_scg() +
   theme(panel.border = element_rect(colour=scgUtils::colour_pal("French Grey")))
 ```
-```{r TurnoutByElectorate, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r TurnoutByElectorate, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_TurnoutByElectorate.png")
 ```
 <br>
 
 ### Turnout (Historic)
-**View turnout over time to see how 2023 compares:**
+#### Upload data
+View the shape of data frame.
 ```{r turnout-over-time}
+head(df1)
+```
+<br>
+
+#### Plot
+**View turnout over time to see how 2023 compares:**
+```{r turnout-over-time1, eval = FALSE}
 df1 %>%
   ggplot(aes(x = as.character(Election), y = Turnout, label = Turnout)) +
   geom_bar(data=df1,
@@ -96,6 +117,6 @@ df1 %>%
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour=scgUtils::colour_pal("French Grey")))
 ```
-```{r TurnoutHistoric, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r TurnoutHistoric, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_TurnoutHistoric.png")
 ```
