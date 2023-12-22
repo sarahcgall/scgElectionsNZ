@@ -58,7 +58,8 @@ df <- update_EName(df, column=Electorate)
 ```
 
 For more in-depth examples of using each dataset included in the `scgElectionsNZ` package, view 
-[Using the scgElectionsNZ datasets](). For more information on the data that is included, view [Datatsets]().
+[Using the scgElectionsNZ datasets](https://sarahcgall.github.io/scgElectionsNZ/articles/using-scgElectionsNZ.html). 
+For more information on the data that is included, view [Datatsets](https://sarahcgall.github.io/scgElectionsNZ/articles/dataset-contents.html).
 
 ## Data Sources
 The election data available within the `scgElectionsNZ` package can be found in the tables below.
