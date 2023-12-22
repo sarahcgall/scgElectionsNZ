@@ -1,9 +1,11 @@
 Package: scgElectionsNZ
-Title: New Zealand General Election Data Explorer
+Title: New Zealand Election Data Explorer
 Version: 0.0.1
 Authors@R: 
     person("Sarah", "Gall", , "contact@sarahcgall.co.uk", role = c("aut", "cre"))
-Description: This package allows you to download and explore New Zealand general election data between 1996 and 2023.
+Description: scgElectionsNZ allows you to download and explore New Zealand's
+    election and referendum data sourced from the NZ Electoral Commission.
+    It was developed by Sarah Gall, Sarah C Gall Ltd.
 License: MIT + file LICENSE
 URL: https://github.com/sarahcgall/scgElectionsNZ, https://sarahcgall.github.io/scgElectionsNZ/
 BugReports: https://github.com/sarahcgall/scgElectionsNZ/issues
