@@ -52,16 +52,21 @@ reference:
   -
 
 articles:
-- title: Building plots
+- title: Dataset Examples
   navbar: ~
   contents:
-  - articles/using-scgElectionsNZ
-  - articles/dataset-contents
+  - articles/summary
+  - articles/turnout
+  - articles/vote-type
+  - articles/party-and-candidate-votes
+  - articles/majority
+  - articles/split-voting
 
-- title: Analyses
-  navbar: Analyses
+- title: Analysis
+  navbar: Analysis
   contents:
-  - articles/election-results23
+  - articles/analysis/2023-election-results
+  - articles/analysis/pre-election-analysis
 
 navbar:
   structure:
