@@ -24,11 +24,17 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/using-scgElectionsNZ.html">Using the scgElectionsNZ datasets</a>
-    <a class="dropdown-item" href="../articles/dataset-contents.html">Dataset content and sources</a>
+    <h6 class="dropdown-header" data-toc-skip>Dataset Examples</h6>
+    <a class="dropdown-item" href="../articles/summary.html">Summary</a>
+    <a class="dropdown-item" href="../articles/turnout.html">Party and Candidate Votes</a>
+    <a class="dropdown-item" href="../articles/vote-type.html">Party and Candidate Votes</a>
+    <a class="dropdown-item" href="../articles/party-and-candidate-votes.html">Party and Candidate Votes</a>
+    <a class="dropdown-item" href="../articles/majority.html">Party and Candidate Votes</a>
+    <a class="dropdown-item" href="../articles/split-voting.html">Party and Candidate Votes</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Analyses</h6>
-    <a class="dropdown-item" href="../articles/election-results23.html">2023 NZ Election Results</a>
+    <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
+    <a class="dropdown-item" href="../articles/2023-election-results.html">2023 NZ Election Results</a>
+    <a class="dropdown-item" href="../articles/pre-election-analysis.html">Pre-Election Analysis</a>
   </div>
 </li>
 <li class="nav-item">
@@ -56,7 +62,13 @@
     <div class="section level2">
       <h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a></h2>
       
-      <p class="section-desc"></p><p>Datasets available within the package.</p>
+      <p class="section-desc"></p><p>scgElectionsNZ comes with the below datasets. For ease, they have been been divided into two categories, referring to the data level (National-level or Electorate-leve).</p>
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="national-level">National-level<a class="anchor" aria-label="anchor" href="#national-level"></a></h3>
+      <p class="section-desc"></p><p>National-level datasets include both post-MMP and pre-MMP datasets.</p>
 
       
     </div><div id="" class="section level2">
@@ -66,24 +78,9 @@
 
       <dl><dt>
           
-          <code><a href="candidate_votes.html">candidate_votes</a></code> 
+          <code><a href="summary.html">summary</a></code> 
         </dt>
-        <dd>Candidate Votes for Successful Registered Parties (1996 - 2023)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="historic_turnout.html">historic_turnout</a></code> 
-        </dt>
-        <dd>Historic Turnout (1879 - 2023)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="majority.html">majority</a></code> 
-        </dt>
-        <dd>Majority (1999 - 2023)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="party_votes.html">party_votes</a></code> 
-        </dt>
-        <dd>Party Votes (1996 - 2023)</dd>
+        <dd>Summary (1996 - 2023)</dd>
       </dl><dl><dt>
           
           <code><a href="preMMP_results.html">preMMP_results</a></code> 
@@ -91,15 +88,21 @@
         <dd>Pre-MMP Results (1890 - 1993)</dd>
       </dl><dl><dt>
           
-          <code><a href="split_total.html">split_total</a></code> 
+          <code><a href="historic_turnout.html">historic_turnout</a></code> 
         </dt>
-        <dd>Split Total (2005 - 2023)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="summary.html">summary</a></code> 
-        </dt>
-        <dd>Summary (1996 - 2023)</dd>
-      </dl><dl><dt>
+        <dd>Historic turnout (1879 - 2023)</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="electorate-level">Electorate-level<a class="anchor" aria-label="anchor" href="#electorate-level"></a></h3>
+      <p class="section-desc"></p><p>Electorate-level datasets include both post-MMP datasets only.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="turnout.html">turnout</a></code> 
         </dt>
@@ -109,6 +112,26 @@
           <code><a href="vote_type.html">vote_type</a></code> 
         </dt>
         <dd>Vote Type (1996 - 2023)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="party_votes.html">party_votes</a></code> 
+        </dt>
+        <dd>Party Votes (1996 - 2023)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="candidate_votes.html">candidate_votes</a></code> 
+        </dt>
+        <dd>Candidate votes for successful registered parties (1996 - 2023)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="majority.html">majority</a></code> 
+        </dt>
+        <dd>Majority (1999 - 2023)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="split_total.html">split_total</a></code> 
+        </dt>
+        <dd>Split Total (2005 - 2023)</dd>
       </dl></div><div class="section level2">
       <h2 id="helper-functions">Helper Functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a></h2>
       
@@ -141,22 +164,12 @@
         </dt>
         <dd>Update Electorate Names</dd>
       </dl></div><div class="section level2">
-      <h2 id="package">Package<a class="anchor" aria-label="anchor" href="#package"></a></h2>
+      <h2 id="visualisations">Visualisations<a class="anchor" aria-label="anchor" href="#visualisations"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Functions to visualise the data.</p>
 
       
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="scgElectionsNZ.html">scgElectionsNZ</a></code> 
-        </dt>
-        <dd>NZ Election Data</dd>
-      </dl></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
