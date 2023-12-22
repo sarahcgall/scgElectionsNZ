@@ -55,9 +55,6 @@
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/get_data.html</loc>
   </url>
   <url>
-    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/historic_turnout.html</loc>
-  </url>
-  <url>
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/index.html</loc>
   </url>
   <url>
@@ -77,6 +74,9 @@
   </url>
   <url>
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html</loc>
+  </url>
+  <url>
+    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html</loc>
   </url>
   <url>
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/update_EName.html</loc>

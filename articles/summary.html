@@ -108,8 +108,8 @@
     margin-bottom: 40px;
   }
 </style>
-<p><br> This article provides examples of using each the
-<code>summary</code> and <code>preMMP_results</code> datasets. <br></p>
+<p><br> This article explores the <code>summary</code> and
+<code>preMMP_results</code> datasets. <br></p>
 <div class="section level3">
 <h3 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h3>
@@ -122,14 +122,41 @@ find the number of overhang seats and which party these can be
 attributed to.</p>
 <p><em>NB overhang seats occur when the Party Vote entitles that party
 to fewer seats than the number of electorate seats that it won.</em>
-<br><br><strong>View the Party Vote and Candidate Vote for
-2023:</strong></p>
+<br><br></p>
+<div class="section level4">
+<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+</h4>
+<p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load datasets by using the following helper function:</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span>
 <span><span class="co"># Alternatively, use: data("summary")</span></span>
-<span></span>
-<span><span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election Ballot                            Party Seats  Votes</span></span>
+<span><span class="co">#&gt; 1     2023  Party                        ACT Party     9 246473</span></span>
+<span><span class="co">#&gt; 2     2023  Party            Animal Justice Party      0   5018</span></span>
+<span><span class="co">#&gt; 3     2023  Party Aotearoa Legalise Cannabis Party     0  13025</span></span>
+<span><span class="co">#&gt; 4     2023  Party                      DemocracyNZ     0   6786</span></span>
+<span><span class="co">#&gt; 5     2023  Party                      Freedoms NZ     0   9586</span></span>
+<span><span class="co">#&gt; 6     2023  Party      NZ Outdoors &amp; Freedom Party     0      0</span></span>
+<span><span class="co">#&gt;   Percentage Nominated Registered Successful</span></span>
+<span><span class="co">#&gt; 1       8.64        60        Yes        Yes</span></span>
+<span><span class="co">#&gt; 2       0.18        17        Yes         No</span></span>
+<span><span class="co">#&gt; 3       0.46        16        Yes         No</span></span>
+<span><span class="co">#&gt; 4       0.24        13        Yes         No</span></span>
+<span><span class="co">#&gt; 5       0.34        35        Yes         No</span></span>
+<span><span class="co">#&gt; 6       0.00         0        Yes         No</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="explore-data-subsets">Explore data subsets<a class="anchor" aria-label="anchor" href="#explore-data-subsets"></a>
+</h4>
+<p><strong>2023 Party and Candidate Votes:</strong><br> This removes the
+<code>Total</code> ballot type from the dataset, leaving just the Party
+vote and Candidate vote. The data has been further filtered for the most
+recent election.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">!=</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -156,10 +183,12 @@ to fewer seats than the number of electorate seats that it won.</em>
 <span><span class="co">#&gt; 9         Yes        Yes</span></span>
 <span><span class="co">#&gt; 10        Yes        Yes</span></span></code></pre></div>
 <p><br></p>
-<p><strong>View the Party Vote (%) of successful parties only to
-determine where the overhang seats in 2023 can be attributed
-to:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p><strong>2023 Overhang Seats</strong><br> Filtering to include only
+the <code>Total</code> ballot type and whether the party was successful
+(i.e., achieved the eligibility requirements), means that you are able
+to determine where the overhang seats can be attributed to. The data has
+been further filtered for the most recent election.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span>, <span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -177,9 +206,13 @@ to:</strong></p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Total  National P…    48 1.09<span style="color: #949494;">e</span>6      38.1        141 Yes       </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: Successful &lt;chr&gt;, `%` &lt;dbl&gt;, Overhang &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br></p>
-<p><strong>Plot the number of seats won by party at each
-election:</strong></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</div>
+<div class="section level4">
+<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+</h4>
+<p>Visualise the number of seats won by party at each election using a
+stacked bar chart.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># remove parties which did not win a seat</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span>, <span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -208,13 +241,43 @@ election:</strong></p>
 <span>        panel.grid.minor.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="img/plot_SeatsByElection.png" width="100%"></p>
 </div>
+</div>
 <div class="section level3">
 <h3 id="premmp-results">preMMP Results<a class="anchor" aria-label="anchor" href="#premmp-results"></a>
 </h3>
 <p>This dataset can be combined with the <code>preMMP_results</code>
 dataset which contains the overall results between 1890 and 1993 by
-party at the national-level.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+party at the national-level. <br><br></p>
+<div class="section level4">
+<h4 id="upload-data-1">Upload data<a class="anchor" aria-label="anchor" href="#upload-data-1"></a>
+</h4>
+<p>View the shape of data frame.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"preMMP_results"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election Ballot                            Party Seats  Votes</span></span>
+<span><span class="co">#&gt; 1     2023  Party                        ACT Party     9 246473</span></span>
+<span><span class="co">#&gt; 2     2023  Party            Animal Justice Party      0   5018</span></span>
+<span><span class="co">#&gt; 3     2023  Party Aotearoa Legalise Cannabis Party     0  13025</span></span>
+<span><span class="co">#&gt; 4     2023  Party                      DemocracyNZ     0   6786</span></span>
+<span><span class="co">#&gt; 5     2023  Party                      Freedoms NZ     0   9586</span></span>
+<span><span class="co">#&gt; 6     2023  Party      NZ Outdoors &amp; Freedom Party     0      0</span></span>
+<span><span class="co">#&gt;   Percentage Nominated Registered Successful</span></span>
+<span><span class="co">#&gt; 1       8.64        60        Yes        Yes</span></span>
+<span><span class="co">#&gt; 2       0.18        17        Yes         No</span></span>
+<span><span class="co">#&gt; 3       0.46        16        Yes         No</span></span>
+<span><span class="co">#&gt; 4       0.24        13        Yes         No</span></span>
+<span><span class="co">#&gt; 5       0.34        35        Yes         No</span></span>
+<span><span class="co">#&gt; 6       0.00         0        Yes         No</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="merge-datasets">Merge datasets<a class="anchor" aria-label="anchor" href="#merge-datasets"></a>
+</h4>
+<p>To match the <code>preMMP_results</code> dataset, the
+<code>summary</code> dataset is filtered by the ballot variable to
+include <code>Total</code> only.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Party <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span>, <span class="va">Party</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -222,13 +285,31 @@ party at the national-level.</p>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Seats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Seats</span><span class="op">)</span>, Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Party</span>, <span class="va">Seats</span>, <span class="va">Percentage</span><span class="op">)</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"preMMP_results"</span><span class="op">)</span></span>
 <span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">df1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">df2</span> <span class="op">%&gt;%</span></span>
+<span><span class="co"># view dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">#&gt;   Election Party          Seats Percentage</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">1</span>996 ACT Party          8       6.10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">1</span>996 Alliance          13      10.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">1</span>996 Labour Party      37      28.2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">1</span>996 NZ First          17      13.3 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">1</span>996 National Party    44      33.8 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">1</span>996 Other              0       7.54</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
+</h4>
+<p>Visualise the number of party vote at each election using a stacked
+bar chart.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># filter 1935 until current time (since the beginning of the National and Labour parties)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">&gt;=</span> <span class="fl">1935</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Party <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Party</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National Party"</span>, <span class="st">"Labour Party"</span><span class="op">)</span>, <span class="va">Party</span>,</span>
@@ -302,6 +383,7 @@ party at the national-level.</p>
 <span>        axis.text.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="img/plot_PartyVoteByElection.png" width="100%"></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -108,9 +108,8 @@
     margin-bottom: 40px;
   }
 </style>
-<p><br> This article provides examples of using each the
-<code>turnout</code> and <code>historic_turnout</code> datasets.
-<br></p>
+<p><br> This article explores the <code>turnout</code> and
+<code>turnout_historic</code> datasets. <br></p>
 <div class="section level3">
 <h3 id="turnout">Turnout<a class="anchor" aria-label="anchor" href="#turnout"></a>
 </h3>
@@ -118,22 +117,46 @@
 informal vote by electorate and ballot type (Candidate and Party). It
 also has the total vote (informal + valid) and total number of electors
 in the election.</p>
-<p>This dataset can be combined with the <code>historic_turnout</code>
+<p>This dataset can be combined with the <code>turnout_historic</code>
 dataset which contains the overall turnout at the national-level for all
 elections between 1879 and 2023. It also contains the total number of
 MPs in parliament for that election, and the total number of electors.
-<br><br><strong>Compare electorate-level turnout to
-national-level:</strong></p>
+<br><br></p>
+<div class="section level4">
+<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+</h4>
+<p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"turnout"</span><span class="op">)</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"historic_turnout"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election Ballot           Electorate Electors Turnout Total Informal</span></span>
+<span><span class="co">#&gt; 2     2023  Party     Auckland Central    45426   78.66 35734       85</span></span>
+<span><span class="co">#&gt; 3     2023  Party      Banks Peninsula    59383   84.10 49944      194</span></span>
+<span><span class="co">#&gt; 4     2023  Party        Bay of Plenty    56200   81.53 45822      209</span></span>
+<span><span class="co">#&gt; 5     2023  Party               Botany    53160   71.65 38087      189</span></span>
+<span><span class="co">#&gt; 6     2023  Party Christchurch Central    50999   78.52 40044      166</span></span>
+<span><span class="co">#&gt; 7     2023  Party    Christchurch East    50898   77.37 39378      203</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="merge-datasets">Merge datasets<a class="anchor" aria-label="anchor" href="#merge-datasets"></a>
+</h4>
+<p><strong>Compare electorate-level turnout to
+national-level:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"turnout_historic"</span><span class="op">)</span></span>
 <span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">df</span>, <span class="va">df1</span>, by <span class="op">=</span> <span class="st">"Election"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Turnout <span class="op">=</span> <span class="va">Turnout.x</span> <span class="op">-</span> <span class="va">Turnout.y</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df2</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Turnout <span class="op">=</span> <span class="va">Turnout.x</span> <span class="op">-</span> <span class="va">Turnout.y</span><span class="op">)</span></span></code></pre></div>
+<p>&lt;br.</p>
+</div>
+<div class="section level4">
+<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+</h4>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Turnout</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Electorate</span>, <span class="va">Turnout</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Turnout</span> <span class="op">&lt;</span> <span class="fl">0</span>,</span>
 <span>                                                                      <span class="st">"Underperformed"</span>,</span>
 <span>                                                                      <span class="st">"Overperformed"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -148,11 +171,30 @@ national-level:</strong></p>
 <span>  <span class="fu">theme</span><span class="op">(</span>panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour<span class="op">=</span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="img/plot_TurnoutByElectorate.png" width="100%"><br></p>
 </div>
+</div>
 <div class="section level3">
-<h3 id="turnout-historic">Turnout Historic<a class="anchor" aria-label="anchor" href="#turnout-historic"></a>
+<h3 id="turnout-historic">Turnout (Historic)<a class="anchor" aria-label="anchor" href="#turnout-historic"></a>
 </h3>
+<div class="section level4">
+<h4 id="upload-data-1">Upload data<a class="anchor" aria-label="anchor" href="#upload-data-1"></a>
+</h4>
+<p>View the shape of data frame.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election MPs Electors Turnout</span></span>
+<span><span class="co">#&gt; 1     1879  88    82271    66.5</span></span>
+<span><span class="co">#&gt; 2     1881  95   120972    66.5</span></span>
+<span><span class="co">#&gt; 3     1884  95   137686    60.6</span></span>
+<span><span class="co">#&gt; 4     1887  95   175410    67.1</span></span>
+<span><span class="co">#&gt; 5     1890  74   183171    80.4</span></span>
+<span><span class="co">#&gt; 6     1893  74   302997    75.3</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
+</h4>
 <p><strong>View turnout over time to see how 2023 compares:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Turnout</span>, label <span class="op">=</span> <span class="va">Turnout</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span>data<span class="op">=</span><span class="va">df1</span>,</span>
@@ -181,6 +223,7 @@ national-level:</strong></p>
 <span>        panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour<span class="op">=</span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="img/plot_TurnoutHistoric.png" width="100%"></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

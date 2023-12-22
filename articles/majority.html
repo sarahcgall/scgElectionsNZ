@@ -108,20 +108,98 @@
     margin-bottom: 40px;
   }
 </style>
-<p><br> This article provides examples of using each the
-<code>majority</code> dataset. <br></p>
+<p><br> This article explores the <code>majority</code> dataset and its
+potential uses. <br></p>
 <div class="section level3">
 <h3 id="majority">Majority<a class="anchor" aria-label="anchor" href="#majority"></a>
 </h3>
 <p>The <code>majority</code> dataset contains the winning candidate and
-the margin of victory by electorate.</p>
+the margin of victory by electorate. The majority is calculated by
+subtracting the number of votes of the winning candidate form the number
+of votes of the second candidate. The margin of victory divides this
+number by the total votes cast to create a percentage figure. <br><br></p>
+<div class="section level4">
+<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+</h4>
+<p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
-<span><span class="co"># Convert pre-2020 electorate names to match name changes that occurred in 2020</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_EName.html">update_EName</a></span><span class="op">(</span><span class="va">df</span>, column<span class="op">=</span><span class="va">Electorate</span><span class="op">)</span></span>
-<span><span class="co"># Add Electorate Type and filter for General electorates only</span></span>
+<code class="sourceCode R"><span><span class="co"># Load dataset</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
+<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
+<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
+<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
+<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
+<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
+<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
+<span><span class="co">#&gt;   Votes Percentage Party_List</span></span>
+<span><span class="co">#&gt; 1  3896      11.31        Yes</span></span>
+<span><span class="co">#&gt; 2   396       0.81        Yes</span></span>
+<span><span class="co">#&gt; 3 15405      34.57        Yes</span></span>
+<span><span class="co">#&gt; 4 16323      44.69        Yes</span></span>
+<span><span class="co">#&gt; 5  1841       4.75        Yes</span></span>
+<span><span class="co">#&gt; 6  2397       6.25        Yes</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="update-electorate-names">Update electorate names<a class="anchor" aria-label="anchor" href="#update-electorate-names"></a>
+</h4>
+<p>Update of the names of electorates so that they can be traced back
+through name changes.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Convert pre-2020 electorate names to match name changes that occurred in 2020 and view</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_EName.html">update_EName</a></span><span class="op">(</span><span class="va">df</span>, column1<span class="op">=</span><span class="va">Electorate</span>, column2<span class="op">=</span><span class="va">Election</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
+<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
+<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
+<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
+<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
+<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
+<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
+<span><span class="co">#&gt;   Votes Percentage Party_List</span></span>
+<span><span class="co">#&gt; 1  3896      11.31        Yes</span></span>
+<span><span class="co">#&gt; 2   396       0.81        Yes</span></span>
+<span><span class="co">#&gt; 3 15405      34.57        Yes</span></span>
+<span><span class="co">#&gt; 4 16323      44.69        Yes</span></span>
+<span><span class="co">#&gt; 5  1841       4.75        Yes</span></span>
+<span><span class="co">#&gt; 6  2397       6.25        Yes</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="add-type-of-electorate">Add type of electorate<a class="anchor" aria-label="anchor" href="#add-type-of-electorate"></a>
+</h4>
+<p>Add a column of the electorate type to filter out Maori
+electorates.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Add Electorate Type and filter for General electorates only and view</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_type.html">add_type</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
+<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
+<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
+<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
+<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
+<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
+<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
+<span><span class="co">#&gt;   Votes Percentage Party_List Electorate_Type</span></span>
+<span><span class="co">#&gt; 1  3896      11.31        Yes         General</span></span>
+<span><span class="co">#&gt; 2   396       0.81        Yes         General</span></span>
+<span><span class="co">#&gt; 3 15405      34.57        Yes         General</span></span>
+<span><span class="co">#&gt; 4 16323      44.69        Yes         General</span></span>
+<span><span class="co">#&gt; 5  1841       4.75        Yes         General</span></span>
+<span><span class="co">#&gt; 6  2397       6.25        Yes         General</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+</h4>
+<p>Create a parallel coordinates plot to track and visualise how
+electorates have changed hands and their margins increase or decrease
+across all MMP elections.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Electorate_Type</span> <span class="op">==</span> <span class="st">"General"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># Remove electorates that had fewer than 7 elections</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -159,7 +237,9 @@ the margin of victory by electorate.</p>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="img/plot_MarginOfVictory.png" width="100%"></p>
 </div>
-  </main>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
