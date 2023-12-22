@@ -1,5 +1,5 @@
 ---
-title: "Party and Candidate Votes"
+title: "Split Voting"
 ---
 ```{=html}
 <style>

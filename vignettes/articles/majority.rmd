@@ -1,5 +1,5 @@
 ---
-title: "Party and Candidate Votes"
+title: "Majority"
 ---
 ```{=html}
 <style>
