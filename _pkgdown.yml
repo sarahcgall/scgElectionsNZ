@@ -52,7 +52,7 @@ reference:
 
 articles:
 - title: Dataset Examples
-  navbar: ~
+  navbar: Dataset Examples
   contents:
   - articles/summary
   - articles/turnout
@@ -64,8 +64,8 @@ articles:
 - title: Analysis
   navbar: Analysis
   contents:
-  - articles/analysis/2023-election-results
-  - articles/analysis/pre-election-analysis
+  - articles/2023-election-results
+  - articles/pre-election-analysis
 
 navbar:
   structure:
