@@ -7,8 +7,7 @@
 #' @return A data frame with an additional region column.
 #' @export
 #' @examples
-#' add_region(majority) %>%
-#'   head(n=10)
+#' head(add_region(majority))
 add_region <- function(..., column="Electorate") {
   if (!column %in% colnames(...))
     stop("Ensure that you have created an column with the 'Electorate'.")

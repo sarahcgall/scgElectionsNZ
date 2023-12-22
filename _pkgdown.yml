@@ -46,10 +46,9 @@ reference:
   - get_data
   - update_EName
 
-- title: Package
+- title: Visualisations
   desc: >
-  contents:
-  -
+    Functions to visualise the data.
 
 articles:
 - title: Dataset Examples

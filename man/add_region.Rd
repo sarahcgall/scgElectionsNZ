@@ -18,5 +18,5 @@ A data frame with an additional region column.
 Add New Zealand Regions to electorates in a data frame.
 }
 \examples{
-add_region(majority)
+head(add_region(majority))
 }
