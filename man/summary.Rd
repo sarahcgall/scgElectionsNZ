@@ -28,7 +28,6 @@ summary
 \description{
 The \code{summary} dataset is in a long format and can be used to view overall
 results summary data. For an example of how to use this dataset, refer
-to the Summary article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}.
+to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}{Summary article}.
 }
 \keyword{datasets}

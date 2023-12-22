@@ -25,7 +25,7 @@ candidate_votes
 \description{
 The \code{candidate_votes} dataset is in a long format and can be used to look up the candidate vote in each
 electorate by successful registered party. For an example of how to use this dataset, refer
-to the Party and Candidate Votes article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}.
+to the
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}{Party and Candidate Votes article}.
 }
 \keyword{datasets}

@@ -26,7 +26,6 @@ vote_type
 The \code{vote_type} dataset is in a long format and can be used to view the vote type
 (ordinary, special - nz, special - oversease) by validity (informal/valid/disallowed)
 and Electorate and Ballot type. For an example of how to use this dataset, refer
-to the Vote Type article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type}.
+to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type}{Vote Type article}.
 }
 \keyword{datasets}

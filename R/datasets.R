@@ -2,8 +2,8 @@
 #'
 #' The `candidate_votes` dataset is in a long format and can be used to look up the candidate vote in each
 #' electorate by successful registered party. For an example of how to use this dataset, refer
-#' to the Party and Candidate Votes article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}.
+#' to the
+#' [Party and Candidate Votes article](https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes).
 #'
 #' @format A data frame with 5,357 rows and 6 variables:
 #' \describe{
@@ -18,30 +18,12 @@
 #' The raw data are available from \url{https://www.electionresults.govt.nz/}.
 "candidate_votes"
 
-#' Historic turnout (1879 - 2023)
-#'
-#' The `historic_turnout` dataset is in a long format and can be used to look view the elector turnout at
-#' each general election between 1879 and 2023. For an example of how to use this dataset,
-#' refer to the Turnout article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}
-#'
-#' @format A data frame with 48 rows and 4 variables:
-#' \describe{
-#'   \item{Election}{election year (1879--2023)}
-#'   \item{MPs}{total number of MPs in parliament (74--123)}
-#'   \item{Electors}{total number of registered electors (82,271--3.68829e+06)}
-#'   \item{Turnout}{turnout as a percentage of the number of electors (60.60--93.70)}
-#' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
-"historic_turnout"
-
 #' Majority (1999 - 2023)
 #'
 #' The `majority` dataset is in a long format and can be used to look up the winning
 #' candidate in each electorate, their party, and their margin of victory/majority (n & %).
-#' For an example of how to use this dataset, refer to the Majority article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/majority}.
+#' For an example of how to use this dataset, refer to the
+#' [Majority article](https://sarahcgall.github.io/scgElectionsNZ/articles/majority).
 #'
 #' @format A data frame with 696 rows and 7 variables:
 #' \describe{
@@ -61,8 +43,8 @@
 #'
 #' The `party_votes` dataset is in a long format and can be used to look up the party vote
 #' in each electorate by registered party. For an example of how to use this dataset, refer
-#' to the Party and Candidate Votes article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}.
+#' to the
+#' [Party and Candidate Votes article](https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes).
 #'
 #' @format A data frame with 12,701 rows and 5 variables:
 #' \describe{
@@ -80,8 +62,7 @@
 #'
 #' The `preMMP_results` dataset is in a long format and can be used to view the results
 #' by party at each general election between 1890 and 1993. For an example of how to use this
-#' dataset, refer to the Summary article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}.
+#' dataset, refer to the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary).
 #'
 #' @format A data frame with 162 rows and 4 variables:
 #' \describe{
@@ -98,8 +79,7 @@
 #'
 #' The `split_total` dataset is in a long format and can be used to view the overall
 #' split voting by party. For an example of how to use this dataset, refer
-#' to the Split Voting article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}.
+#' to the [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting).
 #'
 #' @format A data frame with 2,435 rows and 5 variables:
 #' \describe{
@@ -117,8 +97,7 @@
 #'
 #' The `summary` dataset is in a long format and can be used to view overall
 #' results summary data. For an example of how to use this dataset, refer
-#' to the Summary article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}.
+#' to the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary).
 #'
 #' @format A data frame with 909 rows and 9 variables:
 #' \describe{
@@ -140,8 +119,7 @@
 #'
 #' The `turnout` dataset is in a long format and can be used to view the elector turnout
 #' and the informal vote by Electorate and Ballot type. For an example of how to use this
-#' dataset, refer to the Turnout article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/turnout}.
+#' dataset, refer to the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout).
 #'
 #' @format A data frame with 1,392 rows and 7 variables:
 #' \describe{
@@ -157,13 +135,29 @@
 #' The raw data are available from \url{https://www.electionresults.govt.nz/}.
 "turnout"
 
+#' Turnout (Historic) (1879 - 2023)
+#'
+#' The `turnout_historic` dataset is in a long format and can be used to look view the elector turnout at
+#' each general election between 1879 and 2023. For an example of how to use this dataset,
+#' refer to the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout)
+#'
+#' @format A data frame with 48 rows and 4 variables:
+#' \describe{
+#'   \item{Election}{election year (1879--2023)}
+#'   \item{MPs}{total number of MPs in parliament (74--123)}
+#'   \item{Electors}{total number of registered electors (82,271--3.68829e+06)}
+#'   \item{Turnout}{turnout as a percentage of the number of electors (60.60--93.70)}
+#' }
+#' @source This dataset was sourced from the NZ Electoral Commission's official results.
+#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+"turnout_historic"
+
 #' Vote Type (1996 - 2023)
 #'
 #' The `vote_type` dataset is in a long format and can be used to view the vote type
 #' (ordinary, special - nz, special - oversease) by validity (informal/valid/disallowed)
 #' and Electorate and Ballot type. For an example of how to use this dataset, refer
-#' to the Vote Type article found here:
-#' \url{https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type}.
+#' to the [Vote Type article](https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type).
 #'
 #' @format A data frame with 11,136 rows and 6 variables:
 #' \describe{

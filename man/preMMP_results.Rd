@@ -23,7 +23,6 @@ preMMP_results
 \description{
 The \code{preMMP_results} dataset is in a long format and can be used to view the results
 by party at each general election between 1890 and 1993. For an example of how to use this
-dataset, refer to the Summary article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}.
+dataset, refer to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}{Summary article}.
 }
 \keyword{datasets}

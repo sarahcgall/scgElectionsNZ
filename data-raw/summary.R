@@ -7,11 +7,11 @@ source("data-raw/utils.R")
 # 1.1 Summary of overall results
 summary <- data.frame()
 for (i in year) {
-  df <- upload(i, "overall-results-summary", 4)
-  df <- df %>%
+  tmp <- upload(i, "overall-results-summary", 4)
+  tmp <- tmp %>%
     mutate(Election = as.numeric(i)) # add year column for elections and convert to numeric
 
-  summary <- rbind(summary,df)
+  summary <- rbind(summary,tmp)
 }
 # CLEAN
 summary <- amend_parties(summary, Parties.Grouped.) # amend party names

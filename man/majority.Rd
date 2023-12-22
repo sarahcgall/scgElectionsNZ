@@ -26,7 +26,7 @@ majority
 \description{
 The \code{majority} dataset is in a long format and can be used to look up the winning
 candidate in each electorate, their party, and their margin of victory/majority (n & \%).
-For an example of how to use this dataset, refer to the Majority article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/majority}.
+For an example of how to use this dataset, refer to the
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/majority}{Majority article}.
 }
 \keyword{datasets}

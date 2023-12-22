@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article provides examples of using each the `turnout` and `historic_turnout` datasets.
+This article provides examples of using each the `turnout` and `turnout_historic` datasets.
 <br>
 
 ```{r setup, eval = TRUE, include = FALSE}
@@ -31,7 +31,7 @@ library(tidyverse)
 The `turnout` dataset contains the overall turnout and informal vote by electorate and ballot type (Candidate and Party).
 It also has the total vote (informal + valid) and total number of electors in the election.
 
-This dataset can be combined with the `historic_turnout` dataset which contains the overall turnout at the
+This dataset can be combined with the `turnout_historic` dataset which contains the overall turnout at the
 national-level for all elections between 1879 and 2023. It also contains the total number of MPs in parliament for that
 election, and the total number of electors.
 <br>
@@ -39,7 +39,7 @@ election, and the total number of electors.
 **Compare electorate-level turnout to national-level:**
 ```{r turnout}
 df <- get_data("turnout")
-df1 <- get_data("historic_turnout")
+df1 <- get_data("turnout_historic")
 df2 <- left_join(df, df1, by = "Election")
 
 df2 <- df2 %>%
@@ -65,7 +65,7 @@ knitr::include_graphics("img/plot_TurnoutByElectorate.png")
 ```
 <br>
 
-### Turnout Historic
+### Turnout (Historic)
 **View turnout over time to see how 2023 compares:**
 ```{r turnout-over-time}
 df1 %>%

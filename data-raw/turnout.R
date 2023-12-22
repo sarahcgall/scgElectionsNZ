@@ -9,22 +9,22 @@ source("data-raw/utils.R")
 # 2.1 Party votes and turnout by Electorate + 2.2 Electorate Candidate votes and turnout by Electorate
 turnout <- data.frame()
 for (i in year) {
-  df <- upload(i, "party-votes-and-turnout-by-electorate", 3)
-  df <- df[-1,]
-  df$Ballot <- "Party"
+  tmp <- upload(i, "party-votes-and-turnout-by-electorate", 3)
+  tmp <- tmp[-1,]
+  tmp$Ballot <- "Party"
 
-  df1 <- upload(i, "candidate-votes-and-turnout-by-electorate", 3)
-  df1 <- df1[-1,-14]
-  df1$Ballot <- "Candidate"
+  tmp1 <- upload(i, "candidate-votes-and-turnout-by-electorate", 3)
+  tmp1 <- tmp1[-1,-14]
+  tmp1$Ballot <- "Candidate"
 
-  df <- rbind(df, df1)
-  df <- df[,c(1,7,10:15)]
+  tmp <- rbind(tmp, tmp1)
+  tmp <- tmp[,c(1,7,10:15)]
 
-  df <- df %>%
-    filter(str_detect(df[,1],"Totals") == FALSE) %>%
+  tmp <- tmp %>%
+    filter(str_detect(tmp[,1],"Totals") == FALSE) %>%
     mutate(Election = as.numeric(i)) # add year column for elections and convert to numeric
 
-  turnout <- rbind(turnout,df)
+  turnout <- rbind(turnout,tmp)
 }
 
 # CLEAN

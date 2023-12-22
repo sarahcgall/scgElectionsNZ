@@ -24,7 +24,6 @@ split_total
 \description{
 The \code{split_total} dataset is in a long format and can be used to view the overall
 split voting by party. For an example of how to use this dataset, refer
-to the Split Voting article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}.
+to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}{Split Voting article}.
 }
 \keyword{datasets}

@@ -26,7 +26,6 @@ turnout
 \description{
 The \code{turnout} dataset is in a long format and can be used to view the elector turnout
 and the informal vote by Electorate and Ballot type. For an example of how to use this
-dataset, refer to the Turnout article found here:
-\url{https://sarahcgall.github.io/scgElectionsNZ/articles/turnout}.
+dataset, refer to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/turnout}{Turnout article}.
 }
 \keyword{datasets}

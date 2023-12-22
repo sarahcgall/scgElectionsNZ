@@ -5,7 +5,7 @@
 source("data-raw/utils.R")
 # =====================================#
 # 4.3 Winning Electorate Candidate Votes
-preMMP_results <- read.csv("data-raw/pre-1994/1890-1993-results.csv") # upload raw data from each election folder
+preMMP_results <- read.csv("data-raw/vote-data/pre-1994/1890-1993-results.csv") # upload raw data from each election folder
 
 # CLEAN
 names(preMMP_results)[1] <- "Election"

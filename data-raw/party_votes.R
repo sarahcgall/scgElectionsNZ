@@ -7,14 +7,14 @@ source("data-raw/utils.R")
 # 4.1 Votes for Registered Parties by Electorate
 party_votes <- data.frame()
 for (i in year) {
-  df <- upload(i, "votes-for-registered-parties-by-electorate", 2)
-  df <- df %>%
-    filter(str_detect(df[,1],"Totals") == FALSE) %>%
+  tmp <- upload(i, "votes-for-registered-parties-by-electorate", 2)
+  tmp <- tmp %>%
+    filter(str_detect(tmp[,1],"Totals") == FALSE) %>%
     mutate(Election = as.numeric(i)) %>% # add year and convert to numeric
     pivot_longer(cols=!c(Election,Electorate,Total.Valid.Party.Votes,Informal.Party.Votes),
                  names_to = "Party", values_to = "Votes") # make party names within column "Party"
 
-  party_votes <- rbind(party_votes,df)
+  party_votes <- rbind(party_votes,tmp)
 }
 # CLEAN
 party_votes$Party <- str_replace_all(party_votes$Party, "\\.", " ") # replace full stop with space

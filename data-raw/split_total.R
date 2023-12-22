@@ -7,13 +7,13 @@ source("data-raw/utils.R")
 # 5.1b All Electorates
 split_total <- data.frame()
 for (i in c("2023", "2020", "2017", "2014", "2011", "2008", "2005")) {
-  df <- upload(i, "split-votes-all", 0)
-  df <- df %>%
-    pivot_longer(cols=2:length(df), names_to="Electorate_Party",values_to="Votes") %>%
+  tmp <- upload(i, "split-votes-all", 0)
+  tmp <- tmp %>%
+    pivot_longer(cols=2:length(tmp), names_to="Electorate_Party",values_to="Votes") %>%
     rename(List_Party = 1) %>%
     mutate(Election = as.numeric(i))
 
-  split_total <- rbind(split_total, df)
+  split_total <- rbind(split_total, tmp)
 }
 # CLEAN
 split_total$Electorate_Party <- str_replace_all(split_total$Electorate_Party, "\\.", " ") # replace full stop with space

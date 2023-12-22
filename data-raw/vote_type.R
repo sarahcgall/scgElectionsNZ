@@ -9,22 +9,22 @@ source("data-raw/utils.R")
 # 2.1 Party votes and turnout by Electorate + 2.2 Electorate Candidate votes and turnout by Electorate
 validity <- data.frame()
 for (i in year) {
-  df <- upload(i, "party-votes-and-turnout-by-electorate", 3)
-  df <- df[-1,]
-  df$Ballot <- "Party"
+  tmp <- upload(i, "party-votes-and-turnout-by-electorate", 3)
+  tmp <- tmp[-1,]
+  tmp$Ballot <- "Party"
 
-  df1 <- upload(i, "candidate-votes-and-turnout-by-electorate", 3)
-  df1 <- df1[-1,-14]
-  df1$Ballot <- "Candidate"
+  tmp1 <- upload(i, "candidate-votes-and-turnout-by-electorate", 3)
+  tmp1 <- tmp1[-1,-14]
+  tmp1$Ballot <- "Candidate"
 
-  df <- rbind(df, df1)
-  df <- df[,c(1,2,3,5,6,8,9,15)]
+  tmp <- rbind(tmp, tmp1)
+  tmp <- tmp[,c(1,2,3,5,6,8,9,15)]
 
-  df <- df %>%
-    filter(str_detect(df[,1],"Totals") == FALSE) %>%
+  tmp <- tmp %>%
+    filter(str_detect(tmp[,1],"Totals") == FALSE) %>%
     mutate(Election = as.numeric(i)) # add year column for elections and convert to numeric
 
-  validity <- rbind(validity,df)
+  validity <- rbind(validity,tmp)
 }
 
 # CLEAN
@@ -51,20 +51,20 @@ validity$Electorate <- iconv(validity$Electorate,from="UTF-8",to="ASCII//TRANSLI
 # 2.3 Party special declaration votes by Electorate + 2.4 Electorate Candidate special declaration votes by Electorate
 special <- data.frame()
 for (i in year) {
-  df <- upload(i, "party-sdv-by-electorate", 3)
-  df$Ballot <- "Party"
+  tmp <- upload(i, "party-sdv-by-electorate", 3)
+  tmp$Ballot <- "Party"
 
-  df1 <- upload(i, "candidate-sdv-by-electorate", 3)
-  df1$Ballot <- "Candidate"
+  tmp1 <- upload(i, "candidate-sdv-by-electorate", 3)
+  tmp1$Ballot <- "Candidate"
 
-  df <- rbind(df, df1)
-  df <- df[,c(1,2,3,5,6,12)]
+  tmp <- rbind(tmp, tmp1)
+  tmp <- tmp[,c(1,2,3,5,6,12)]
 
-  df <- df %>%
-    filter(str_detect(df[,1],"Totals") == FALSE) %>%
+  tmp <- tmp %>%
+    filter(str_detect(tmp[,1],"Totals") == FALSE) %>%
     mutate(Election = as.numeric(i)) # add year column for elections and convert to numeric
 
-  special <- rbind(special,df)
+  special <- rbind(special,tmp)
 }
 
 # rename columns and create Ballot column
