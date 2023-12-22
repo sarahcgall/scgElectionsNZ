@@ -5,7 +5,7 @@ Authors@R:
     person("Sarah", "Gall", , "contact@sarahcgall.co.uk", role = c("aut", "cre"))
 Description: This package allows you to download and explore New Zealand general election data between 1996 and 2023.
 License: MIT + file LICENSE
-URL: https://sarahcgall.r-lib.org/, https://github.com/r-lib/sarahcgall
+URL: https://sarahcgall.r-lib.org/, https://github.com/r-lib/sarahcgall, https://sarahcgall.github.io/scgElectionsNZ/
 BugReports: https://github.com/r-lib/sarahcgall/issues
 Imports:
     dplyr,
@@ -24,3 +24,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Config/Needs/website: tidyverse/tidytemplate
