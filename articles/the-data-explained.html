@@ -163,8 +163,9 @@ that party received, and</li>
 have been allocated so far to that party.</li>
 </ul>
 <p>A detailed explanation of the allocation process can be found in the
-<a href=""><code>Summary</code></a> article. For electorate-level Party
-Vote data, view the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html"><code>party_votes</code></a>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html">Seat
+Allocation Explained article</a>. For electorate-level Party Vote data,
+view the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html"><code>party_votes</code></a>
 dataset. <br><br></p>
 </div>
 <div class="section level4">
@@ -172,9 +173,9 @@ dataset. <br><br></p>
 </h4>
 <p>The FPTP results can be accessed through the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html"><code>candidate_votes</code></a>
 dataset at the electorate-level (NB. the <code>candidate_votes</code>
-dataset only contains successful parties only with unsuccessful parties
-being grouped as ‘Other’). The type of electorate (Māori or General) can
-also be identified using the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/add_type.html"><code>add_type</code></a>
+dataset currently contains successful parties only, with unsuccessful
+parties being grouped as ‘Other’). The type of electorate (Māori or
+General) can also be identified using the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/add_type.html"><code>add_type</code></a>
 function.</p>
 <p>In addition, the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html"><code>majority</code></a>
 dataset lists the winner of each electorate (i.e., Candidate Vote), the
@@ -218,8 +219,9 @@ in electorate for all candidates. <br><br>
 be entitled to from the proportion of the Party Vote, those candidates
 retain their electorates and the total number of MPs elected to
 parliament increases. These are referred to as overhang seats. Overhang
-seats can be easily determined at each election by using the <a href="https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#explore-data-subsets"><code>summary</code></a>
-dataset. <br><br></p>
+seats can be easily determined at each election. Details of how to
+determine overhang seats from the data can be found in the <a href="https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#overhang-seats">Summary
+article</a>. <br><br></p>
 </div>
 <div class="section level4">
 <h4 id="eligibility">Eligibility<a class="anchor" aria-label="anchor" href="#eligibility"></a>
@@ -227,14 +229,21 @@ dataset. <br><br></p>
 <p>For parties to be eligible to have seats allocated to them, they
 either need to receive five per cent of the Party Vote or win at least
 one electorate. To look up whether or not a party was eligible in the
-election results, the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>Successful</code></a>
-variable in the <a href="https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#upload-data"><code>summary</code></a>
+election results, the <a href="https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html#step-2-determine-seat-entitlement"><code>Successful</code></a>
+variable in the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>summary</code></a>
 dataset contains this information. <br><br></p>
 </div>
 <div class="section level4">
 <h4 id="before-mmp">Before MMP<a class="anchor" aria-label="anchor" href="#before-mmp"></a>
 </h4>
-<p>In 1993, New Zealanders voted to change their voting system from</p>
+<p>In 1993, New Zealanders voted to change their voting system from FPTP
+to MMP. Data prior to 1996 (first general election in which MMP was
+used), is contained within the package. View the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html"><code>preMMP_results</code></a>
+for the national-level popular vote and number of seats won by each
+party. Data goes back to 1890 and can be combined with the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>summary</code></a>
+dataset for a comparison with the party vote. An example of this can be
+found in the <a href="https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#premmp-results">Summary
+article</a>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

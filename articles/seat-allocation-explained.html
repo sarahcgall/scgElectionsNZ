@@ -125,19 +125,23 @@ electorate seats won are also tallied.</p>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="co"># filter out total ballot type, leaving the candidate and party ballor types only</span></span>
+<span>  <span class="co"># filter out total ballot type, leaving the candidate and party ballor</span></span>
+<span>  <span class="co"># types only</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">!=</span> <span class="st">"Total"</span>,</span>
 <span>         <span class="co"># filter for the most recent election</span></span>
 <span>         <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># keep party votes only by removing candidate votes</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Candidate"</span>, <span class="fl">0</span>, <span class="va">Votes</span><span class="op">)</span>,</span>
-<span>         <span class="co"># NB % is not required in this step and is only included for illustrative purposes</span></span>
+<span>         <span class="co"># NB % is not required in this step and is only included</span></span>
+<span>         <span class="co"># for illustrative purposes</span></span>
 <span>         Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Candidate"</span>, <span class="fl">0</span>, <span class="va">Percentage</span><span class="op">)</span>,</span>
-<span>         <span class="co"># keep the number of electorate seats only by removing party/list seats</span></span>
+<span>         <span class="co"># keep the number of electorate seats only by removing</span></span>
+<span>         <span class="co"># party/list seats</span></span>
 <span>         Seats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="fl">0</span>, <span class="va">Seats</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># group long format data frame (NB keep 'Successful' column)</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Party</span>, <span class="va">Successful</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Percentage</span><span class="op">)</span>, Seats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Seats</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Percentage</span><span class="op">)</span>,</span>
+<span>            Seats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Seats</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Votes</span><span class="op">)</span></span>
 <span></span>
@@ -202,7 +206,8 @@ party is divided by an odd number every round.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">120</span> <span class="co"># Total number of seats:</span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># s begins at 0 and sequences up until total number of seats has been reached</span></span>
+<span><span class="co"># s begins at 0 and sequences up until total number of seats</span></span>
+<span><span class="co"># has been reached</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">s</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>      <span class="co"># Saint-Lague Formula:</span></span>
@@ -237,7 +242,8 @@ This continues until all 120 seats are allocated (NB this disregards any
 overhang seats given that these come from excess electorate seats and
 not list seats).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Order seats by Quotient (highest to lowest) and subset rows by the total number of seats (120):</span></span>
+<code class="sourceCode R"><span><span class="co"># Order seats by Quotient (highest to lowest) and subset</span></span>
+<span><span class="co"># rows by the total number of seats (120):</span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">df1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">df1</span><span class="op">$</span><span class="va">Quotient</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">df1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,<span class="op">]</span></span>
 <span></span>
