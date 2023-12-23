@@ -4,15 +4,15 @@ pkgdown_sha: ~
 articles:
   2023-election-results: 2023-election-results.html
   majority: majority.html
+  nz-elections-explained: nz-elections-explained.html
   party-and-candidate-votes: party-and-candidate-votes.html
   pre-election-analysis: pre-election-analysis.html
   seat-allocation-explained: seat-allocation-explained.html
   split-voting: split-voting.html
   summary: summary.html
-  the-data-explained: the-data-explained.html
   turnout: turnout.html
   vote-type: vote-type.html
-last_built: 2023-12-23T19:15Z
+last_built: 2023-12-23T19:39Z
 urls:
   reference: https://sarahcgall.github.io/scgElectionsNZ/reference
   article: https://sarahcgall.github.io/scgElectionsNZ/articles

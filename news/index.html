@@ -24,7 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/the-data-explained.html">The Data Explained</a>
+    <a class="dropdown-item" href="../articles/nz-elections-explained.html">NZ Elections Explained</a>
     <a class="dropdown-item" href="../articles/seat-allocation-explained.html">Seat Allocation Explained</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Dataset Usage</h6>
@@ -65,7 +65,230 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1" id="scgelectionsnz-development-version-001">scgElectionsNZ (development version 0.0.1)<a class="anchor" aria-label="anchor" href="#scgelectionsnz-development-version-001"></a></h2>
-<p>This is the initial release. It contains</p>
+<p>This is the initial release. It contains the following datasets:</p>
+<table class="table"><colgroup><col width="13%"><col width="6%"><col width="6%"><col width="7%"><col width="14%"><col width="10%"><col width="6%"><col width="14%"><col width="9%"><col width="10%"></colgroup><thead><tr class="header"><th align="left">Column Name</th>
+<th align="center"><code>summary</code></th>
+<th align="center"><code>turnout</code></th>
+<th align="center"><code>vote_type</code></th>
+<th align="center">
+<code>party_votes</code><sup>1</sup></th>
+<th align="center"><code>candidate_votes</code></th>
+<th align="center"><code>majority</code></th>
+<th align="center">
+<code>split_total</code><sup>1</sup></th>
+<th align="center"><code>preMMP_results</code></th>
+<th align="center"><code>historic_turnout</code></th>
+</tr></thead><tbody><tr class="odd"><td align="left">Election</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr><tr class="even"><td align="left">Ballot<sup>2</sup></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">MPs</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+</tr><tr class="even"><td align="left">Electorate</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Electors</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+</tr><tr class="even"><td align="left">Turnout</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+</tr><tr class="odd"><td align="left">Total<sup>3</sup></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">Informal</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Validity</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">Vote_Type</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Party</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">List_Party</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Electorate_Party</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">Candidate<sup>4</sup></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Seats</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">Votes</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Percentage</td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">Party_List<sup>5</sup></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Nominated<sup>6</sup></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="even"><td align="left">Registered<sup>7</sup></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr><tr class="odd"><td align="left">Successful<sup>8</sup></td>
+<td align="center">✔</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr></tbody></table><p>1 Dataset includes Informal Votes under Party column.<br> 2 Ballot includes “Party”, “Candidate”, or “Total” (Party + Candidate for Seats or Party only for Vote/Percentage).<br> 3 Total refers to the total number of votes cast (Valid + Informal).<br> 4 Candidate column contains the name of the winning candidate for that electorate.<br> 5 Party_List column contains Yes or No values and refers to whether the candidate running in the electorate is also on the Party List.<br> 6 Nominated column refers to the number of candidates nominated as electorate candidates or the number on a party list depending on Vote_Type.<br> 7 Registered column contains Yes or No values and refers to whether the party is a registered party with a list or an unregistered party without a list.<br> 8 Successful column contains Yes or No values and refers to whether or not a party achieved the 5% Party_Vote threshold or won at least one electorate.<br></p>
 </div>
   </main></div>
 
