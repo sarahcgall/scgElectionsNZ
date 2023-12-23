@@ -54,7 +54,7 @@ articles:
 - title: Explainers
   navbar: ~
   contents:
-  - articles/the-data-explained
+  - articles/nz-elections-explained
   - articles/seat-allocation-explained
 
 - title: Dataset Examples

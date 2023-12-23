@@ -1,5 +1,5 @@
 ---
-title: "The Data Explained"
+title: "NZ Elections Explained"
 ---
 ```{=html}
 <style>
@@ -84,11 +84,6 @@ where:
 <br>
 <br>
 
-#### Split Voting
-
-<br>
-<br>
-
 #### Overhang Seats
 In circumstances where a party has won more electorates than it would be entitled to from the proportion of the Party Vote, those candidates retain their electorates and the total number of MPs elected to parliament increases. These are referred to as overhang seats. Overhang seats can be easily determined at each election. Details of how to determine overhang seats from the data can be found in the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#overhang-seats).
 <br>
@@ -101,4 +96,20 @@ For parties to be eligible to have seats allocated to them, they either need to 
 
 #### Before MMP
 In 1993, New Zealanders voted to change their voting system from FPTP to MMP. Data prior to 1996 (first general election in which MMP was used), is contained within the package. View the [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) for the national-level popular vote and number of seats won by each party. Data goes back to 1890 and can be combined with the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset for a comparison with the party vote. An example of this can be found in the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#premmp-results).
+<br>
+<br>
 
+#### Turnout
+[Section to be added] relevant datasets: [`turnout`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html) + [`turnout_historic`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html)
+<br>
+<br>
+
+#### Vote Types
+[Section to be added] relevant datasets: [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html)
+<br>
+<br>
+
+#### Split Voting
+[Section to be added] relevant datasets: [`split_total`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_total.html)
+<br>
+<br>
