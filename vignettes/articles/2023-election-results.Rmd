@@ -91,34 +91,3 @@ knitr::include_graphics("img/results_MoV6.png")
 ```
 
 The number of non-classic seats (i.e., those won not by the two major parties) increased in 2023. Previously safe Labour seats, Rongotai and Wellington Central, turned Green for the first time since 1996. The seat of Tamaki - a previously blue-ribbon seat - turned yellow for the first time.
-
-<br>
-
-## Pre-Election Analysis
-The following was an analysis done two months prior to the election.
-
-```{r pre_Cartogram, eval = TRUE, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/pre_Cartogram.png")
-```
-
-The cartogram shows the Labour Party's impressive number of general election gains in 2020 compared with 2017. The party dominated cities such as Auckland, Wellington, Hamilton, and Christchurch. It also won seats such as Ilam in the South Island which has been held by the National Party since 1978.
-
-```{r pre_Pendulum, eval = TRUE, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/pre_Pendulum.png")
-```
-
-The upcoming general election - which will be held on 14 October 2023 - is looking dire for the Labour Party. According to current polling, the party is set to lose the rare majority that it achieved in 2020.
-
-There is, however, a potential path to victory. If the party can cauterise the bleeding of party votes before the election, it may still be able to retain a minority government in coalition with the Green Party and Te Pati Maori.
-
-For this to occur, Labour can afford to lose no more than 19% of the party vote if the Greens and Te Pati Maori get at least 15% of the vote, cumulatively.
-
-```{r pre_PartyVote, eval = TRUE, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/pre_PartyVote.png")
-```
-
-The issue for the National Party is that while Labour is losing a considerable number of voters, these voters are nor turning to National. Instead, there appears to be a rejection of the two major parties, with 38% of voters optiong for minor parties instead.
-
-The polling figures are similar to the 1996 election results which saw neither party achieve a majority and need to rely on a coalition partner to form government. In the case of the 1996 election, this partner was NZ First who are currently in a similar position of being "kingmarker", sitting on a polling average of 5.8% of the party vote.
-
-This means that we could be seeing a coalition government, consisting of the centre-right National Party, right-wing ACT Party, and populist NZ First Party, come October 14.
