@@ -50,7 +50,10 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <h6 class="dropdown-header" data-toc-skip>Dataset Examples</h6>
+    <a class="dropdown-item" href="../articles/the-data-explained.html">The Data Explained</a>
+    <a class="dropdown-item" href="../articles/seat-allocation-explained.html">Seat Allocation Explained</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Dataset Usage</h6>
     <a class="dropdown-item" href="../articles/summary.html">Summary</a>
     <a class="dropdown-item" href="../articles/turnout.html">Turnout</a>
     <a class="dropdown-item" href="../articles/vote-type.html">Vote Type</a>
@@ -100,8 +103,8 @@
     
     
 <style>
-  .content h3 {
-    margin-top: -30px !important;
+  .content p {
+    margin-top: 30px !important;
   }
 
   details {
@@ -149,12 +152,11 @@ to fewer seats than the number of electorate seats that it won.</em>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="explore-data-subsets">Explore data subsets<a class="anchor" aria-label="anchor" href="#explore-data-subsets"></a>
+<h4 id="party-and-candidate-votes">Party and Candidate Votes<a class="anchor" aria-label="anchor" href="#party-and-candidate-votes"></a>
 </h4>
-<p><strong>2023 Party and Candidate Votes:</strong><br> This removes the
-<code>Total</code> ballot type from the dataset, leaving just the Party
-vote and Candidate vote. The data has been further filtered for the most
-recent election.</p>
+<p>This removes the <code>Total</code> ballot type from the dataset,
+leaving just the Party vote and Candidate vote. The data has been
+further filtered for the most recent election.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">!=</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -183,11 +185,15 @@ recent election.</p>
 <span><span class="co">#&gt; 9         Yes        Yes</span></span>
 <span><span class="co">#&gt; 10        Yes        Yes</span></span></code></pre></div>
 <p><br></p>
-<p><strong>2023 Overhang Seats</strong><br> Filtering to include only
-the <code>Total</code> ballot type and whether the party was successful
-(i.e., achieved the eligibility requirements), means that you are able
-to determine where the overhang seats can be attributed to. The data has
-been further filtered for the most recent election.</p>
+</div>
+<div class="section level4">
+<h4 id="overhang-seats">Overhang Seats<a class="anchor" aria-label="anchor" href="#overhang-seats"></a>
+</h4>
+<p>Filtering to include only the <code>Total</code> ballot type and
+whether the party was successful (i.e., achieved the eligibility
+requirements), means that you are able to determine where the overhang
+seats can be attributed to. The data has been further filtered for the
+most recent election.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span>, <span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>

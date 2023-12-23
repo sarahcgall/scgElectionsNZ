@@ -6,11 +6,13 @@ articles:
   majority: majority.html
   party-and-candidate-votes: party-and-candidate-votes.html
   pre-election-analysis: pre-election-analysis.html
+  seat-allocation-explained: seat-allocation-explained.html
   split-voting: split-voting.html
   summary: summary.html
+  the-data-explained: the-data-explained.html
   turnout: turnout.html
   vote-type: vote-type.html
-last_built: 2023-12-23T09:37Z
+last_built: 2023-12-23T18:33Z
 urls:
   reference: https://sarahcgall.github.io/scgElectionsNZ/reference
   article: https://sarahcgall.github.io/scgElectionsNZ/articles
