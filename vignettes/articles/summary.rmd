@@ -3,8 +3,8 @@ title: "Summary"
 ---
 ```{=html}
 <style>
-  .content h3 {
-    margin-top: -30px !important;
+  .content p {
+    margin-top: 30px !important;
   }
 
   details {
@@ -45,8 +45,7 @@ head(df)
 ```
 <br>
 
-#### Explore data subsets
-**2023 Party and Candidate Votes:**<br>
+#### Party and Candidate Votes
 This removes the `Total` ballot type from the dataset, leaving just the Party vote and Candidate vote. The data has been further filtered for the most recent election.
 ```{r summary1}
 df %>%
@@ -56,7 +55,7 @@ df %>%
 ```
 <br>
 
-**2023 Overhang Seats**<br>
+#### Overhang Seats
 Filtering to include only the `Total` ballot type and whether the party was successful (i.e., achieved the eligibility requirements), means that you are able to determine where the overhang seats can be attributed to. The data has been further filtered for the most recent election.
 ```{r summary2}
 df %>%

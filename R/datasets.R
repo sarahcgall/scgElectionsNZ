@@ -102,7 +102,7 @@
 #' @format A data frame with 909 rows and 9 variables:
 #' \describe{
 #'   \item{Election}{election year (1996--2023)}
-#'   \item{Ballot}{ballot type (Candidate, Party, Total (Party + Candidate))}
+#'   \item{Ballot}{ballot type (Candidate, Party, Total (Party + Candidate for Seats or Party only for Vote/Percentage))}
 #'   \item{Party}{party name (e.g., ACT Party)}
 #'   \item{Seats}{number of seats won by party (0--65)}
 #'   \item{Votes}{total valid votes for the party (0--1.44355e+06)}
@@ -128,7 +128,7 @@
 #'   \item{Electorate}{electorate name (e.g., Auckland Central)}
 #'   \item{Electors}{total number of registered electors (24,725--59,899)}
 #'   \item{Turnout}{turnout as a percentage of the number of electors (1.53--93.49)}
-#'   \item{Total}{total number of votes cast (804--50,106)}
+#'   \item{Total}{total number of votes cast - valid and informal (804--50,106)}
 #'   \item{Informal}{total number informal votes cast (0--1403))}
 #' }
 #' @source This dataset was sourced from the NZ Electoral Commission's official results.

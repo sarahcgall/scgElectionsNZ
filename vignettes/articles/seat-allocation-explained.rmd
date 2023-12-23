@@ -1,0 +1,121 @@
+---
+title: "Seat Allocation Explained"
+---
+```{=html}
+<style>
+  .content p {
+    margin-top: 30px !important;
+  }
+
+  details {
+    margin-bottom: 40px;
+  }
+</style>
+```
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = TRUE
+)
+```
+<br>
+
+```{r setup, include = FALSE}
+library(scgElectionsNZ)
+library(tidyverse)
+```
+To determine the order in which seats are allocated to parties, the [NZ Electoral Commission](https://electionresults.govt.nz/electionresults_2023/statistics/sainte-lague-formula.html) follows the below process.
+<br>
+<br>
+
+#### Step 1: Tally Party Votes
+First, all Party Votes are tallied for each party and the number of electorate seats won are also tallied.
+```{r step1}
+# load dataset
+df <- get_data("summary")
+
+df <- df %>%
+  # filter out total ballot type, leaving the candidate and party ballor types only
+  filter(Ballot != "Total",
+         # filter for the most recent election
+         Election == 2023) %>%
+  # keep party votes only by removing candidate votes
+  mutate(Votes = ifelse(Ballot == "Candidate", 0, Votes),
+         # NB % is not required in this step and is only included for illustrative purposes
+         Percentage = ifelse(Ballot == "Candidate", 0, Percentage),
+         # keep the number of electorate seats only by removing party/list seats
+         Seats = ifelse(Ballot == "Party", 0, Seats)) %>%
+  # group long format data frame (NB keep 'Successful' column)
+  group_by(Party, Successful) %>%
+  summarise(Votes = sum(Votes), Percentage = sum(Percentage), Seats = sum(Seats), .groups = 'drop') %>%
+  ungroup() %>%
+  arrange(-Votes)
+
+head(df)
+```
+<br>
+
+#### Step 2: Determine Seat Entitlement
+Next, ineligible parties (those which do not achieve above 5% Party Vote or win at least 1 electorate) are removed from the denominator of the total votes. The percentage of all party votes is recalculated and the seat entitlement and number of top-up seats are determined.
+```{r step2}
+df <- df %>%
+  # filer out ineligible parties
+  filter(Successful == "Yes") %>%
+        # New percentage
+  mutate(Percentage = Votes/sum(Votes)*100,
+         # Number of seats each party is entitled to
+         Entitlement = round(120 * Percentage/100, digits=0),
+         # Number of top-up seats
+         Top_Up = Entitlement - Seats)
+head(df)
+```
+<br>
+
+#### Step 3: Use Saint-Lagu&#235; Formula
+Next, the Sainte-Lagu&#235; formula, $Quotient = \frac{Votes}{(2s + 1)}$, is used to determine the order of seats.
+
+NB $s$ begins at 0 for each Party and increases by 1 as seats are allocated each round. This means that the total number of $Votes$ for each party is divided by an odd number every round.
+
+i.e.,
+
+1. $(2 \times 0 + 1) = 1$
+2. $(2 \times 1 + 1) = 3$
+3. $(2 \times 2 + 1) = 5$
+
+and so on...
+```{r step3}
+n <- 120 # Total number of seats:
+df1 <- data.frame()
+# s begins at 0 and sequences up until total number of seats has been reached
+for(s in seq(0,n)) {
+    tmp <- df %>%
+      # Saint-Lague Formula:
+      mutate(Quotient = Votes / (2*s + 1),
+             # included for illustrative purposes only
+             s = s) %>%
+      select(Party, Quotient, s)
+    df1 <- rbind(df1, tmp)
+}
+head(df1,10)
+```
+<br>
+
+#### Step 4: Determine Allocation Order
+Each seat is then allocated to a party based on the order of the $Quotient$ from highest to lowest. This continues until all 120 seats are allocated (NB this disregards any overhang seats given that these come from excess electorate seats and not list seats).
+```{r step4}
+# Order seats by Quotient (highest to lowest) and subset rows by the total number of seats (120):
+df1 <- df1[order(-df1$Quotient),]
+df1 <- df1[1:n,]
+
+# Allocate seat number:
+df1$Allocation <- 1:n
+head(df1,10)
+```
+<br>
+
+#### Step 5: Allocate Seats
+Finally, the electorate seats won by parties are allocated first and the remaining entitlement are allocated from the remaining candidates on party lists (those which did not win an electorate).
+```{r step5}
+
+```

@@ -51,8 +51,14 @@ reference:
     Functions to visualise the data.
 
 articles:
+- title: Explainers
+  navbar: ~
+  contents:
+  - articles/the-data-explained
+  - articles/seat-allocation-explained
+
 - title: Dataset Examples
-  navbar: Dataset Examples
+  navbar: Dataset Usage
   contents:
   - articles/summary
   - articles/turnout

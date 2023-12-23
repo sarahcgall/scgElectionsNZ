@@ -3,8 +3,8 @@ title: "Party and Candidate Votes"
 ---
 ```{=html}
 <style>
-  .content h3 {
-    margin-top: -30px !important;
+  .content p {
+    margin-top: 30px !important;
   }
 
   details {
