@@ -108,8 +108,8 @@
     margin-bottom: 40px;
   }
 </style>
-<p><br> This article provides examples of using each the
-<code>split_voting</code> dataset. <br></p>
+<p><br> This article explores the <code>split_voting</code> dataset.
+<br></p>
 <div class="section level3">
 <h3 id="split-voting">Split Voting<a class="anchor" aria-label="anchor" href="#split-voting"></a>
 </h3>
@@ -117,13 +117,22 @@
 who cast their party vote for a different party to their candidate vote
 at the national level, by party. This dataset only has election years
 2005 through to 2023 due to there not being split-ticket voting data
-available for previous years.</p>
+available for previous years. <br><br></p>
+<div class="section level4">
+<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+</h4>
+<p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"split_total"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Prepare Sankey Data</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Year</span><span class="op">==</span><span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># get 2023 election data only</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"split_total"</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="prepare-sankey">Prepare Sankey<a class="anchor" aria-label="anchor" href="#prepare-sankey"></a>
+</h4>
+<p>Prepare sankey data.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span><span class="op">==</span><span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># get 2023 election data only</span></span>
 <span>  <span class="co"># combine unsuccessful minor parties into "Other" category</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>List_Party <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span>
 <span>    <span class="va">List_Party</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Labour Party"</span>,<span class="st">"ACT Party"</span>,<span class="st">"Maori Party"</span>,</span>
@@ -138,27 +147,73 @@ available for previous years.</p>
 <span>    <span class="va">Electorate_Party</span>, <span class="st">"Other"</span></span>
 <span>  <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">List_Party</span>, <span class="va">Electorate_Party</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>Vote <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Vote <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># A tibble: 64 x 3</span></span>
-<span><span class="co">#   List_Party  Electorate_Party    Vote</span></span>
-<span><span class="co">#   &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;</span></span>
-<span><span class="co"># 1 ACT Party   ACT Party         68692.</span></span>
-<span><span class="co"># 2 ACT Party   Green Party        2095.</span></span>
-<span><span class="co"># ...</span></span>
-<span></span>
-<span><span class="co"># =====================================#</span></span>
-<span><span class="co"># Look up colours</span></span>
-<span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"polNZ"</span><span class="op">)</span></span>
-<span><span class="co"># $`ACT Party`</span></span>
-<span><span class="co"># [1] "#ffd006"</span></span>
-<span><span class="co"># $`Green Party`</span></span>
-<span><span class="co"># [1] "#45ba52"</span></span>
-<span><span class="co"># ...</span></span>
-<span></span>
-<span><span class="co"># Create Sankey</span></span>
-<span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">plot_sankey</span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;   List_Party Electorate_Party   Vote</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ACT Party  ACT Party        <span style="text-decoration: underline;">68</span>692.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ACT Party  Green Party       <span style="text-decoration: underline;">2</span>095.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ACT Party  Informal          <span style="text-decoration: underline;">1</span>356.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ACT Party  Labour Party      <span style="text-decoration: underline;">7</span>715.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ACT Party  Maori Party        715.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ACT Party  NZ First          <span style="text-decoration: underline;">3</span>106.</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="view-colours">View colours<a class="anchor" aria-label="anchor" href="#view-colours"></a>
+</h4>
+<p>Look up colours using the <code>scgUtils</code> package and manually
+enter.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"polNZ"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $`ACT Party`</span></span>
+<span><span class="co">#&gt; [1] "#ffd006"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`Green Party`</span></span>
+<span><span class="co">#&gt; [1] "#45ba52"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $Informal</span></span>
+<span><span class="co">#&gt; [1] "#d5cdb9"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`Labour Party`</span></span>
+<span><span class="co">#&gt; [1] "#D82A20"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`Maori Party`</span></span>
+<span><span class="co">#&gt; [1] "#B2001A"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`National Party`</span></span>
+<span><span class="co">#&gt; [1] "#00529F"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`NZ First`</span></span>
+<span><span class="co">#&gt; [1] "#000000"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $Alliance</span></span>
+<span><span class="co">#&gt; [1] "#158f1a"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $MANA</span></span>
+<span><span class="co">#&gt; [1] "#ff0000"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`Jim Anderton's Progressive`</span></span>
+<span><span class="co">#&gt; [1] "#a91d26"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $`United Future`</span></span>
+<span><span class="co">#&gt; [1] "#4b104e"</span></span>
+<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; $Other</span></span>
+<span><span class="co">#&gt; [1] "#cdcdd1"</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+</h4>
+<p>Again, using the <code>scgUtils</code> package, create sankey to
+visualise the split vote from the candidate vote (left) to the party
+vote (right).</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">plot_sankey</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">df</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">"Electorate_Party"</span>, <span class="co"># left side of sankey</span></span>
 <span>  target <span class="op">=</span> <span class="st">"List_Party"</span>, <span class="co"># right side of sankey</span></span>
@@ -171,7 +226,9 @@ available for previous years.</p>
 <span>  <span class="co"># htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)</span></span></code></pre></div>
 <p><img src="img/plot_SplitVote.png" width="100%"></p>
 </div>
-  </main>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

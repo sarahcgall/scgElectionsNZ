@@ -108,20 +108,36 @@
     margin-bottom: 40px;
   }
 </style>
-<p><br> This article provides examples of using each the
-<code>vote_type</code> dataset. <br></p>
+<p><br> This article explores the <code>vote_type</code> dataset.
+<br></p>
 <div class="section level3">
 <h3 id="vote-type">Vote Type<a class="anchor" aria-label="anchor" href="#vote-type"></a>
 </h3>
 <p>The <code>vote_type</code> dataset contains the validity of the vote
 (Disallowed, Informal, and Valid) and the vote type (Ordinary, Special -
 NZ, and Special - Overseas) by electorate and ballot type (Candidate and
-Party). <br><br><strong>View percent of disallowed votes by electorate
-and ballot:</strong></p>
+Party). <br><br></p>
+<div class="section level4">
+<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+</h4>
+<p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"vote_type"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
+<span><span class="co">#&gt;   Election Ballot    Electorate       Validity   Vote_Type          Votes</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Ordinary               0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Special              988</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Ordinary             160</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - NZ         129</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - Overseas    14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Valid      Ordinary           <span style="text-decoration: underline;">23</span>227</span></span></code></pre></div>
+<p><br></p>
+<p><strong>Disallowed votes (%)</strong><br> View percent of disallowed
+votes by electorate and ballot type.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Validity</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -144,12 +160,11 @@ and ballot:</strong></p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Candidate Te Tai Hauauru  Disallowed  <span style="text-decoration: underline;">1</span>324       4.91</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Candidate Panmure-Otahuhu Disallowed  <span style="text-decoration: underline;">1</span>416       4.68</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Candidate Ikaroa-Rawhiti  Disallowed  <span style="text-decoration: underline;">1</span>244       4.61</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Candidate Te Tai Tonga    Disallowed  <span style="text-decoration: underline;">1</span>191       4.18</span></span>
-<span><span class="co"># ...</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Candidate Te Tai Tonga    Disallowed  <span style="text-decoration: underline;">1</span>191       4.18</span></span></code></pre></div>
 <p><br></p>
-<p><strong>View percentage of voters overseas by
-electorate:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p><strong>Overseas votes (%)</strong><br> View percentage of voters
+overseas by electorate.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>        <span class="co"># including only valid and informal votes</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -176,10 +191,33 @@ electorate:</strong></p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Party     Mt Albert          Special - Overseas  <span style="text-decoration: underline;">1</span>935       5.24</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Candidate Rongotai           Special - Overseas  <span style="text-decoration: underline;">2</span>027       4.96</span></span></code></pre></div>
 <p><br></p>
-<p><strong>Add a region column to dataset::</strong></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</div>
+<div class="section level4">
+<h4 id="add-region">Add region<a class="anchor" aria-label="anchor" href="#add-region"></a>
+</h4>
+<p>Add a column to facet by region.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_region.html">add_region</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
+<span><span class="co">#&gt;   Election Ballot    Electorate       Validity   Vote_Type    Votes Region</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Ordinary         0 Auckl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Special        988 Auckl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Ordinary       160 Auckl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - NZ   129 Auckl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - O…    14 Auckl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Valid      Ordinary     <span style="text-decoration: underline;">23</span>227 Auckl…</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+</h4>
+<p>Filter by Party vote and exclude disallowed votes from the
+denominator. Visualise the proportion of votes cast overseas by region
+at each election.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>   <span class="co"># including only valid and informal votes</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Region</span>, <span class="va">Vote_Type</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -211,7 +249,9 @@ electorate:</strong></p>
 <span>        legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="img/plot_OverseasVotes.png" width="100%"></p>
 </div>
-  </main>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
