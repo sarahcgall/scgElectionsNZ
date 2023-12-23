@@ -67,8 +67,43 @@ head(df)
 
 #### View colours
 Look up colours using the `scgUtils` package and manually enter.
-```{r split-voting2}
+```{r split-voting2, eval = FALSE}
 scgUtils::colour_pal("polNZ")
+#> $`ACT Party`
+#> [1] "#ffd006"
+#>
+#> $`Green Party`
+#> [1] "#45ba52"
+#>
+#> $Informal
+#> [1] "#d5cdb9"
+#>
+#> $`Labour Party`
+#> [1] "#D82A20"
+#>
+#> $`Maori Party`
+#> [1] "#B2001A"
+#>
+#> $`National Party`
+#> [1] "#00529F"
+#>
+#> $`NZ First`
+#> [1] "#000000"
+#>
+#> $Alliance
+#> [1] "#158f1a"
+#>
+#> $MANA
+#> [1] "#ff0000"
+#>
+#> $`Jim Anderton's Progressive`
+#> [1] "#a91d26"
+#>
+#> $`United Future`
+#> [1] "#4b104e"
+#>
+#> $Other
+#> [1] "#cdcdd1"
 ```
 <br>
 
