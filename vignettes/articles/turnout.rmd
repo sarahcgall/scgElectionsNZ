@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the `turnout` and `turnout_historic` datasets.
+This article explores the [`turnout`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html) and [`turnout_historic`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html) datasets.
 <br>
 
 ```{r setup, include = FALSE}

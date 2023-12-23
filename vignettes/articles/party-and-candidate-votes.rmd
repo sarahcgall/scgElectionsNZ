@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the `party_votes` and `candidate_votes` datasets.
+This article explores the [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) and [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) datasets.
 <br>
 
 ```{r setup, include = FALSE}

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the `vote_type` dataset.
+This article explores the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset.
 <br>
 
 ```{r setup, include = FALSE}

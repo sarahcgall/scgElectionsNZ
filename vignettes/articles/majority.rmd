@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the `majority` dataset and its potential uses.
+This article explores the [`majority`](https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html) dataset and its potential uses.
 <br>
 
 ```{r setup, include = FALSE}

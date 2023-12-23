@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the `summary` and `preMMP_results` datasets.
+This article explores the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) and [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) datasets.
 <br>
 
 ```{r setup, include = FALSE}

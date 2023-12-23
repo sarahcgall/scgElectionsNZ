@@ -52,13 +52,12 @@ where:
 * $V$ is the total number of votes that party received, and
 * $s$ is the number of seats that have been allocated so far to that party.
 
-
-A detailed explanation of the allocation process can be found in the [`Summary`]() article. For electorate-level Party Vote data, view the [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) dataset.
+A detailed explanation of the allocation process can be found in the [Seat Allocation Explained article](https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html). For electorate-level Party Vote data, view the [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) dataset.
 <br>
 <br>
 
 #### Candidate Vote
-The FPTP results can be accessed through the [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) dataset at the electorate-level (NB. the `candidate_votes` dataset only contains successful parties only with unsuccessful parties being grouped as 'Other'). The type of electorate (M&#257;ori or General) can also be identified using the [`add_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_type.html) function.
+The FPTP results can be accessed through the [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) dataset at the electorate-level (NB. the `candidate_votes` dataset currently contains successful parties only, with unsuccessful parties being grouped as 'Other'). The type of electorate (M&#257;ori or General) can also be identified using the [`add_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_type.html) function.
 
 In addition, the [`majority`](https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html) dataset lists the winner of each electorate (i.e., Candidate Vote), the majority, and the margin of victory/marginality. The majority is calculated using the following formula:
 
@@ -91,14 +90,15 @@ where:
 <br>
 
 #### Overhang Seats
-In circumstances where a party has won more electorates than it would be entitled to from the proportion of the Party Vote, those candidates retain their electorates and the total number of MPs elected to parliament increases. These are referred to as overhang seats. Overhang seats can be easily determined at each election by using the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#explore-data-subsets) dataset.
+In circumstances where a party has won more electorates than it would be entitled to from the proportion of the Party Vote, those candidates retain their electorates and the total number of MPs elected to parliament increases. These are referred to as overhang seats. Overhang seats can be easily determined at each election. Details of how to determine overhang seats from the data can be found in the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#overhang-seats).
 <br>
 <br>
 
 #### Eligibility
-For parties to be eligible to have seats allocated to them, they either need to receive five per cent of the Party Vote or win at least one electorate. To look up whether or not a party was eligible in the election results, the [`Successful`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) variable in the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#upload-data) dataset contains this information.
+For parties to be eligible to have seats allocated to them, they either need to receive five per cent of the Party Vote or win at least one electorate. To look up whether or not a party was eligible in the election results, the [`Successful`](https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html#step-2-determine-seat-entitlement) variable in the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset contains this information.
 <br>
 <br>
 
 #### Before MMP
-In 1993, New Zealanders voted to change their voting system from
+In 1993, New Zealanders voted to change their voting system from FPTP to MMP. Data prior to 1996 (first general election in which MMP was used), is contained within the package. View the [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) for the national-level popular vote and number of seats won by each party. Data goes back to 1890 and can be combined with the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset for a comparison with the party vote. An example of this can be found in the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#premmp-results).
+

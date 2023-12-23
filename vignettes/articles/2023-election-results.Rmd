@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+<br>
 
 On the 14th of October 2023, New Zealand held their general election. Overall, 78.2% of voters turned out to vote. The results were officially declared by the Electoral Commission on the 3rd of November 2023, after the counting of special votes (votes cast overseas or out of a voter's electorate) had taken place.
 

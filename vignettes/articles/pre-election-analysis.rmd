@@ -15,18 +15,22 @@ title: "Pre-Election Analysis"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = TRUE,
+  echo = FALSE
 )
 ```
+<br>
+
 The following was an analysis done two months prior to the election. The visualisations first appeared in an [article](https://conservativehome.com/2023/08/23/api-dawson-labours-collapse-could-see-an-historically-strong-result-for-the-smaller-parties-in-the-new-zealand-election/) in Conservative Home on 23 August 2023.
 
-```{r pre_Cartogram, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r pre_Cartogram, out.width = '100%'}
 knitr::include_graphics("img/pre_Cartogram.png")
 ```
 
 The cartogram shows the Labour Party's impressive number of general election gains in 2020 compared with 2017. The party dominated cities such as Auckland, Wellington, Hamilton, and Christchurch. It also won seats such as Ilam in the South Island which has been held by the National Party since 1978.
 
-```{r pre_Pendulum, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r pre_Pendulum, out.width = '100%'}
 knitr::include_graphics("img/pre_Pendulum.png")
 ```
 
@@ -36,7 +40,7 @@ There is, however, a potential path to victory. If the party can cauterise the b
 
 For this to occur, Labour can afford to lose no more than 19% of the party vote if the Greens and Te Pati Maori get at least 15% of the vote, cumulatively.
 
-```{r pre_PartyVote, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r pre_PartyVote, out.width = '100%'}
 knitr::include_graphics("img/pre_PartyVote.png")
 ```
 

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the `split_voting` dataset.
+This article explores the [`split_total`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_total.html) dataset.
 <br>
 
 ```{r setup, include = FALSE}

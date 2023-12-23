@@ -20,7 +20,6 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
@@ -36,19 +35,23 @@ First, all Party Votes are tallied for each party and the number of electorate s
 df <- get_data("summary")
 
 df <- df %>%
-  # filter out total ballot type, leaving the candidate and party ballor types only
+  # filter out total ballot type, leaving the candidate and party ballor
+  # types only
   filter(Ballot != "Total",
          # filter for the most recent election
          Election == 2023) %>%
   # keep party votes only by removing candidate votes
   mutate(Votes = ifelse(Ballot == "Candidate", 0, Votes),
-         # NB % is not required in this step and is only included for illustrative purposes
+         # NB % is not required in this step and is only included
+         # for illustrative purposes
          Percentage = ifelse(Ballot == "Candidate", 0, Percentage),
-         # keep the number of electorate seats only by removing party/list seats
+         # keep the number of electorate seats only by removing
+         # party/list seats
          Seats = ifelse(Ballot == "Party", 0, Seats)) %>%
   # group long format data frame (NB keep 'Successful' column)
   group_by(Party, Successful) %>%
-  summarise(Votes = sum(Votes), Percentage = sum(Percentage), Seats = sum(Seats), .groups = 'drop') %>%
+  summarise(Votes = sum(Votes), Percentage = sum(Percentage),
+            Seats = sum(Seats), .groups = 'drop') %>%
   ungroup() %>%
   arrange(-Votes)
 
@@ -87,7 +90,8 @@ and so on...
 ```{r step3}
 n <- 120 # Total number of seats:
 df1 <- data.frame()
-# s begins at 0 and sequences up until total number of seats has been reached
+# s begins at 0 and sequences up until total number of seats
+# has been reached
 for(s in seq(0,n)) {
     tmp <- df %>%
       # Saint-Lague Formula:
@@ -104,7 +108,8 @@ head(df1,10)
 #### Step 4: Determine Allocation Order
 Each seat is then allocated to a party based on the order of the $Quotient$ from highest to lowest. This continues until all 120 seats are allocated (NB this disregards any overhang seats given that these come from excess electorate seats and not list seats).
 ```{r step4}
-# Order seats by Quotient (highest to lowest) and subset rows by the total number of seats (120):
+# Order seats by Quotient (highest to lowest) and subset
+# rows by the total number of seats (120):
 df1 <- df1[order(-df1$Quotient),]
 df1 <- df1[1:n,]
 
