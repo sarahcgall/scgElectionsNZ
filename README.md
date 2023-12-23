@@ -57,13 +57,14 @@ df <- add_type(df)
 df <- update_EName(df, column=Electorate)
 ```
 
-For more in-depth examples of using each dataset included in the `scgElectionsNZ` package, view 
-[Using the scgElectionsNZ datasets](https://sarahcgall.github.io/scgElectionsNZ/articles/using-scgElectionsNZ.html). 
-For more information on the data that is included, view [Datatsets](https://sarahcgall.github.io/scgElectionsNZ/articles/dataset-contents.html).
+For more in-depth examples of using each dataset included in the `scgElectionsNZ` package, view the data index 
+[here](https://sarahcgall.github.io/scgElectionsNZ/reference/index.html) or view the articles found at:
+https://sarahcgall.github.io/scgElectionsNZ.
 
 ## Data Sources
 The election data available within the `scgElectionsNZ` package can be found in the tables below.
-Data have been sourced from the [New Zealand Electoral Commission](https://electionresults.govt.nz/) and are up-to-date as at 3 December, 2023.
+Data have been sourced from the [New Zealand Electoral Commission](https://electionresults.govt.nz/) and are 
+up-to-date as at 3 December, 2023.
 
 ## Future Additions and Updates
 Additional datasets will include by-election data and the following datasets:

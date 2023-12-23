@@ -16,26 +16,34 @@ title: "Split Voting"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 <br>
-This article provides examples of using each the `split_voting` dataset.
+This article explores the `split_voting` dataset.
 <br>
 
-```{r setup, eval = TRUE, include = FALSE}
+```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
 ```
 ### Split Voting
 The `split_total` dataset contains the number of voters who cast their party vote for a different party to their candidate vote at the national level, by party. This dataset only has election years 2005 through to 2023 due to there not being split-ticket voting data available for previous years.
+<br>
+<br>
 
-```{r split-voting, eval = FALSE}
+#### Upload data
+View the shape of data frame.
+```{r split-voting}
 df <- get_data("split_total")
+```
+<br>
 
-# Prepare Sankey Data
+#### Prepare Sankey
+Prepare sankey data.
+```{r split-voting1}
 df <- df %>%
-  filter(Year==2023) %>% # get 2023 election data only
+  filter(Election==2023) %>% # get 2023 election data only
   # combine unsuccessful minor parties into "Other" category
   mutate(List_Party = ifelse(
     List_Party %in% c("Labour Party","ACT Party","Maori Party",
@@ -50,26 +58,23 @@ df <- df %>%
     Electorate_Party, "Other"
   )) %>%
   group_by(List_Party, Electorate_Party) %>%
-  summarise(Vote = sum(Votes)) %>%
+  summarise(Vote = sum(Votes), .groups = 'drop') %>%
   ungroup()
 
-# A tibble: 64 x 3
-#   List_Party  Electorate_Party    Vote
-#   <chr>       <chr>              <dbl>
-# 1 ACT Party   ACT Party         68692.
-# 2 ACT Party   Green Party        2095.
-# ...
+head(df)
+```
+<br>
 
-# =====================================#
-# Look up colours
+#### View colours
+Look up colours using the `scgUtils` package and manually enter.
+```{r split-voting2}
 scgUtils::colour_pal("polNZ")
-# $`ACT Party`
-# [1] "#ffd006"
-# $`Green Party`
-# [1] "#45ba52"
-# ...
+```
+<br>
 
-# Create Sankey
+#### Plot
+Again, using the `scgUtils` package, create sankey to visualise the split vote from the candidate vote (left) to the party vote (right).
+```{r split-voting3, eval = FALSE}
 scgUtils::plot_sankey(
   data = df,
   source = "Electorate_Party", # left side of sankey
@@ -81,8 +86,7 @@ scgUtils::plot_sankey(
 ) # %>%
   # save from viewer to html
   # htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)
-
 ```
-```{r SplitVote, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r SplitVote, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_SplitVote.png")
 ```

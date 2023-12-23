@@ -46,7 +46,7 @@ head(df)
 <br>
 
 #### Merge datasets
-**Compare electorate-level turnout to national-level:**
+Add the national-level dataset to the electorate-level to compare the difference.
 ```{r turnout1}
 df1 <- get_data("turnout_historic")
 df2 <- left_join(df, df1, by = "Election")
@@ -54,10 +54,13 @@ df2 <- left_join(df, df1, by = "Election")
 df2 <- df2 %>%
   filter(Ballot == "Party", Election == 2023) %>%
   mutate(Turnout = Turnout.x - Turnout.y)
+
+head(df2)
 ```
-<br.
+<br>
 
 #### Plot
+Visualise if the electorate turnout was above or below the average turnout for that election year (2023).
 ```{r turnout2, eval = FALSE}
 df2 %>%
   ggplot(aes(x=Turnout, y=reorder(Electorate, Turnout), fill = ifelse(Turnout < 0,
@@ -87,7 +90,7 @@ head(df1)
 <br>
 
 #### Plot
-**View turnout over time to see how 2023 compares:**
+Visualise turnout over time to see how 2023 compares.
 ```{r turnout-over-time1, eval = FALSE}
 df1 %>%
   ggplot(aes(x = as.character(Election), y = Turnout, label = Turnout)) +

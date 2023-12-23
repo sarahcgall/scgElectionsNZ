@@ -16,14 +16,14 @@ title: "Vote Type"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 <br>
-This article provides examples of using each the `vote_type` dataset.
+This article explores the `vote_type` dataset.
 <br>
 
-```{r setup, eval = TRUE, include = FALSE}
+```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
 ```
@@ -32,10 +32,18 @@ The `vote_type` dataset contains the validity of the vote (Disallowed, Informal,
 Special - NZ, and Special - Overseas) by electorate and ballot type (Candidate and Party).
 <br>
 <br>
-**View percent of disallowed votes by electorate and ballot:**
-```{r vote-type1, eval = TRUE}
-df <- get_data("vote_type")
 
+#### Upload data
+View the shape of data frame.
+```{r vote-type}
+df <- get_data("vote_type")
+head(df)
+```
+<br>
+
+**Disallowed votes (%)**<br>
+View percent of disallowed votes by electorate and ballot type.
+```{r vote-type1}
 df %>%
   filter(Election == 2023) %>%
   group_by(Ballot, Electorate, Validity) %>%
@@ -47,12 +55,12 @@ df %>%
   filter(Validity == "Disallowed") %>%
   arrange(-Percentage) %>%
   head(n = 10)
-# ...
 ```
 <br>
 
-**View percentage of voters overseas by electorate:**
-```{r vote-type2, eval = TRUE}
+**Overseas votes (%)**<br>
+View percentage of voters overseas by electorate.
+```{r vote-type2}
 df %>%
         # including only valid and informal votes
   filter(Election == 2023, Validity != "Disallowed") %>%
@@ -68,9 +76,17 @@ df %>%
 ```
 <br>
 
-**Add a region column to dataset::**
+#### Add region
+Add a column to facet by region.
 ```{r vote-type3}
 df <- add_region(df)
+head(df)
+```
+<br>
+
+#### Plot
+Filter by Party vote and exclude disallowed votes from the denominator. Visualise the proportion of votes cast overseas by region at each election.
+```{r vote-type4, eval = FALSE}
 df <- df %>%
    # including only valid and informal votes
   filter(Ballot == "Party", Validity != "Disallowed") %>%

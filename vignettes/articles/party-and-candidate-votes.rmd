@@ -16,14 +16,14 @@ title: "Party and Candidate Votes"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 <br>
-This article provides examples of using each the `party_votes` and `candidate_votes` datasets.
+This article explores the `party_votes` and `candidate_votes` datasets.
 <br>
 
-```{r setup, eval = TRUE, include = FALSE}
+```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(tidyverse)
 ```
@@ -31,11 +31,24 @@ library(tidyverse)
 The `party_votes` and `candidate_votes` datasets contain party and candidate votes, respectively, by electorate and party. Currently, the `party_votes` has all parties listed, including the informal vote, while the `candidate_votes` have only the successful parties listed with the remaining parties listed as "Other". The informal vote is also not included.
 
 Future updates to the `candidate_votes` dataset will replicate the `party_votes` dataset so that the "Other" category is broken down into all parties and the informal vote is included.
+<br>
+<br>
 
-```{r party-candidate-votes}
+#### Upload data
+View the shape of data frame.
+```{r party-votes}
 df <- get_data("party_votes")
+head(df)
+```
+```{r candidate-votes}
 df1 <- get_data("candidate_votes")
+head(df1)
+```
+<br>
 
+#### Merging datasets
+Merge the two candidate and party vote datasets together in a long form data frame.
+```{r party-candidate-votes}
 df <- df %>%
   mutate(Party = ifelse(Party %in% c("Labour Party", "National Party", "Green Party",
                                      "ACT Party", "NZ First", "Maori Party"), Party,
@@ -49,6 +62,13 @@ df <- df %>%
 
 df2 <- rbind(df, df1)
 
+head(df2)
+```
+<br>
+
+#### Plot
+Visualise the 2023 candidate vote by party vote in a scatter plot faceted by party.
+```{r party-candidate-votes1, eval = FALSE}
 df2 <- df2 %>%
   filter(Election == 2023) %>%
   mutate(Ballot = ifelse(Ballot == "Party", "Party Vote", "Candidate Vote")) %>%
@@ -74,6 +94,6 @@ df2 %>%
   scgUtils::theme_scg() +
   theme(legend.position = "none")
 ```
-```{r CandidateByParty, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r CandidateByParty, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_CandidateByParty.png")
 ```
