@@ -130,6 +130,9 @@ scgUtils::plot_sankey(
   # save from viewer to html
   # htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)
 ```
-```{r SplitVote_html, child="img/sankey_2023.html", out.width = '100%'}
-
-```
+````{=html}
+<iframe width="100%" height="850"
+  src="img/sankey_2023.html"
+  frameborder="0"
+  allowfullscreen></iframe>
+````
