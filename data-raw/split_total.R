@@ -23,16 +23,12 @@ split_total <- amend_parties(split_total, List_Party) # amend party names
 
 split_total <- split_total %>%
   group_by(Election, List_Party) %>%
-  mutate(Votes = Votes / 100 * Votes[Electorate_Party == "Total Party Votes"]) %>%
+  mutate(Percentage = Votes,
+         Votes = Votes / 100 * Votes[Electorate_Party == "Total Party Votes"]) %>%
   ungroup() %>%
   filter(List_Party != "Total Party Votes and Percentages",
          !Electorate_Party %in% c("Total  ","Total Party Votes")) %>%
-  group_by(Election, List_Party, Electorate_Party) %>%
-  summarise(Votes = sum(Votes)) %>%
-  ungroup() %>%
-  group_by(Election, List_Party) %>%
-  mutate(Percentage = Votes / sum(Votes) * 100) %>%
-  ungroup()
+  select(Election, List_Party, Electorate_Party, Votes, Percentage)
 # Remove special characters
 split_total$Electorate_Party <- iconv(split_total$Electorate_Party,from="UTF-8",to="ASCII//TRANSLIT")
 split_total$List_Party <- iconv(split_total$List_Party,from="UTF-8",to="ASCII//TRANSLIT")

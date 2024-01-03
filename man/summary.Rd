@@ -8,7 +8,7 @@
 A data frame with 909 rows and 9 variables:
 \describe{
 \item{Election}{election year (1996--2023)}
-\item{Ballot}{ballot type (Candidate, Party, Total (Party + Candidate))}
+\item{Ballot}{ballot type (Candidate, Party, Total (Party + Candidate for Seats or Party only for Vote/Percentage))}
 \item{Party}{party name (e.g., ACT Party)}
 \item{Seats}{number of seats won by party (0--65)}
 \item{Votes}{total valid votes for the party (0--1.44355e+06)}

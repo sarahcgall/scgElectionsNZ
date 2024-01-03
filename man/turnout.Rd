@@ -12,7 +12,7 @@ A data frame with 1,392 rows and 7 variables:
 \item{Electorate}{electorate name (e.g., Auckland Central)}
 \item{Electors}{total number of registered electors (24,725--59,899)}
 \item{Turnout}{turnout as a percentage of the number of electors (1.53--93.49)}
-\item{Total}{total number of votes cast (804--50,106)}
+\item{Total}{total number of votes cast - valid and informal (804--50,106)}
 \item{Informal}{total number informal votes cast (0--1403))}
 }
 }

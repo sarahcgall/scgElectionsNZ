@@ -75,6 +75,25 @@
 #' The raw data are available from \url{https://www.electionresults.govt.nz/}.
 "preMMP_results"
 
+#' Split Electorate (2005 - 2023)
+#'
+#' The `split_electorate` dataset is in a long format and can be used to view the electorate-level
+#' split voting by party. For an example of how to use this dataset, refer
+#' to the [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting).
+#'
+#' @format A data frame with 81,269 rows and 6 variables:
+#' \describe{
+#'   \item{Election}{election year (2005--2023)}
+#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
+#'   \item{List_Party}{party voted for in party vote (e.g., 99 MP Party)}
+#'   \item{Electorate_Party}{party voted for in candidate vote (e.g., ACT Party)}
+#'   \item{Votes}{estimated number of votes flowing from list to electorate parties (n)}
+#'   \item{Percentage}{percentage of votes flowing from list to electorate parties (%)}
+#' }
+#' @source This dataset was sourced from the NZ Electoral Commission's official results.
+#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+"split_electorate"
+
 #' Split Total (2005 - 2023)
 #'
 #' The `split_total` dataset is in a long format and can be used to view the overall
@@ -86,7 +105,7 @@
 #'   \item{Election}{election year (2005--2023)}
 #'   \item{List_Party}{party voted for in party vote (e.g., 99 MP Party)}
 #'   \item{Electorate_Party}{party voted for in candidate vote (e.g., ACT Party)}
-#'   \item{Votes}{number of votes flowing from list to electorate parties (n)}
+#'   \item{Votes}{estimated number of votes flowing from list to electorate parties (n)}
 #'   \item{Percentage}{percentage of votes flowing from list to electorate parties (%)}
 #' }
 #' @source This dataset was sourced from the NZ Electoral Commission's official results.
