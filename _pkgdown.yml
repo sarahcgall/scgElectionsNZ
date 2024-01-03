@@ -23,6 +23,7 @@ reference:
     National-level datasets include both post-MMP and pre-MMP datasets.
   contents:
   - summary
+  - split_total
   - preMMP_results
   - turnout_historic
 
@@ -35,7 +36,7 @@ reference:
   - party_votes
   - candidate_votes
   - majority
-  - split_total
+  - split_electorate
 
 - title: Helper Functions
   desc: >
