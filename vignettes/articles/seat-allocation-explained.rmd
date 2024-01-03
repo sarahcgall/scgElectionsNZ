@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 <br>
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
-library(tidyverse)
+library(dplyr)
 ```
 To determine the order in which seats are allocated to parties, the [NZ Electoral Commission](https://electionresults.govt.nz/electionresults_2023/statistics/sainte-lague-formula.html) follows the below process.
 <br>

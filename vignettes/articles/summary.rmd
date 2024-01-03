@@ -25,7 +25,8 @@ This article explores the [`summary`](https://sarahcgall.github.io/scgElectionsN
 
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 ```
 
 ### Summary

@@ -25,7 +25,7 @@ This article explores the [`split_total`](https://sarahcgall.github.io/scgElecti
 
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
-library(tidyverse)
+library(dplyr)
 ```
 ### Split Voting
 The `split_total` and `split_electorate` datasets contains the number of voters who cast their party vote for a different party to their candidate vote at the national level, by party. This dataset only has election years 2005 through to 2023 due to there not being split-ticket voting data available for previous years.

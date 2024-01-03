@@ -25,7 +25,8 @@ This article explores the [`turnout`](https://sarahcgall.github.io/scgElectionsN
 
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 ```
 ### Turnout
 The `turnout` dataset contains the overall turnout and informal vote by electorate and ballot type (Candidate and Party).

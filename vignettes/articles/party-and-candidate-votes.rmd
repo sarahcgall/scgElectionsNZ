@@ -25,7 +25,8 @@ This article explores the [`party_votes`](https://sarahcgall.github.io/scgElecti
 
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 ```
 ### Party and Candidate Votes
 The `party_votes` and `candidate_votes` datasets contain party and candidate votes, respectively, by electorate and party. Currently, the `party_votes` has all parties listed, including the informal vote, while the `candidate_votes` have only the successful parties listed with the remaining parties listed as "Other". The informal vote is also not included.

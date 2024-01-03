@@ -25,7 +25,8 @@ This article explores the [`vote_type`](https://sarahcgall.github.io/scgElection
 
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 ```
 ### Vote Type
 The `vote_type` dataset contains the validity of the vote (Disallowed, Informal, and Valid) and the vote type (Ordinary,
