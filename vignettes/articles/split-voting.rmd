@@ -120,12 +120,10 @@ Again, using the `scgUtils` package, create sankey to visualise the split vote f
 ```{r split-voting3, eval = FALSE}
 scgUtils::plot_sankey(
   data = df,
-  source = "Electorate_Party", # left side of sankey
-  target = "List_Party", # right side of sankey
+  source = "List_Party", # left side of sankey
+  target = "Electorate_Party", # right side of sankey
   value = "Vote",
-  colours = '"#ffd006","#45ba52","#d5cdb9","#D82A20","#B2001A","#000000","#00529F","#cdcdd1"',
-  fontSize = 20, # reduce font size from default
-  width = 1600 # increase width from default
+  colours = '"#ffd006","#45ba52","#d5cdb9","#D82A20","#B2001A","#000000","#00529F","#cdcdd1"'
 ) # %>%
   # save from viewer to html
   # htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)

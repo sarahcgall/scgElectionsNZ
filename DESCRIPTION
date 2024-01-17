@@ -24,7 +24,8 @@ Suggests:
     knitr,
     rmarkdown,
     ggplot2,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    scgUtils
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Config/Needs/website: tidyverse/tidytemplate
