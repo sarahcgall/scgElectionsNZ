@@ -37,7 +37,7 @@ The `majority` dataset contains the winning candidate and the margin of victory 
 View the shape of data frame.
 ```{r majority}
 # Load dataset
-df <- get_data("majority")
+df <- scgUtils::get_data("majority")
 head(df)
 ```
 <br>

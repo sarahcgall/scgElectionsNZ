@@ -4,10 +4,10 @@
 \alias{add_region}
 \title{New Zealand Regions}
 \usage{
-add_region(..., column = "Electorate")
+add_region(data, column = "Electorate")
 }
 \arguments{
-\item{...}{Data frame to have region column added to}
+\item{data}{Data frame to have region column added to}
 
 \item{column}{Name of column to be joined (default = "Electorate")}
 }

@@ -4,10 +4,10 @@
 \alias{update_EName}
 \title{Update Electorate Names}
 \usage{
-update_EName(..., column1 = Electorate, column2 = Election)
+update_EName(data, column1 = Electorate, column2 = Election)
 }
 \arguments{
-\item{...}{Name of dataset}
+\item{data}{Name of dataset}
 
 \item{column1}{Name of column with electorates}
 

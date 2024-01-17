@@ -37,7 +37,7 @@ Special - NZ, and Special - Overseas) by electorate and ballot type (Candidate a
 #### Upload data
 View the shape of data frame.
 ```{r vote-type}
-df <- get_data("vote_type")
+df <- scgUtils::get_data("vote_type")
 head(df)
 ```
 <br>

@@ -32,7 +32,7 @@ To determine the order in which seats are allocated to parties, the [NZ Electora
 First, all Party Votes are tallied for each party and the number of electorate seats won are also tallied.
 ```{r step1}
 # load dataset
-df <- get_data("summary")
+df <- scgUtils::get_data("summary")
 
 df <- df %>%
   # filter out total ballot type, leaving the candidate and party ballor

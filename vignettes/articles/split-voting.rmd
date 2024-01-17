@@ -35,9 +35,9 @@ The `split_total` and `split_electorate` datasets contains the number of voters 
 #### Upload data
 View the shape of data frame.
 ```{r split-voting}
-df <- get_data("split_total")
+df <- scgUtils::get_data("split_total")
 # or
-# df <- get_data("split_electorate")
+# df <- scgUtils::get_data("split_electorate")
 ```
 <br>
 

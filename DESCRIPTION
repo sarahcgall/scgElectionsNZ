@@ -9,23 +9,22 @@ Description: scgElectionsNZ allows you to download and explore New Zealand's
 License: MIT + file LICENSE
 URL: https://github.com/sarahcgall/scgElectionsNZ, https://sarahcgall.github.io/scgElectionsNZ/
 BugReports: https://github.com/sarahcgall/scgElectionsNZ/issues
-Depends:
-    R (>= 3.5.0)
 Imports:
     dplyr,
-    utils,
     rlang
+LazyData: true
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends:
+    R (>= 3.5.0)
 Suggests:
     knitr,
     rmarkdown,
     ggplot2,
     testthat (>= 3.0.0),
     scgUtils
-LazyData: true
-Encoding: UTF-8
-Language: en-GB
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Config/Needs/website: tidyverse/tidytemplate

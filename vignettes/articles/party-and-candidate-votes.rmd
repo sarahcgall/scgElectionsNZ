@@ -38,11 +38,11 @@ Future updates to the `candidate_votes` dataset will replicate the `party_votes`
 #### Upload data
 View the shape of data frame.
 ```{r party-votes}
-df <- get_data("party_votes")
+df <- scgUtils::get_data("party_votes")
 head(df)
 ```
 ```{r candidate-votes}
-df1 <- get_data("candidate_votes")
+df1 <- scgUtils::get_data("candidate_votes")
 head(df1)
 ```
 <br>

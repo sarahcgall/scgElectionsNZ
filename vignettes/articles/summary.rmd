@@ -40,7 +40,7 @@ The `summary` dataset contains the overall results at the national-level by Elec
 View the shape of data frame.
 ```{r summary}
 # Load datasets by using the following helper function:
-df <- get_data("summary")
+df <- scgUtils::get_data("summary")
 # Alternatively, use: data("summary")
 head(df)
 ```

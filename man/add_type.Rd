@@ -4,10 +4,10 @@
 \alias{add_type}
 \title{New Zealand Electorate Types}
 \usage{
-add_type(..., column = "Electorate")
+add_type(data, column = "Electorate")
 }
 \arguments{
-\item{...}{Data frame to have electorate type column added to}
+\item{data}{Data frame to have electorate type column added to}
 
 \item{column}{Name of column to be joined (default = "Electorate")}
 }

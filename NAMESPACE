@@ -2,6 +2,5 @@
 
 export(add_region)
 export(add_type)
-export(get_data)
 export(update_EName)
 importFrom(rlang,":=")
