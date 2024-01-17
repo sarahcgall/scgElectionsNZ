@@ -1,12 +1,12 @@
 # Load datasets by using the following helper function:
-df <- scgUtils::get_data("majority")
+data("majority")
 
 test_that("error message correctly returned", {
   expect_error(update_EName("df"), "A data frame is required to be parsed through this function.")
 })
 
 test_that("converts pre-2020 electorate names to match name changes that occurred in 2020", {
-  x <- update_EName(df)
+  x <- update_EName(majority)
   expect_length(x, 7)
 
   # testing change for 2020 Flat Bush to Takanini
