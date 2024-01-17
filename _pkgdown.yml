@@ -44,7 +44,6 @@ reference:
   contents:
   - add_region
   - add_type
-  - get_data
   - update_EName
 
 - title: Visualisations
