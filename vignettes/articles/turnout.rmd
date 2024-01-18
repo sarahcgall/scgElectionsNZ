@@ -27,6 +27,10 @@ This article explores the [`turnout`](https://sarahcgall.github.io/scgElectionsN
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
+data("turnout")
+df <- turnout
+data("turnout_historic")
+df1 <- turnout_historic
 ```
 ### Turnout
 The `turnout` dataset contains the overall turnout and informal vote by electorate and ballot type (Candidate and Party).
@@ -40,16 +44,25 @@ election, and the total number of electors.
 
 #### Upload data
 View the shape of data frame.
-```{r turnout}
+```{r turnout, eval = FALSE}
 df <- scgUtils::get_data("turnout")
 head(df)
+#>   Election Ballot           Electorate Electors Turnout Total Informal
+#> 2     2023  Party     Auckland Central    45426   78.66 35734       85
+#> 3     2023  Party      Banks Peninsula    59383   84.10 49944      194
+#> 4     2023  Party        Bay of Plenty    56200   81.53 45822      209
+#> 5     2023  Party               Botany    53160   71.65 38087      189
+#> 6     2023  Party Christchurch Central    50999   78.52 40044      166
+#> 7     2023  Party    Christchurch East    50898   77.37 39378      203
 ```
 <br>
 
 #### Merge datasets
 Add the national-level dataset to the electorate-level to compare the difference.
-```{r turnout1}
+```{r turnout_df1, eval = FALSE}
 df1 <- scgUtils::get_data("turnout_historic")
+```
+```{r turnout1}
 df2 <- left_join(df, df1, by = "Election")
 
 df2 <- df2 %>%

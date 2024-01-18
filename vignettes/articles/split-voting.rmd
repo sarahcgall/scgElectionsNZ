@@ -26,6 +26,8 @@ This article explores the [`split_total`](https://sarahcgall.github.io/scgElecti
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(dplyr)
+data("split_total")
+df <- split_total
 ```
 ### Split Voting
 The `split_total` and `split_electorate` datasets contains the number of voters who cast their party vote for a different party to their candidate vote at the national level, by party. This dataset only has election years 2005 through to 2023 due to there not being split-ticket voting data available for previous years.
@@ -34,7 +36,7 @@ The `split_total` and `split_electorate` datasets contains the number of voters 
 
 #### Upload data
 View the shape of data frame.
-```{r split-voting}
+```{r split-voting, eval = FALSE}
 df <- scgUtils::get_data("split_total")
 # or
 # df <- scgUtils::get_data("split_electorate")
@@ -73,63 +75,23 @@ head(df)
 ```
 <br>
 
-#### View colours
-Look up colours using the `scgUtils` package and manually enter.
-```{r split-voting2, eval = FALSE}
-scgUtils::colour_pal("polNZ")
-#> $`ACT Party`
-#> [1] "#ffd006"
-#>
-#> $`Green Party`
-#> [1] "#45ba52"
-#>
-#> $Informal
-#> [1] "#d5cdb9"
-#>
-#> $`Labour Party`
-#> [1] "#D82A20"
-#>
-#> $`Maori Party`
-#> [1] "#B2001A"
-#>
-#> $`National Party`
-#> [1] "#00529F"
-#>
-#> $`NZ First`
-#> [1] "#000000"
-#>
-#> $Alliance
-#> [1] "#158f1a"
-#>
-#> $MANA
-#> [1] "#ff0000"
-#>
-#> $`Jim Anderton's Progressive`
-#> [1] "#a91d26"
-#>
-#> $`United Future`
-#> [1] "#4b104e"
-#>
-#> $Other
-#> [1] "#cdcdd1"
-```
-<br>
-
 #### Plot
-Again, using the `scgUtils` package, create sankey to visualise the split vote from the candidate vote (left) to the party vote (right).
+Using the `scgUtils` package, create sankey to visualise the split vote from the candidate vote (left) to the party vote (right). Use the `colour_prep` function from the same package to match the party colours to the correct political party.
 ```{r split-voting3, eval = FALSE}
 scgUtils::plot_sankey(
   data = df,
   source = "List_Party", # left side of sankey
   target = "Electorate_Party", # right side of sankey
   value = "Vote",
-  colours = '"#ffd006","#45ba52","#d5cdb9","#D82A20","#B2001A","#000000","#00529F","#cdcdd1"'
+  colours = scgUtils::colour_prep(df, c("List_Party","Electorate_Party"), pal_name = "polNZ"),
+  width = 900, # reduce width from default of 1200
+  height = 700 # reduce height from default of 800
 ) # %>%
   # save from viewer to html
   # htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)
 ```
 ````{=html}
-<iframe width="100%" height="850"
+<iframe width="100%" height="800"
   src="img/sankey_2023.html"
   frameborder="0"
   allowfullscreen></iframe>

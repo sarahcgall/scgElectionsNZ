@@ -27,6 +27,8 @@ This article explores the [`majority`](https://sarahcgall.github.io/scgElections
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
+data("majority")
+df <- majority
 ```
 ### Majority
 The `majority` dataset contains the winning candidate and the margin of victory by electorate. The majority is calculated by subtracting the number of votes of the winning candidate form the number of votes of the second candidate. The margin of victory divides this number by the total votes cast to create a percentage figure.
@@ -35,10 +37,24 @@ The `majority` dataset contains the winning candidate and the margin of victory 
 
 #### Upload data
 View the shape of data frame.
-```{r majority}
+```{r majority, eval = FALSE}
 # Load dataset
 df <- scgUtils::get_data("majority")
 head(df)
+#>   Election           Electorate          Party                  Candidate
+#> 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte
+#> 2     2023      Banks Peninsula National Party           WEENINK, Vanessa
+#> 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom
+#> 4     2023               Botany National Party         LUXON, Christopher
+#> 5     2023 Christchurch Central   Labour Party               WEBB, Duncan
+#> 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John
+#>    Votes Percentage Party_List
+#> 1   3896      11.31        Yes
+#> 2    396       0.81        Yes
+#> 3  15405      34.57        Yes
+#> 4  16323      44.69        Yes
+#> 5   1841       4.75        Yes
+#> 6   2397       6.25        Yes
 ```
 <br>
 

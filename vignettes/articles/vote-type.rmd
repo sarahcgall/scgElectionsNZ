@@ -27,6 +27,8 @@ This article explores the [`vote_type`](https://sarahcgall.github.io/scgElection
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
+data("vote_type")
+df <- vote_type
 ```
 ### Vote Type
 The `vote_type` dataset contains the validity of the vote (Disallowed, Informal, and Valid) and the vote type (Ordinary,
@@ -36,9 +38,18 @@ Special - NZ, and Special - Overseas) by electorate and ballot type (Candidate a
 
 #### Upload data
 View the shape of data frame.
-```{r vote-type}
+```{r vote-type, eval = FALSE}
 df <- scgUtils::get_data("vote_type")
 head(df)
+#> # A tibble: 6 x 6
+#>   Election Ballot    Electorate       Validity   Vote_Type          Votes
+#>      <dbl> <chr>     <chr>            <chr>      <chr>              <dbl>
+#> 1     2023 Candidate Auckland Central Disallowed Ordinary               0
+#> 2     2023 Candidate Auckland Central Disallowed Special              988
+#> 3     2023 Candidate Auckland Central Informal   Ordinary             160
+#> 4     2023 Candidate Auckland Central Informal   Special - NZ         129
+#> 5     2023 Candidate Auckland Central Informal   Special - Overseas    14
+#> 6     2023 Candidate Auckland Central Valid      Ordinary           23227
 ```
 <br>
 

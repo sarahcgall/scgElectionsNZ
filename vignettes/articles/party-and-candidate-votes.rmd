@@ -27,6 +27,10 @@ This article explores the [`party_votes`](https://sarahcgall.github.io/scgElecti
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
+data("party_votes")
+df <- party_votes
+data("candidate_votes")
+df1 <- candidate_votes
 ```
 ### Party and Candidate Votes
 The `party_votes` and `candidate_votes` datasets contain party and candidate votes, respectively, by electorate and party. Currently, the `party_votes` has all parties listed, including the informal vote, while the `candidate_votes` have only the successful parties listed with the remaining parties listed as "Other". The informal vote is also not included.
@@ -37,13 +41,35 @@ Future updates to the `candidate_votes` dataset will replicate the `party_votes`
 
 #### Upload data
 View the shape of data frame.
-```{r party-votes}
+
+***Party Votes***
+```{r party-votes, eval = FALSE}
 df <- scgUtils::get_data("party_votes")
 head(df)
+#> # A tibble: 6 x 5
+#>   Election Ballot Electorate       Party                            Votes
+#>      <dbl> <chr>  <chr>            <chr>                            <int>
+#> 1     2023 Party  Auckland Central ACT Party                         3301
+#> 2     2023 Party  Auckland Central Animal Justice Party                50
+#> 3     2023 Party  Auckland Central Aotearoa Legalise Cannabis Party   142
+#> 4     2023 Party  Auckland Central DemocracyNZ                         32
+#> 5     2023 Party  Auckland Central Freedoms NZ                         48
+#> 6     2023 Party  Auckland Central Green Party                       8503
 ```
-```{r candidate-votes}
+
+***Candidate Votes***
+```{r candidate-votes, eval = FALSE}
 df1 <- scgUtils::get_data("candidate_votes")
 head(df1)
+#> # A tibble: 6 x 6
+#>   Election Ballot    Electorate       Party          Votes Percentage
+#>      <dbl> <chr>     <chr>            <chr>          <dbl>      <dbl>
+#> 1     2023 Candidate Auckland Central ACT Party       1235       3.59
+#> 2     2023 Candidate Auckland Central Green Party    16624      48.3
+#> 3     2023 Candidate Auckland Central Labour Party    2608       7.57
+#> 4     2023 Candidate Auckland Central National Party 12728      37.0
+#> 5     2023 Candidate Auckland Central NZ First           0       0
+#> 6     2023 Candidate Auckland Central Maori Party        0       0
 ```
 <br>
 
@@ -58,7 +84,7 @@ df <- df %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Election, Electorate, Ballot) %>%
-  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  mutate(Percentage = Votes / sum(Votes) * 100) %>%
   ungroup()
 
 df2 <- rbind(df, df1)
@@ -74,7 +100,7 @@ df2 <- df2 %>%
   filter(Election == 2023) %>%
   mutate(Ballot = ifelse(Ballot == "Party", "Party Vote", "Candidate Vote")) %>%
   select(Election, Ballot, Electorate, Party, Percentage) %>%
-  pivot_wider(names_from = Ballot, values_from = Percentage)
+  tidyr::pivot_wider(names_from = Ballot, values_from = Percentage)
 
 df2[is.na(df2)] <- 0
 
@@ -83,12 +109,12 @@ df2 %>%
   ggplot(aes(x = `Candidate Vote`, y = `Party Vote`, colour = Party)) +
   geom_smooth(method = "lm", se = TRUE, formula = y ~ x,
               colour = scgUtils::colour_pal("French Grey"),
-              size=0.5, fill = "#F4F4F5", alpha = 0.5) +
+              size = 0.5, fill = "#F4F4F5", alpha = 0.5) +
   geom_point() +
   ggpmisc::stat_poly_eq(colour = scgUtils::colour_pal("Regent Grey")) +
-  facet_wrap(.~Party) +
+  facet_wrap(. ~ Party) +
   scale_colour_manual(values = scgUtils::colour_pal("polNZ")) +
-  coord_equal(ylim = c(0,80), xlim = c(0,80)) +
+  coord_equal(ylim = c(0, 80), xlim = c(0, 80)) +
   labs(title = "2023 Candidate vs Party Vote\nby Electorate and Party",
        y = "Party Vote (%)\n",
        x = "Candidate Vote (%)") +
