@@ -131,7 +131,7 @@ MPs in parliament for that election, and the total number of electors.
 </h4>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"turnout"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"turnout"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Election Ballot           Electorate Electors Turnout Total Informal</span></span>
 <span><span class="co">#&gt; 2     2023  Party     Auckland Central    45426   78.66 35734       85</span></span>
@@ -148,8 +148,9 @@ MPs in parliament for that election, and the total number of electors.
 <p>Add the national-level dataset to the electorate-level to compare the
 difference.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"turnout_historic"</span><span class="op">)</span></span>
-<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">df</span>, <span class="va">df1</span>, by <span class="op">=</span> <span class="st">"Election"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"turnout_historic"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">df</span>, <span class="va">df1</span>, by <span class="op">=</span> <span class="st">"Election"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -177,7 +178,7 @@ difference.</p>
 </h4>
 <p>Visualise if the electorate turnout was above or below the average
 turnout for that election year (2023).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Turnout</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Electorate</span>, <span class="va">Turnout</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Turnout</span> <span class="op">&lt;</span> <span class="fl">0</span>,</span>
 <span>                                                                      <span class="st">"Underperformed"</span>,</span>
@@ -201,7 +202,7 @@ turnout for that election year (2023).</p>
 <h4 id="upload-data-1">Upload data<a class="anchor" aria-label="anchor" href="#upload-data-1"></a>
 </h4>
 <p>View the shape of data frame.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Election MPs Electors Turnout</span></span>
 <span><span class="co">#&gt; 1     1879  88    82271    66.5</span></span>
@@ -216,7 +217,7 @@ turnout for that election year (2023).</p>
 <h4 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
 </h4>
 <p>Visualise turnout over time to see how 2023 compares.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Turnout</span>, label <span class="op">=</span> <span class="va">Turnout</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span>data<span class="op">=</span><span class="va">df1</span>,</span>

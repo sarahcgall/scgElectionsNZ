@@ -132,30 +132,32 @@ included. <br><br></p>
 <h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
 </h4>
 <p>View the shape of data frame.</p>
+<p><strong><em>Party Votes</em></strong></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"party_votes"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"party_votes"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
+<span><span class="co">#&gt; # A tibble: 6 x 5</span></span>
 <span><span class="co">#&gt;   Election Ballot Electorate       Party                            Votes</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Party  Auckland Central ACT Party                         <span style="text-decoration: underline;">3</span>301</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Party  Auckland Central Animal Justice Party                50</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Party  Auckland Central Aotearoa Legalise Cannabis Party   142</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Party  Auckland Central DemocracyNZ                         32</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Party  Auckland Central Freedoms NZ                         48</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Party  Auckland Central Green Party                       <span style="text-decoration: underline;">8</span>503</span></span></code></pre></div>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;            &lt;chr&gt;                            &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1     2023 Party  Auckland Central ACT Party                         3301</span></span>
+<span><span class="co">#&gt; 2     2023 Party  Auckland Central Animal Justice Party                50</span></span>
+<span><span class="co">#&gt; 3     2023 Party  Auckland Central Aotearoa Legalise Cannabis Party   142</span></span>
+<span><span class="co">#&gt; 4     2023 Party  Auckland Central DemocracyNZ                         32</span></span>
+<span><span class="co">#&gt; 5     2023 Party  Auckland Central Freedoms NZ                         48</span></span>
+<span><span class="co">#&gt; 6     2023 Party  Auckland Central Green Party                       8503</span></span></code></pre></div>
+<p><strong><em>Candidate Votes</em></strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"candidate_votes"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"candidate_votes"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
+<span><span class="co">#&gt; # A tibble: 6 x 6</span></span>
 <span><span class="co">#&gt;   Election Ballot    Electorate       Party          Votes Percentage</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central ACT Party       <span style="text-decoration: underline;">1</span>235       3.59</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Green Party    <span style="text-decoration: underline;">16</span>624      48.3 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Labour Party    <span style="text-decoration: underline;">2</span>608       7.57</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central National Party <span style="text-decoration: underline;">12</span>728      37.0 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central NZ First           0       0   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Maori Party        0       0</span></span></code></pre></div>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;          &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     2023 Candidate Auckland Central ACT Party       1235       3.59</span></span>
+<span><span class="co">#&gt; 2     2023 Candidate Auckland Central Green Party    16624      48.3</span></span>
+<span><span class="co">#&gt; 3     2023 Candidate Auckland Central Labour Party    2608       7.57</span></span>
+<span><span class="co">#&gt; 4     2023 Candidate Auckland Central National Party 12728      37.0</span></span>
+<span><span class="co">#&gt; 5     2023 Candidate Auckland Central NZ First           0       0</span></span>
+<span><span class="co">#&gt; 6     2023 Candidate Auckland Central Maori Party        0       0</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -172,7 +174,7 @@ form data frame.</p>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Electorate</span>, <span class="va">Ballot</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">df1</span><span class="op">)</span></span>
@@ -199,7 +201,7 @@ faceted by party.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Ballot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="st">"Party Vote"</span>, <span class="st">"Candidate Vote"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Party</span>, <span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Ballot</span>, values_from <span class="op">=</span> <span class="va">Percentage</span><span class="op">)</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Ballot</span>, values_from <span class="op">=</span> <span class="va">Percentage</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span></span>
@@ -208,12 +210,12 @@ faceted by party.</p>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">`Candidate Vote`</span>, y <span class="op">=</span> <span class="va">`Party Vote`</span>, colour <span class="op">=</span> <span class="va">Party</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">TRUE</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span>,</span>
 <span>              colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span>,</span>
-<span>              size<span class="op">=</span><span class="fl">0.5</span>, fill <span class="op">=</span> <span class="st">"#F4F4F5"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>              size <span class="op">=</span> <span class="fl">0.5</span>, fill <span class="op">=</span> <span class="st">"#F4F4F5"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggpmisc</span><span class="fu">::</span><span class="fu">stat_poly_eq</span><span class="op">(</span>colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"Regent Grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="va">Party</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="va">Party</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_colour_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"polNZ"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">coord_equal</span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">80</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">80</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">coord_equal</span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"2023 Candidate vs Party Vote\nby Electorate and Party"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Party Vote (%)\n"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Candidate Vote (%)"</span><span class="op">)</span> <span class="op">+</span></span>

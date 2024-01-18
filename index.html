@@ -139,8 +139,6 @@
 <p>In addition to the datasets listed above, a number of helper functions exist to aid in the analysis of the data. These include:</p>
 <ul>
 <li>
-<code><a href="reference/get_data.html">get_data()</a></code>: provides ability to save dataset with a name of your choosing.</li>
-<li>
 <code><a href="reference/add_region.html">add_region()</a></code>: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) against a dataset containing electorates.</li>
 <li>
 <code><a href="reference/add_type.html">add_type()</a></code>: adds an Electorate_Type column (i.e., General or Maori) against a dataset containing electorates.</li>
@@ -149,7 +147,7 @@
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load datasets by using the following helper function:</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">get_data</span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
 <span><span class="co"># Alternatively, use: </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
 <span></span>

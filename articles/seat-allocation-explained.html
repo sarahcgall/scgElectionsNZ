@@ -122,9 +122,9 @@ Electoral Commission</a> follows the below process. <br><br></p>
 electorate seats won are also tallied.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load dataset</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># filter out total ballot type, leaving the candidate and party ballor</span></span>
 <span>  <span class="co"># types only</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">!=</span> <span class="st">"Total"</span>,</span>
@@ -164,7 +164,7 @@ electorate seats won are also tallied.</p>
 Vote or win at least 1 electorate) are removed from the denominator of
 the total votes. The percentage of all party votes is recalculated and
 the seat entitlement and number of top-up seats are determined.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># filer out ineligible parties</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -203,7 +203,7 @@ party is divided by an odd number every round.</p>
 <li><span class="math inline">\((2 \times 2 + 1) = 5\)</span></li>
 </ol>
 <p>and so on…</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">120</span> <span class="co"># Total number of seats:</span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># s begins at 0 and sequences up until total number of seats</span></span>
@@ -241,7 +241,7 @@ party is divided by an odd number every round.</p>
 This continues until all 120 seats are allocated (NB this disregards any
 overhang seats given that these come from excess electorate seats and
 not list seats).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Order seats by Quotient (highest to lowest) and subset</span></span>
 <span><span class="co"># rows by the total number of seats (120):</span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">df1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">df1</span><span class="op">$</span><span class="va">Quotient</span><span class="op">)</span>,<span class="op">]</span></span>

@@ -127,9 +127,9 @@ not being split-ticket voting data available for previous years. <br><br></p>
 </h4>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"split_total"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"split_total"</span><span class="op">)</span></span>
 <span><span class="co"># or</span></span>
-<span><span class="co"># df &lt;- get_data("split_electorate")</span></span></code></pre></div>
+<span><span class="co"># df &lt;- scgUtils::get_data("split_electorate")</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -175,68 +175,25 @@ not being split-ticket voting data available for previous years. <br><br></p>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="view-colours">View colours<a class="anchor" aria-label="anchor" href="#view-colours"></a>
-</h4>
-<p>Look up colours using the <code>scgUtils</code> package and manually
-enter.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_pal</span><span class="op">(</span><span class="st">"polNZ"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $`ACT Party`</span></span>
-<span><span class="co">#&gt; [1] "#ffd006"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`Green Party`</span></span>
-<span><span class="co">#&gt; [1] "#45ba52"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $Informal</span></span>
-<span><span class="co">#&gt; [1] "#d5cdb9"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`Labour Party`</span></span>
-<span><span class="co">#&gt; [1] "#D82A20"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`Maori Party`</span></span>
-<span><span class="co">#&gt; [1] "#B2001A"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`National Party`</span></span>
-<span><span class="co">#&gt; [1] "#00529F"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`NZ First`</span></span>
-<span><span class="co">#&gt; [1] "#000000"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $Alliance</span></span>
-<span><span class="co">#&gt; [1] "#158f1a"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $MANA</span></span>
-<span><span class="co">#&gt; [1] "#ff0000"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`Jim Anderton's Progressive`</span></span>
-<span><span class="co">#&gt; [1] "#a91d26"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $`United Future`</span></span>
-<span><span class="co">#&gt; [1] "#4b104e"</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; $Other</span></span>
-<span><span class="co">#&gt; [1] "#cdcdd1"</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level4">
 <h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
 </h4>
-<p>Again, using the <code>scgUtils</code> package, create sankey to
-visualise the split vote from the candidate vote (left) to the party
-vote (right).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>Using the <code>scgUtils</code> package, create sankey to visualise
+the split vote from the candidate vote (left) to the party vote (right).
+Use the <code>colour_prep</code> function from the same package to match
+the party colours to the correct political party.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">plot_sankey</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">df</span>,</span>
-<span>  source <span class="op">=</span> <span class="st">"Electorate_Party"</span>, <span class="co"># left side of sankey</span></span>
-<span>  target <span class="op">=</span> <span class="st">"List_Party"</span>, <span class="co"># right side of sankey</span></span>
+<span>  source <span class="op">=</span> <span class="st">"List_Party"</span>, <span class="co"># left side of sankey</span></span>
+<span>  target <span class="op">=</span> <span class="st">"Electorate_Party"</span>, <span class="co"># right side of sankey</span></span>
 <span>  value <span class="op">=</span> <span class="st">"Vote"</span>,</span>
-<span>  colours <span class="op">=</span> <span class="st">'"#ffd006","#45ba52","#d5cdb9","#D82A20","#B2001A","#000000","#00529F","#cdcdd1"'</span>,</span>
-<span>  fontSize <span class="op">=</span> <span class="fl">20</span>, <span class="co"># reduce font size from default</span></span>
-<span>  width <span class="op">=</span> <span class="fl">1600</span> <span class="co"># increase width from default</span></span>
+<span>  colours <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_prep</span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"List_Party"</span>,<span class="st">"Electorate_Party"</span><span class="op">)</span>, pal_name <span class="op">=</span> <span class="st">"polNZ"</span><span class="op">)</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">900</span>, <span class="co"># reduce width from default of 1200</span></span>
+<span>  height <span class="op">=</span> <span class="fl">700</span> <span class="co"># reduce height from default of 800</span></span>
 <span><span class="op">)</span> <span class="co"># %&gt;%</span></span>
 <span>  <span class="co"># save from viewer to html</span></span>
 <span>  <span class="co"># htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)</span></span></code></pre></div>
-<iframe width="100%" height="850" src="img/sankey_2023.html" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" height="800" src="img/sankey_2023.html" frameborder="0" allowfullscreen></iframe>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

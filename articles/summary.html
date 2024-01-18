@@ -133,8 +133,8 @@ to fewer seats than the number of electorate seats that it won.</em>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load datasets by using the following helper function:</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span>
-<span><span class="co"># Alternatively, use: data("summary")</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span>
+<span><span class="co"># Alternatively, use: data("summary"), then df &lt;- summary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Election Ballot                            Party Seats  Votes</span></span>
 <span><span class="co">#&gt; 1     2023  Party                        ACT Party     9 246473</span></span>
@@ -143,13 +143,13 @@ to fewer seats than the number of electorate seats that it won.</em>
 <span><span class="co">#&gt; 4     2023  Party                      DemocracyNZ     0   6786</span></span>
 <span><span class="co">#&gt; 5     2023  Party                      Freedoms NZ     0   9586</span></span>
 <span><span class="co">#&gt; 6     2023  Party      NZ Outdoors &amp; Freedom Party     0      0</span></span>
-<span><span class="co">#&gt;   Percentage Nominated Registered Successful</span></span>
-<span><span class="co">#&gt; 1       8.64        60        Yes        Yes</span></span>
-<span><span class="co">#&gt; 2       0.18        17        Yes         No</span></span>
-<span><span class="co">#&gt; 3       0.46        16        Yes         No</span></span>
-<span><span class="co">#&gt; 4       0.24        13        Yes         No</span></span>
-<span><span class="co">#&gt; 5       0.34        35        Yes         No</span></span>
-<span><span class="co">#&gt; 6       0.00         0        Yes         No</span></span></code></pre></div>
+<span><span class="co">#&gt;    Percentage Nominated Registered Successful</span></span>
+<span><span class="co">#&gt; 1        8.64        60        Yes        Yes</span></span>
+<span><span class="co">#&gt; 2        0.18        17        Yes         No</span></span>
+<span><span class="co">#&gt; 3        0.46        16        Yes         No</span></span>
+<span><span class="co">#&gt; 4        0.24        13        Yes         No</span></span>
+<span><span class="co">#&gt; 5        0.34        35        Yes         No</span></span>
+<span><span class="co">#&gt; 6        0.00         0        Yes         No</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -260,22 +260,15 @@ party at the national-level. <br><br></p>
 </h4>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"preMMP_results"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election Ballot                            Party Seats  Votes</span></span>
-<span><span class="co">#&gt; 1     2023  Party                        ACT Party     9 246473</span></span>
-<span><span class="co">#&gt; 2     2023  Party            Animal Justice Party      0   5018</span></span>
-<span><span class="co">#&gt; 3     2023  Party Aotearoa Legalise Cannabis Party     0  13025</span></span>
-<span><span class="co">#&gt; 4     2023  Party                      DemocracyNZ     0   6786</span></span>
-<span><span class="co">#&gt; 5     2023  Party                      Freedoms NZ     0   9586</span></span>
-<span><span class="co">#&gt; 6     2023  Party      NZ Outdoors &amp; Freedom Party     0      0</span></span>
-<span><span class="co">#&gt;   Percentage Nominated Registered Successful</span></span>
-<span><span class="co">#&gt; 1       8.64        60        Yes        Yes</span></span>
-<span><span class="co">#&gt; 2       0.18        17        Yes         No</span></span>
-<span><span class="co">#&gt; 3       0.46        16        Yes         No</span></span>
-<span><span class="co">#&gt; 4       0.24        13        Yes         No</span></span>
-<span><span class="co">#&gt; 5       0.34        35        Yes         No</span></span>
-<span><span class="co">#&gt; 6       0.00         0        Yes         No</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"preMMP_results"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Election              Party Seats Percentage</span></span>
+<span><span class="co">#&gt; 1     1890            Liberal    38      56.10</span></span>
+<span><span class="co">#&gt; 2     1890 Conservative Party    25      28.90</span></span>
+<span><span class="co">#&gt; 3     1890       Independents    11      15.00</span></span>
+<span><span class="co">#&gt; 4     1893            Liberal    51      57.80</span></span>
+<span><span class="co">#&gt; 5     1893 Conservative Party    13      24.49</span></span>
+<span><span class="co">#&gt; 6     1893       Independents    10      17.71</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
