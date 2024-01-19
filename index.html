@@ -103,99 +103,101 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>scgElectionsNZ</code> is an R package which provides data and functions for exploring New Zealand’s general election results. All data are from elections occuring between 1996 and 2023, unless stated otherwise.</p>
-<p>This package provides the following datasets:</p>
+<p><code>scgElectionsNZ</code> is an R package providing comprehensive data and tools for analyzing New Zealand’s general election results from 1996 to 2023. It offers a unique insight into the dynamics of the electoral process in New Zealand, presented through a variety of datasets and functions.</p>
+<div class="section level4">
+<h4 id="datasets-included">Datasets Included:<a class="anchor" aria-label="anchor" href="#datasets-included"></a>
+</h4>
 <ul>
 <li>
-<code>summary</code>: overall results at the national-level by party</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>summary</code></a>: National-level overall results by party.</li>
 <li>
-<code>turnout</code>: turnout and informal vote by electorate and ballot type (candidate and party)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html"><code>turnout</code></a>: Electorate and ballot type-specific turnout and informal vote details.</li>
 <li>
-<code>vote_type</code>: valdidity and vote type by electorate and ballot type (candidate and party)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>: Validity and method of votes by electorate and ballot.</li>
 <li>
-<code>party_votes</code>: party vote by electorate and party (electorate-level)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html"><code>party_votes</code></a>: Party votes at the electorate level.</li>
 <li>
-<code>candidate_votes</code>: candidate vote by electorate and party (electorate-level)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html"><code>candidate_votes</code></a>: Candidate votes at the electorate level.</li>
 <li>
-<code>majority</code>: winning candidate and margin of victory by electorate (electorate-level)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html"><code>majority</code></a>: Winning candidates and their margins of victory at the electorate level.</li>
 <li>
-<code>split_total</code>: split-ticket voting (2005 - 2023 only) - the number of voters who cast their party vote for a different party to their candidate vote (national-level by party)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/split_electorate.html"><code>split_electorate</code></a>: Electorate-level split-ticket voting data (2005 - 2023).</li>
 <li>
-<code>preMMP_results</code>: overall results between 1890 and 1993 (prior to the introduction of MMP) (national-level by party)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/split_total.html"><code>split_total</code></a>: National-level split-ticket voting data (2005 - 2023).</li>
 <li>
-<code>historic_turnout</code>: turnout between 1879 and 2023 (national-level by year)</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html"><code>preMMP_results</code></a>: National-level results from 1890 to 1993, before MMP.</li>
+<li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html"><code>historic_turnout</code></a>: National-level turnout data from 1879 to 2023.</li>
 </ul>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The code below relies on the development version of <code>scgElectionsNZ</code>. Install it with:</p>
+<p>To install the development version of <code>scgElectionsNZ</code>, use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sarahcgall/scgElectionsNZ"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Install the development version from GitHub</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sarahcgall/scgElectionsNZ"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>In addition to the datasets listed above, a number of helper functions exist to aid in the analysis of the data. These include:</p>
+<p><code>scgElectionsNZ</code> includes several helper functions to enhance data analysis:</p>
 <ul>
 <li>
-<code><a href="reference/add_data.html">add_data()</a></code>: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) or Electorate_Type column (i.e., General or Maori) against a dataset containing electorates.</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html"><code>add_data()</code></a>: Enhances datasets with regional or electorate type information.</li>
 <li>
-<code><a href="reference/update_names.html">update_names()</a></code>: this function converts pre-2020 electorate names to match post-2020 electorate names so that seats can be tracked from 1996 until 2023 with one exception of Waipareira which merged with Waitakere in 1999 but then split into Kelston and Upper Harbour.</li>
+<a href="https://sarahcgall.github.io/scgElectionsNZ/reference/update_names.html"><code>update_names()</code></a>: Standardises electorate names for consistent analysis across years or condense unsuccessful party names into “Other” for easier analysis.</li>
 </ul>
+<p>Example usage:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load datasets by using the following helper function:</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sarahcgall/scgElectionsNZ" class="external-link">scgElectionsNZ</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load a dataset</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
-<span><span class="co"># Alternatively, use: </span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Add a region column to dataset</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output<span class="op">=</span><span class="st">"regions"</span><span class="op">)</span> <span class="co"># default</span></span>
-<span><span class="co"># NB "regions" is the default and therefore can be: add_data(df)</span></span>
-<span></span>
-<span><span class="co"># Add a electorate type column to dataset</span></span>
+<span><span class="co"># Add additional data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output<span class="op">=</span><span class="st">"regions"</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output<span class="op">=</span><span class="st">"type"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Convert pre-2020 electorate names to match name changes that occurred in 2020</span></span>
+<span><span class="co"># Standardise names</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"electorate"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Convert unsuccessful party names to "Other"</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"party"</span><span class="op">)</span> <span class="co"># default</span></span></code></pre></div>
-<p>For more in-depth examples of using each dataset included in the <code>scgElectionsNZ</code> package, view the data index <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/index.html">here</a> or view the articles found at: <a href="https://sarahcgall.github.io/scgElectionsNZ" class="uri">https://sarahcgall.github.io/scgElectionsNZ</a>.</p>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"party"</span><span class="op">)</span></span></code></pre></div>
+<p>Explore detailed examples and dataset descriptions in the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/index.html"><code>scgElectionsNZ</code> documentation</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="data-sources">Data Sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
+<h2 id="data-sources-and-disclaimer">Data Sources and Disclaimer<a class="anchor" aria-label="anchor" href="#data-sources-and-disclaimer"></a>
 </h2>
-<p>The election data available within the <code>scgElectionsNZ</code> package can be found in the tables below. Data have been sourced from the <a href="https://electionresults.govt.nz/" class="external-link">New Zealand Electoral Commission</a> and are up-to-date as at 3 December, 2023.</p>
+<div class="section level4">
+<h4 id="data-sources">Data Sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
+</h4>
+<p>The datasets in the <code>scgElectionsNZ</code> package are meticulously curated from the official results provided by the <a href="https://electionresults.govt.nz/" class="external-link">New Zealand Electoral Commission</a>. These datasets offer a comprehensive view of New Zealand’s electoral outcomes and are crucial for in-depth analysis and research in political science, electoral studies, and related fields.</p>
+</div>
+<div class="section level4">
+<h4 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
+</h4>
+<p>While the utmost care has been taken to ensure the accuracy and reliability of the data, the New Zealand Electoral Commission was not involved in the development of this package and thus does not bear responsibility for any errors or omissions in the datasets. Users of <code>scgElectionsNZ</code> should note that the package’s creators have independently compiled, processed, and presented the data. Any discrepancies or inaccuracies found within the datasets do not reflect on the official records maintained by the Electoral Commission.</p>
+</div>
+<div class="section level4">
+<h4 id="currency-of-data">Currency of Data<a class="anchor" aria-label="anchor" href="#currency-of-data"></a>
+</h4>
+<p>The data included in this package are up-to-date as of 3 December 2023. Users should be aware that subsequent electoral events or data revisions by the Electoral Commission after this date may not be reflected in the current version of <code>scgElectionsNZ</code>.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="future-additions-and-updates">Future Additions and Updates<a class="anchor" aria-label="anchor" href="#future-additions-and-updates"></a>
 </h2>
-<p>Additional datasets will include by-election data and the following datasets:</p>
-<ul>
-<li>
-<code>results_by_booths</code>: TBC</li>
-<li>
-<code>split_electorate</code>: split voting by electorate (2005 - 2023 only)</li>
-</ul>
-<p>In future updates, the following functions will be added:</p>
-<ul>
-<li>
-<code>amend_boundary</code>: a function to convert boundaries into current boundaries for a better comparison across multiple elections (this will replace the <code>update_EName</code> function which is ok for general tracking of electorates but not for statistical purposes)</li>
-<li>
-<code>plot_parliament</code>: a function to visualise the number of seats (parliament graph)</li>
-<li>
-<code>plot_cartogram</code>: a function to visualise the vote by electorate (cartogram)</li>
-</ul>
-<p>For any suggested additions or amendments, please get in touch!</p>
+<p>Planned future additions include by-election and referendum results and enhanced datasets like <code>results_by_booths</code>. Upcoming functional updates will focus on visualising election results specific to New Zealand and making boundary adjustments for better comparative analysis.</p>
 </div>
 <div class="section level2">
-<h2 id="other-packages">Other Packages<a class="anchor" aria-label="anchor" href="#other-packages"></a>
+<h2 id="feedback-and-contributions">Feedback and Contributions<a class="anchor" aria-label="anchor" href="#feedback-and-contributions"></a>
 </h2>
-<ul>
-<li>
-<a href="https://github.com/sarahcgall/scgUtils" class="external-link"><code>scgUtils</code></a>: a package which provides functions and plotting capabilities</li>
-</ul>
+<p>Suggestions and contributions are welcome. For any proposed additions, amendments, or feedback, please <a href="https://github.com/sarahcgall/scgElectionsNZ/issues" class="external-link">create an issue</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="related-packages">Related Packages<a class="anchor" aria-label="anchor" href="#related-packages"></a>
+</h2>
+<p>Check out <a href="https://github.com/sarahcgall/scgUtils" class="external-link"><code>scgUtils</code></a> for additional functions and visualisation tools.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
