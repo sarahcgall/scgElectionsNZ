@@ -73,8 +73,7 @@ head(df)
 Add a column of the electorate type to filter out Maori electorates.
 ```{r majority2}
 # Add Electorate Type and filter for General electorates only and view
-df <- add_data(df,
-               output="type")
+df <- add_data(df, output="type")
 head(df)
 ```
 <br>

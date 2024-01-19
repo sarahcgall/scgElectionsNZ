@@ -21,23 +21,29 @@ knitr::opts_chunk$set(
 ```
 <br>
 
+New Zealand's electoral system is a dynamic and integral part of its democratic framework. This article provides an in-depth exploration of the various aspects of New Zealand's elections, including the electoral system, voting processes, and data analysis resources available from within the [`scgElectionsNZ`](https://sarahcgall.github.io/scgElectionsNZ/) package.
+<br>
+<br>
+
 #### NZ Electoral System
-New Zealand has non-compulsory voting with voters electing 120 members to a unicameral House of Representatives using a mixed-member proportional (MMP) voting system. Under this system:
+New Zealand employs a non-compulsory voting system to elect 120 members to a unicameral House of Representatives using a Mixed-Member Proportional (MMP) voting system. This system comprises:
 
-* 72 members are elected from single-member electorates (Electorate MPs) using first-past-the-post (FPTP) voting.
-  * 7 of these seats are M&#257;ori electorates which are reserved for people of M&#257;ori ethnicity or ancestry who choose to place themselves on a separate electoral roll. Both M&#257;ori and General electorates overlap.
-* 48 members are elected from nationwide, closed (i.e., the order of the candidates is determined by individual parties), party lists (List MPs). There is no separation between M&#257;ori and General electoral roll voters for List MPs.
+* **72 Electorate MPs** elected from single-member electorates using the First-Past-The-Post (FPTP) voting method.
+  * *7 of these seats* are M&#257;ori electorates for individuals of M&#257;ori ethnicity or ancestry who choose to place themselves on a separate electoral roll. Both M&#257;ori and General electorates overlap.
+* **48 List MPs** elected from nationwide, closed (i.e., the order of the candidates is determined by individual parties), party lists. There is no distinction between M&#257;ori and General electoral roll voters for these seats.
+<br>
+<br>
 
-This means that voters cast two votes on election day: one vote for their local candidate in their electorate (Candidate Vote) and a second vote for a party (Party Vote).
+Voters thus cast two votes: a Candidate Vote for their preferred local candidate and a Party Vote for their favoured party.
 
-Both of the Party and Candidate votes can be explored using the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset at the national-level. The number and type of seats can also be viewed using this dataset.
+Explore the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset for an analysis of the party and candidate votes at the national-level. The number and type of seats can also be viewed using this dataset.
 <br>
 <br>
 
 #### Party Vote
-At a national level, the 120 seats are allocated to parties proportional to the number of votes each party received from the Party Vote. The number of electorates won are then subtracted from this number and the remaining seats are distributed to the party's allocation (top-up).
+The allocation of the 120 parliamentary seats is based on the proportion of Party Votes each party receives. After subtracting the number of electorate seats won, the remaining seats are allocated to parties as a top-up.
 
-The order in which seats are allocated are determined using the Sainte-Lagu&#235; formula:
+The order in which seats are allocated is determined by the Sainte-Lagu&#235; formula:
 
 $$
 quotient = \frac{V}{2s + 1}
@@ -45,67 +51,111 @@ $$
 
 where:
 
-* $V$ is the total number of votes that party received, and
-* $s$ is the number of seats that have been allocated so far to that party.
+* $V$ is the total number of votes for a party, and
+* $s$ is the number of seats already allocated to that party.
+<br>
+<br>
 
-A detailed explanation of the allocation process can be found in the [Seat Allocation Explained article](https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html). For electorate-level Party Vote data, view the [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) dataset.
+For a comprehensive understanding of this allocation process, refer to the [Seat Allocation Explained article](https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html). Electorate-level Party Vote data can be found in the  [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) dataset.
 <br>
 <br>
 
 #### Candidate Vote
-The FPTP results can be accessed through the [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) dataset at the electorate-level (NB. the `candidate_votes` dataset currently contains successful parties only, with unsuccessful parties being grouped as 'Other'). The type of electorate (M&#257;ori or General) can also be identified using the [`add_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_type.html) function.
+FPTP voting results for electorates are available in the [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) dataset Note that this dataset currently includes only successful parties, with others grouped under 'Other'. Use the [`add_data`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html) function to identify the type of each electorate (i.e., M&#257;ori or General).
 
-In addition, the [`majority`](https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html) dataset lists the winner of each electorate (i.e., Candidate Vote), the majority, and the margin of victory/marginality. The majority is calculated using the following formula:
+The [`majority`](https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html) dataset lists each electorate winner, the majority, and the margin of victory, calculated as follows:
 
-$$
-Majority = candidate_{1} - candidate_{2}
-$$
-
-where:
-
-* $candidate_{1}$ is the number of votes that the first candidate received, and
-* $candidate_{2}$ is the number of votes that the second candidate received.
-<br>
-<br>
-
-The margin of victory, denoted by $MoV$, has been calculated using the following formula:
+***Majority***
 
 $$
-MoV = \frac{Majority}{n}
+M = V_{1} - V_{2}
 $$
 
 where:
 
-* $n$ is the total valid votes cast in electorate for all candidates.
+* $M$ represents the Majority,
+* $V_{1}$ is the number of votes received by the first candidate, and
+* $V_{2}$ is the number of votes received by the second candidate.
+<br>
+<br>
+
+***Margin of Victory***
+
+$$
+MoV = \frac{M}{T_{votes}}
+$$
+
+where:
+
+* $MoV$ represents the Margin of Victory,
+* $M$ is the Majority (as calculated above), and
+* $T_{votes}$ is the total valid votes cast in electorate for all candidates.
+<br>
+<br>
+
+For insights into the use of these datasets, see the [Party and Candidate Votes article](https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes.html) and the [Majority article](https://sarahcgall.github.io/scgElectionsNZ/articles/majority.html).
 <br>
 <br>
 
 #### Overhang Seats
-In circumstances where a party has won more electorates than it would be entitled to from the proportion of the Party Vote, those candidates retain their electorates and the total number of MPs elected to parliament increases. These are referred to as overhang seats. Overhang seats can be easily determined at each election. Details of how to determine overhang seats from the data can be found in the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#overhang-seats).
+In circumstances where a party has won more electorates than it would be entitled to from the proportion of the Party Vote, those candidates retain their electorates and the total number of MPs elected to parliament increases. These are referred to as overhang seats. Learn how to identify overhang seats in each election from the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#overhang-seats).
 <br>
 <br>
 
 #### Eligibility
-For parties to be eligible to have seats allocated to them, they either need to receive five per cent of the Party Vote or win at least one electorate. To look up whether or not a party was eligible in the election results, the [`Successful`](https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html#step-2-determine-seat-entitlement) variable in the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset contains this information.
+For parties to be eligible to have seats allocated to them, they either need to receive five per cent of the Party Vote or win at least one electorate. The [`Successful`](https://sarahcgall.github.io/scgElectionsNZ/articles/seat-allocation-explained.html#step-2-determine-seat-entitlement) variable in the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset indicates party eligibility in election results.
 <br>
 <br>
 
 #### Before MMP
-In 1993, New Zealanders voted to change their voting system from FPTP to MMP. Data prior to 1996 (first general election in which MMP was used), is contained within the package. View the [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) for the national-level popular vote and number of seats won by each party. Data goes back to 1890 and can be combined with the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset for a comparison with the party vote. An example of this can be found in the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#premmp-results).
+In 1993, New Zealanders voted to change their voting system from FPTP to MMP. The [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) dataset covers data from 1890 to 1996, allowing comparisons with the post-MMP Party Vote. See the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary.html#premmp-results) for an example of how to use these data.
 <br>
 <br>
 
 #### Turnout
-[Section to be added] relevant datasets: [`turnout`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html) + [`turnout_historic`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html)
+The New Zealand Electoral Commission calculates voter turnout as follows:
+
+$$
+{T} = \left( \frac{{V_{cast}}}{{E_{total}}} \right) \times 100
+$$
+
+where:
+
+* $T$ represents the Turnout percentage,
+* $V_{cast}$ is the Total Votes Cast (includes all valid, informal, and disallowed votes), and
+* $E_{total}$ is the Total Electors on the Master Roll (including both General and M&#257;ori electoral rolls).
+<br>
+<br>
+
+Explore the electorate-level turnout data in the [`turnout`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html) dataset, national-level data in the [`turnout_historic`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html) dataset, and how to use both in the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout.html).
+
+Note that in the latter dataset, the Party Vote turnout is used for the national figure. The figures for 1978 have also been amended to disregard the hundreds of thousands of duplicated names on the electoral roll. More on this can be found in the footnotes on the electoral commissions website [here](https://web.archive.org/web/20081017191904/http://www1.elections.org.nz/record/resultsdata/elections-dates-turnout.html).
 <br>
 <br>
 
 #### Vote Types
-[Section to be added] relevant datasets: [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html)
+New Zealand's electoral system encompasses a range of vote types, categorised by method and validity.
+
+***Methods of Voting***
+
+* *Ordinary Votes:* Cast in-person on election day.
+* *Special Votes - Within New Zealand:* For voters outside their electorate, late registrants, those needing anonymity, and those in hospitals or prisons.
+* *Special Votes - Overseas:* For New Zealanders abroad, ensuring that the 1 in 5 Kiwis overseas can still vote.
+<br>
+
+***Validity of Votes***
+
+* *Valid Votes:* Properly cast and meeting all criteria.
+* *Informal Votes:* Where voter intent is unclear, due to improper filling, illegibility, or multiple markings.
+* *Disallowed Votes:* Not counted due to late receipt, unauthenticated special votes, or ineligibility of the voter.
+
+The [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset offers an in-depth breakdown of these types. For analysis examples, see the [Vote Type article](https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type.html).
 <br>
 <br>
 
 #### Split Voting
-[Section to be added] relevant datasets: [`split_total`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_total.html)
+Split voting occurs when voters choose a candidate from one party for their Candidate Vote and a different party for their Party Vote. This phenomenon reflects the flexibility of the MMP system, allowing voters to support a local candidate irrespective of their preferred party for proportional representation.
+
+Explore the national-level flow of votes in the [`split_total`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_total.html) dataset and the electorate-level data in the [`split_electorate`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_electorate.html) dataset. For practical examples, refer to the [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting.html).
 <br>
 <br>

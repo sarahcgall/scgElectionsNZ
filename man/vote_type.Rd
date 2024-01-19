@@ -7,25 +7,27 @@
 \format{
 A data frame with 11,136 rows and 6 variables:
 \describe{
-\item{Election}{election year (1996--2023)}
-\item{Ballot}{ballot type (Candidate, Party)}
-\item{Electorate}{electorate name (e.g., Auckland Central)}
-\item{Validity}{validity of the vote (Valid, Informal, Disallowed)}
-\item{Vote_Type}{type of vote (Ordinary, Special - NZ, Special - Overseas)}
-\item{Votes}{total number of votes cast (0--42,496)}
+\item{Election}{Year of election (1996--2023).}
+\item{Ballot}{Type of ballot (Candidate, Party).}
+\item{Electorate}{Electorate name (e.g., Auckland Central).}
+\item{Validity}{Validity of the vote (Valid, Informal, Disallowed).}
+\item{Method}{Method of voting (Ordinary, Special - NZ, Special - Overseas).}
+\item{Votes}{Total number of votes cast.}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 vote_type
 }
 \description{
-The \code{vote_type} dataset is in a long format and can be used to view the vote type
-(ordinary, special - nz, special - oversease) by validity (informal/valid/disallowed)
-and Electorate and Ballot type. For an example of how to use this dataset, refer
-to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type}{Vote Type article}.
+The \code{vote_type} dataset in a long format allows for the analysis of vote types (ordinary, special - NZ,
+special - overseas) by their validity (valid, informal, disallowed) and Electorate and Ballot type.
+Useful for understanding the distribution of different types of votes.
+For usage guidance, see the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type}{Vote Type article}.
+Detailed explanation of voting types in 'Vote Types' section of
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#vote-types}{NZ Elections Explained}.
 }
 \keyword{datasets}

@@ -7,23 +7,25 @@
 \format{
 A data frame with 2,435 rows and 5 variables:
 \describe{
-\item{Election}{election year (2005--2023)}
-\item{List_Party}{party voted for in party vote (e.g., 99 MP Party)}
-\item{Electorate_Party}{party voted for in candidate vote (e.g., ACT Party)}
-\item{Votes}{estimated number of votes flowing from list to electorate parties (n)}
-\item{Percentage}{percentage of votes flowing from list to electorate parties (\%)}
+\item{Election}{Year of election (2005--2023).}
+\item{List_Party}{Party voted for in the party vote (e.g., 99 MP Party).}
+\item{Electorate_Party}{Party voted for in the candidate vote (e.g., ACT Party).}
+\item{Votes}{Estimated number of votes flowing from list to electorate parties.}
+\item{Percentage}{Percentage of votes flowing from list to electorate parties.}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 split_total
 }
 \description{
-The \code{split_total} dataset is in a long format and can be used to view the overall
-split voting by party. For an example of how to use this dataset, refer
-to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}{Split Voting article}.
+The \code{split_total} dataset in long format facilitates the analysis of overall split voting trends by party from 2005 to 2023.
+Ideal for examining national-level voting patterns and the degree of voter alignment between party and candidate preferences.
+For usage, see \href{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}{Split Voting article}.
+Split voting concepts detailed in 'Split Voting' section of
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#split-voting}{NZ Elections Explained}.
 }
 \keyword{datasets}

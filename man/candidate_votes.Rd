@@ -7,25 +7,27 @@
 \format{
 A data frame with 5,349 rows and 6 variables:
 \describe{
-\item{Election}{election year (1996--2023)}
-\item{Ballot}{ballot type (Candidate)}
-\item{Electorate}{electorate name (e.g., Auckland Central)}
-\item{Party}{successful registered party name (e.g., ACT Party)}
-\item{Votes}{total valid candidate votes for the party (0--49,510)}
-\item{Percentage}{percentage of total valid candidate votes for the party (0.00--78.06)}
+\item{Election}{Year of election (1996--2023).}
+\item{Ballot}{Type of ballot (Candidate).}
+\item{Electorate}{Name of electorate (e.g., Auckland Central).}
+\item{Party}{Name of successful registered party (e.g., ACT Party).}
+\item{Votes}{Total valid candidate votes for the party (0--49,510).}
+\item{Percentage}{Percentage of total valid candidate votes for the party (0.00--78.06).}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 candidate_votes
 }
 \description{
-The \code{candidate_votes} dataset is in a long format and can be used to look up the candidate vote in each
-electorate by successful registered party. For an example of how to use this dataset, refer
-to the
+Th \code{candidate_votes} dataset in a long format allows analysis of candidate votes in each electorate
+by successful registered parties. Useful for exploring voting patterns and party performance in
+individual electorates over time. For usage examples, see
 \href{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}{Party and Candidate Votes article}.
+For understanding candidate votes, consult
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#candidate-vote}{NZ Elections Explained}.
 }
 \keyword{datasets}

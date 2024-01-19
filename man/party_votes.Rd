@@ -7,24 +7,25 @@
 \format{
 A data frame with 12,701 rows and 5 variables:
 \describe{
-\item{Election}{election year (1996--2023)}
-\item{Ballot}{ballot type (Party)}
-\item{Electorate}{electorate name (e.g., Auckland Central)}
-\item{Party}{registered party name (e.g., ACT Party)}
-\item{Votes}{total valid party votes for the party (0--27,010)}
+\item{Election}{Year of election (1996--2023).}
+\item{Ballot}{Type of ballot (Party).}
+\item{Electorate}{Electorate name (e.g., Auckland Central).}
+\item{Party}{Registered party name (e.g., ACT Party).}
+\item{Votes}{Total valid party votes for the party (0--27,010).}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 party_votes
 }
 \description{
-The \code{party_votes} dataset is in a long format and can be used to look up the party vote
-in each electorate by registered party. For an example of how to use this dataset, refer
-to the
+The \code{party_votes} dataset in a long format can be used to look up the party vote
+in each electorate by registered party. Usage examples in
 \href{https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes}{Party and Candidate Votes article}.
+For insights into party votes, refer to
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html}{NZ Elections Explained}.
 }
 \keyword{datasets}

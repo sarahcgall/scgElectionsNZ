@@ -36,37 +36,37 @@ process_and_bind_data <- function(years, file_type, skip_rows, special_vote = FA
 validity <- process_and_bind_data(year, "party", 3) %>%
   rename(Electorate = Electoral.District) %>%
   pivot_longer(cols = c(Ordinary.Votes:Special.Votes.Disallowed),
-               names_to = "Vote_Type", values_to = "Votes") %>%
-  filter(!Vote_Type %in% c("Special.Votes", "Special.Votes.1")) %>% # remove to avoid duplication with special votes df
+               names_to = "Method", values_to = "Votes") %>%
+  filter(!Method %in% c("Special.Votes", "Special.Votes.1")) %>% # remove to avoid duplication with special votes df
   mutate(Votes = as.numeric(Votes),
          Validity = case_when(
-           Vote_Type %in% c("Ordinary.Votes") ~ "Valid",
-           Vote_Type %in% c("Ordinary.Votes.1") ~ "Informal",
-           Vote_Type %in% c("Ordinary.Votes.Disallowed", "Special.Votes.Disallowed") ~ "Disallowed"
+           Method %in% c("Ordinary.Votes") ~ "Valid",
+           Method %in% c("Ordinary.Votes.1") ~ "Informal",
+           Method %in% c("Ordinary.Votes.Disallowed", "Special.Votes.Disallowed") ~ "Disallowed"
          ),
-         Vote_Type = case_when(
-           Vote_Type %in% c("Ordinary.Votes", "Ordinary.Votes.1", "Ordinary.Votes.Disallowed") ~ "Ordinary",
-           Vote_Type %in% c("Special.Votes.Disallowed") ~ "Special"
+         Method = case_when(
+           Method %in% c("Ordinary.Votes", "Ordinary.Votes.1", "Ordinary.Votes.Disallowed") ~ "Ordinary",
+           Method %in% c("Special.Votes.Disallowed") ~ "Special"
          )) %>%
-  select(Election, Ballot, Electorate, Validity, Vote_Type, Votes)
+  select(Election, Ballot, Electorate, Validity, Method, Votes)
 
 # Process and combine data for specialvotes
 special <- process_and_bind_data(year, "party", 3, TRUE) %>%
-  pivot_longer(cols = c(NZ:Overseas.1), names_to = "Vote_Type", values_to = "Votes") %>%
+  pivot_longer(cols = c(NZ:Overseas.1), names_to = "Method", values_to = "Votes") %>%
   mutate(Votes = as.numeric(Votes),
          Validity = case_when(
-           Vote_Type %in% c("NZ", "Overseas") ~ "Valid",
-           Vote_Type %in% c("NZ.1", "Overseas.1") ~ "Informal"
+           Method %in% c("NZ", "Overseas") ~ "Valid",
+           Method %in% c("NZ.1", "Overseas.1") ~ "Informal"
          ),
-         Vote_Type = case_when(
-           Vote_Type %in% c("NZ", "NZ.1") ~ "Special - NZ",
-           Vote_Type %in% c("Overseas", "Overseas.1") ~ "Special - Overseas"
+         Method = case_when(
+           Method %in% c("NZ", "NZ.1") ~ "Special - NZ",
+           Method %in% c("Overseas", "Overseas.1") ~ "Special - Overseas"
          )) %>%
-  select(Election, Ballot, Electorate, Validity, Vote_Type, Votes)
+  select(Election, Ballot, Electorate, Validity, Method, Votes)
 
 # Bind valid and special data frames
 vote_type <- bind_rows(validity, special) %>%
-  arrange(-Election, Ballot, Electorate, Validity, Vote_Type) %>% # re-index
+  arrange(-Election, Ballot, Electorate, Validity, Method) %>% # re-index
   mutate(across(where(is.numeric), ~replace_na(., 0)))  # Replace NA with 0 for numeric columns
 
 # Save to .rds

@@ -42,7 +42,7 @@ View the shape of data frame.
 df <- scgUtils::get_data("vote_type")
 head(df)
 #> # A tibble: 6 x 6
-#>   Election Ballot    Electorate       Validity   Vote_Type          Votes
+#>   Election Ballot    Electorate       Validity   Method             Votes
 #>      <dbl> <chr>     <chr>            <chr>      <chr>              <dbl>
 #> 1     2023 Candidate Auckland Central Disallowed Ordinary               0
 #> 2     2023 Candidate Auckland Central Disallowed Special              988
@@ -76,13 +76,13 @@ View percentage of voters overseas by electorate.
 df %>%
         # including only valid and informal votes
   filter(Election == 2023, Validity != "Disallowed") %>%
-  group_by(Ballot, Electorate, Vote_Type) %>%
+  group_by(Ballot, Electorate, Method) %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Ballot, Electorate) %>%
   mutate(Percentage = Votes/sum(Votes)*100) %>%
   ungroup() %>%
-  filter(Vote_Type == "Special - Overseas") %>%
+  filter(Method == "Special - Overseas") %>%
   arrange(-Percentage) %>%
   head(n = 10)
 ```
@@ -90,8 +90,8 @@ df %>%
 
 #### Add region
 Add a column to facet by region.
-```{r vote-type3, eval = FALSE}
-df <- add_data(df)
+```{r vote-type3}
+df <- add_data(df, output = "region")
 head(df)
 ```
 <br>
@@ -102,13 +102,13 @@ Filter by Party vote and exclude disallowed votes from the denominator. Visualis
 df <- df %>%
    # including only valid and informal votes
   filter(Ballot == "Party", Validity != "Disallowed") %>%
-  group_by(Election, Region, Vote_Type) %>%
+  group_by(Election, Region, Method) %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Election, Region) %>%
   mutate(Percentage = Votes/sum(Votes)*100) %>%
   ungroup() %>%
-  filter(Vote_Type == "Special - Overseas") %>%
+  filter(Method == "Special - Overseas") %>%
   arrange(-Percentage)
 
 df %>%

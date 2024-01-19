@@ -7,24 +7,27 @@
 \format{
 A data frame with 81,269 rows and 6 variables:
 \describe{
-\item{Election}{election year (2005--2023)}
-\item{Electorate}{electorate name (e.g., Auckland Central)}
-\item{List_Party}{party voted for in party vote (e.g., 99 MP Party)}
-\item{Electorate_Party}{party voted for in candidate vote (e.g., ACT Party)}
-\item{Votes}{estimated number of votes flowing from list to electorate parties (n)}
-\item{Percentage}{percentage of votes flowing from list to electorate parties (\%)}
+\item{Election}{Year of election (2005--2023).}
+\item{Electorate}{Electorate name (e.g., Auckland Central).}
+\item{List_Party}{Party voted for in the party vote (e.g., 99 MP Party).}
+\item{Electorate_Party}{Party voted for in the candidate vote (e.g., ACT Party).}
+\item{Votes}{Estimated number of votes flowing from list to electorate parties.}
+\item{Percentage}{Percentage of votes flowing from list to electorate parties.}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 split_electorate
 }
 \description{
-The \code{split_electorate} dataset is in a long format and can be used to view the electorate-level
-split voting by party. For an example of how to use this dataset, refer
-to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}{Split Voting article}.
+The \code{split_electorate} dataset in a long format provides a detailed view of split voting at the electorate level
+by party, from 2005 to 2023. Essential for understanding voter behaviour in terms of party and candidate vote divergence.
+For application examples, refer to the
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting}{Split Voting article}.
+To grasp split voting concepts, see 'Split Voting' section in
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#split-voting}{NZ Elections Explained}.
 }
 \keyword{datasets}

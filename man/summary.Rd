@@ -7,27 +7,27 @@
 \format{
 A data frame with 909 rows and 9 variables:
 \describe{
-\item{Election}{election year (1996--2023)}
-\item{Ballot}{ballot type (Candidate, Party, Total (Party + Candidate for Seats or Party only for Vote/Percentage))}
-\item{Party}{party name (e.g., ACT Party)}
-\item{Seats}{number of seats won by party (0--65)}
-\item{Votes}{total valid votes for the party (0--1.44355e+06)}
-\item{Percentage}{percentage of total valid votes for the party (0.00--50.01)}
-\item{Nominated}{number nominated by party on lists or ballot papers (0--153)}
-\item{Registered}{if party is registered (Yes, No)}
-\item{Successful}{if party achieved the eligibility requirement (Yes, No)}
+\item{Election}{Year of election (1996--2023).}
+\item{Ballot}{Type of ballot (Candidate, Party, Total).}
+\item{Party}{Party name (e.g., ACT Party).}
+\item{Seats}{Number of seats won by the party (0--65).}
+\item{Votes}{Total valid votes for the party.}
+\item{Percentage}{Percentage of total valid votes for the party (0.00--50.01).}
+\item{Nominated}{Number nominated by party on lists or ballot papers.}
+\item{Registered}{If party is registered (Yes, No).}
+\item{Successful}{If party achieved the eligibility requirement (Yes, No).}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 summary
 }
 \description{
-The \code{summary} dataset is in a long format and can be used to view overall
-results summary data. For an example of how to use this dataset, refer
-to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}{Summary article}.
+The \code{summary} dataset offers a comprehensive overview of election results from 1996 to 2023, in a user-friendly long format.
+This dataset is useful for broad analysis of electoral trends and party performance across different elections.
+For practical application, see the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}{Summary article}.
 }
 \keyword{datasets}

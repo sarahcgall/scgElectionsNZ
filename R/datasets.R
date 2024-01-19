@@ -1,192 +1,207 @@
 #' Candidate votes for successful registered parties (1996 - 2023)
 #'
-#' The `candidate_votes` dataset is in a long format and can be used to look up the candidate vote in each
-#' electorate by successful registered party. For an example of how to use this dataset, refer
-#' to the
+#' Th `candidate_votes` dataset in a long format allows analysis of candidate votes in each electorate
+#' by successful registered parties. Useful for exploring voting patterns and party performance in
+#' individual electorates over time. For usage examples, see
 #' [Party and Candidate Votes article](https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes).
+#' For understanding candidate votes, consult
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#candidate-vote).
 #'
 #' @format A data frame with 5,349 rows and 6 variables:
 #' \describe{
-#'   \item{Election}{election year (1996--2023)}
-#'   \item{Ballot}{ballot type (Candidate)}
-#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
-#'   \item{Party}{successful registered party name (e.g., ACT Party)}
-#'   \item{Votes}{total valid candidate votes for the party (0--49,510)}
-#'   \item{Percentage}{percentage of total valid candidate votes for the party (0.00--78.06)}
+#'   \item{Election}{Year of election (1996--2023).}
+#'   \item{Ballot}{Type of ballot (Candidate).}
+#'   \item{Electorate}{Name of electorate (e.g., Auckland Central).}
+#'   \item{Party}{Name of successful registered party (e.g., ACT Party).}
+#'   \item{Votes}{Total valid candidate votes for the party (0--49,510).}
+#'   \item{Percentage}{Percentage of total valid candidate votes for the party (0.00--78.06).}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "candidate_votes"
 
 #' Majority (1999 - 2023)
 #'
-#' The `majority` dataset is in a long format and can be used to look up the winning
-#' candidate in each electorate, their party, and their margin of victory/majority (n & %).
-#' For an example of how to use this dataset, refer to the
-#' [Majority article](https://sarahcgall.github.io/scgElectionsNZ/articles/majority).
+#' The `majority` dataset in a long format is used for identifying winning candidates in each electorate,
+#' their party affiliations, and their margins of victory.
+#' See [Majority article](https://sarahcgall.github.io/scgElectionsNZ/articles/majority) for use cases.
+#' For methodology, refer to 'Candidate Vote' section in
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#candidate-vote).
 #'
 #' @format A data frame with 696 rows and 7 variables:
 #' \describe{
-#'   \item{Election}{election year (1996--2023)}
-#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
-#'   \item{Party}{name of the winning candidate's party (e.g., Green Party)}
-#'   \item{Candidate}{name of the winning candidate (e.g., SWARBRICK, Chloe Charlotte}
-#'   \item{Votes}{majority votes: difference in the number of votes between first and second candidate (9--23,376)}
-#'   \item{Percentage}{margin of victory as a percentage: majority votes / total valid votes cast (0.03--72.25)}
-#'   \item{Party_List}{if candidate is also on the party list (Yes, No)}
+#'   \item{Election}{Year of election (1996--2023).}
+#'   \item{Electorate}{Electorate name (e.g., Auckland Central).}
+#'   \item{Party}{Winning candidate's party name (e.g., Green Party).}
+#'   \item{Candidate}{Winning candidate's name (e.g., SWARBRICK, Chloe Charlotte).}
+#'   \item{Votes}{Majority votes: difference in votes between first and second candidates (9--23,376).}
+#'   \item{Percentage}{Margin of victory as a percentage: majority votes / total valid votes cast (0.03--72.25).}
+#'   \item{Party_List}{Whether candidate is also on the party list (Yes, No).}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "majority"
 
 #' Party Votes (1996 - 2023)
 #'
-#' The `party_votes` dataset is in a long format and can be used to look up the party vote
-#' in each electorate by registered party. For an example of how to use this dataset, refer
-#' to the
+#' The `party_votes` dataset in a long format can be used to look up the party vote
+#' in each electorate by registered party. Usage examples in
 #' [Party and Candidate Votes article](https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes).
+#' For insights into party votes, refer to
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html).
 #'
 #' @format A data frame with 12,701 rows and 5 variables:
 #' \describe{
-#'   \item{Election}{election year (1996--2023)}
-#'   \item{Ballot}{ballot type (Party)}
-#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
-#'   \item{Party}{registered party name (e.g., ACT Party)}
-#'   \item{Votes}{total valid party votes for the party (0--27,010)}
+#'   \item{Election}{Year of election (1996--2023).}
+#'   \item{Ballot}{Type of ballot (Party).}
+#'   \item{Electorate}{Electorate name (e.g., Auckland Central).}
+#'   \item{Party}{Registered party name (e.g., ACT Party).}
+#'   \item{Votes}{Total valid party votes for the party (0--27,010).}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "party_votes"
 
 #' Pre-MMP Results (1890 - 1993)
 #'
-#' The `preMMP_results` dataset is in a long format and can be used to view the results
-#' by party at each general election between 1890 and 1993. For an example of how to use this
-#' dataset, refer to the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary).
+#' The `preMMP_results` dataset in long a format offers historical insights into party results at general elections between 1890 and 1993.
+#' This dataset can be used for historical electoral analysis and comparison with the post-MMP era.
+#' For usage guidance, see the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary).
 #'
 #' @format A data frame with 162 rows and 4 variables:
 #' \describe{
-#'   \item{Election}{election year (1890--1993)}
-#'   \item{Party}{registered party name (e.g., Liberal)}
-#'   \item{Seats}{number of seats won by party (0--67)}
-#'   \item{Percentage}{percentage of popular vote (0--58.7)}
+#'   \item{Election}{Year of election (1890--1993).}
+#'   \item{Party}{Registered party name (e.g., Liberal).}
+#'   \item{Seats}{Number of seats won by the party (0--67).}
+#'   \item{Percentage}{Percentage of the popular vote (0--58.7).}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "preMMP_results"
 
 #' Split Electorate (2005 - 2023)
 #'
-#' The `split_electorate` dataset is in a long format and can be used to view the electorate-level
-#' split voting by party. For an example of how to use this dataset, refer
-#' to the [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting).
+#' The `split_electorate` dataset in a long format provides a detailed view of split voting at the electorate level
+#' by party, from 2005 to 2023. Essential for understanding voter behaviour in terms of party and candidate vote divergence.
+#' For application examples, refer to the
+#' [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting).
+#' To grasp split voting concepts, see 'Split Voting' section in
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#split-voting).
 #'
 #' @format A data frame with 81,269 rows and 6 variables:
 #' \describe{
-#'   \item{Election}{election year (2005--2023)}
-#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
-#'   \item{List_Party}{party voted for in party vote (e.g., 99 MP Party)}
-#'   \item{Electorate_Party}{party voted for in candidate vote (e.g., ACT Party)}
-#'   \item{Votes}{estimated number of votes flowing from list to electorate parties (n)}
-#'   \item{Percentage}{percentage of votes flowing from list to electorate parties (%)}
+#'   \item{Election}{Year of election (2005--2023).}
+#'   \item{Electorate}{Electorate name (e.g., Auckland Central).}
+#'   \item{List_Party}{Party voted for in the party vote (e.g., 99 MP Party).}
+#'   \item{Electorate_Party}{Party voted for in the candidate vote (e.g., ACT Party).}
+#'   \item{Votes}{Estimated number of votes flowing from list to electorate parties.}
+#'   \item{Percentage}{Percentage of votes flowing from list to electorate parties.}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "split_electorate"
 
 #' Split Total (2005 - 2023)
 #'
-#' The `split_total` dataset is in a long format and can be used to view the overall
-#' split voting by party. For an example of how to use this dataset, refer
-#' to the [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting).
+#' The `split_total` dataset in long format facilitates the analysis of overall split voting trends by party from 2005 to 2023.
+#' Ideal for examining national-level voting patterns and the degree of voter alignment between party and candidate preferences.
+#' For usage, see [Split Voting article](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting).
+#' Split voting concepts detailed in 'Split Voting' section of
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#split-voting).
 #'
 #' @format A data frame with 2,435 rows and 5 variables:
 #' \describe{
-#'   \item{Election}{election year (2005--2023)}
-#'   \item{List_Party}{party voted for in party vote (e.g., 99 MP Party)}
-#'   \item{Electorate_Party}{party voted for in candidate vote (e.g., ACT Party)}
-#'   \item{Votes}{estimated number of votes flowing from list to electorate parties (n)}
-#'   \item{Percentage}{percentage of votes flowing from list to electorate parties (%)}
+#'   \item{Election}{Year of election (2005--2023).}
+#'   \item{List_Party}{Party voted for in the party vote (e.g., 99 MP Party).}
+#'   \item{Electorate_Party}{Party voted for in the candidate vote (e.g., ACT Party).}
+#'   \item{Votes}{Estimated number of votes flowing from list to electorate parties.}
+#'   \item{Percentage}{Percentage of votes flowing from list to electorate parties.}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "split_total"
 
 #' Summary (1996 - 2023)
 #'
-#' The `summary` dataset is in a long format and can be used to view overall
-#' results summary data. For an example of how to use this dataset, refer
-#' to the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary).
+#' The `summary` dataset offers a comprehensive overview of election results from 1996 to 2023, in a user-friendly long format.
+#' This dataset is useful for broad analysis of electoral trends and party performance across different elections.
+#' For practical application, see the [Summary article](https://sarahcgall.github.io/scgElectionsNZ/articles/summary).
 #'
 #' @format A data frame with 909 rows and 9 variables:
 #' \describe{
-#'   \item{Election}{election year (1996--2023)}
-#'   \item{Ballot}{ballot type (Candidate, Party, Total (Party + Candidate for Seats or Party only for Vote/Percentage))}
-#'   \item{Party}{party name (e.g., ACT Party)}
-#'   \item{Seats}{number of seats won by party (0--65)}
-#'   \item{Votes}{total valid votes for the party (0--1.44355e+06)}
-#'   \item{Percentage}{percentage of total valid votes for the party (0.00--50.01)}
-#'   \item{Nominated}{number nominated by party on lists or ballot papers (0--153)}
-#'   \item{Registered}{if party is registered (Yes, No)}
-#'   \item{Successful}{if party achieved the eligibility requirement (Yes, No)}
+#'   \item{Election}{Year of election (1996--2023).}
+#'   \item{Ballot}{Type of ballot (Candidate, Party, Total).}
+#'   \item{Party}{Party name (e.g., ACT Party).}
+#'   \item{Seats}{Number of seats won by the party (0--65).}
+#'   \item{Votes}{Total valid votes for the party.}
+#'   \item{Percentage}{Percentage of total valid votes for the party (0.00--50.01).}
+#'   \item{Nominated}{Number nominated by party on lists or ballot papers.}
+#'   \item{Registered}{If party is registered (Yes, No).}
+#'   \item{Successful}{If party achieved the eligibility requirement (Yes, No).}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "summary"
 
 #' Turnout (1996 - 2023)
 #'
-#' The `turnout` dataset is in a long format and can be used to view the elector turnout
-#' and the informal vote by Electorate and Ballot type. For an example of how to use this
-#' dataset, refer to the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout).
+#' The `turnout` dataset in a long format enables the analysis of elector turnout and informal vote by Electorate and Ballot type from 1996 to 2023.
+#' Key for understanding voter participation and the effectiveness of electoral engagement strategies.
+#' For application insights, visit the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout).
+#' Turnout concepts explained in 'Turnout' section of
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#turnout).
 #'
 #' @format A data frame with 1,392 rows and 7 variables:
 #' \describe{
-#'   \item{Election}{election year (1996--2023)}
-#'   \item{Ballot}{ballot type (Candidate, Party)}
-#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
-#'   \item{Electors}{total number of registered electors (24,725--59,899)}
-#'   \item{Turnout}{turnout as a percentage of the number of electors (1.53--93.49)}
-#'   \item{Total}{total number of votes cast - valid and informal (804--50,106)}
-#'   \item{Informal}{total number informal votes cast (0--1403))}
+#'   \item{Election}{Year of election (1996--2023).}
+#'   \item{Ballot}{Type of ballot (Candidate, Party).}
+#'   \item{Electorate}{Electorate name (e.g., Auckland Central).}
+#'   \item{Electors}{Total number of registered electors.}
+#'   \item{Turnout}{Turnout as a percentage of the number of electors.}
+#'   \item{Total}{Total number of votes cast - valid and informal.}
+#'   \item{Informal}{Total number of informal votes cast.}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "turnout"
 
 #' Turnout (Historic) (1879 - 2023)
 #'
-#' The `turnout_historic` dataset is in a long format and can be used to look view the elector turnout at
-#' each general election between 1879 and 2023. For an example of how to use this dataset,
-#' refer to the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout)
+#' The `turnout_historic` dataset provides a long-term perspective of elector turnout at general elections from 1879 to 2023.
+#' Essential for historical analysis of voter engagement and turnout trends over time.
+#' For use case examples, refer to the [Turnout article](https://sarahcgall.github.io/scgElectionsNZ/articles/turnout).
+#' Turnout methodology detailed in 'Turnout' section of
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#turnout).
 #'
 #' @format A data frame with 48 rows and 4 variables:
 #' \describe{
-#'   \item{Election}{election year (1879--2023)}
-#'   \item{MPs}{total number of MPs in parliament (74--123)}
-#'   \item{Electors}{total number of registered electors (82,271--3.68829e+06)}
-#'   \item{Turnout}{turnout as a percentage of the number of electors (60.60--93.70)}
+#'   \item{Election}{Year of election (1879--2023).}
+#'   \item{MPs}{Total number of MPs in parliament.}
+#'   \item{Electors}{Total number of registered electors.}
+#'   \item{Turnout}{Turnout as a percentage of the number of electors.}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "turnout_historic"
 
 #' Vote Type (1996 - 2023)
 #'
-#' The `vote_type` dataset is in a long format and can be used to view the vote type
-#' (ordinary, special - nz, special - oversease) by validity (informal/valid/disallowed)
-#' and Electorate and Ballot type. For an example of how to use this dataset, refer
-#' to the [Vote Type article](https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type).
+#' The `vote_type` dataset in a long format allows for the analysis of vote types (ordinary, special - NZ,
+#' special - overseas) by their validity (valid, informal, disallowed) and Electorate and Ballot type.
+#' Useful for understanding the distribution of different types of votes.
+#' For usage guidance, see the [Vote Type article](https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type).
+#' Detailed explanation of voting types in 'Vote Types' section of
+#' [NZ Elections Explained](https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#vote-types).
 #'
 #' @format A data frame with 11,136 rows and 6 variables:
 #' \describe{
-#'   \item{Election}{election year (1996--2023)}
-#'   \item{Ballot}{ballot type (Candidate, Party)}
-#'   \item{Electorate}{electorate name (e.g., Auckland Central)}
-#'   \item{Validity}{validity of the vote (Valid, Informal, Disallowed)}
-#'   \item{Vote_Type}{type of vote (Ordinary, Special - NZ, Special - Overseas)}
-#'   \item{Votes}{total number of votes cast (0--42,496)}
+#'   \item{Election}{Year of election (1996--2023).}
+#'   \item{Ballot}{Type of ballot (Candidate, Party).}
+#'   \item{Electorate}{Electorate name (e.g., Auckland Central).}
+#'   \item{Validity}{Validity of the vote (Valid, Informal, Disallowed).}
+#'   \item{Method}{Method of voting (Ordinary, Special - NZ, Special - Overseas).}
+#'   \item{Votes}{Total number of votes cast.}
 #' }
-#' @source This dataset was sourced from the NZ Electoral Commission's official results.
-#' The raw data are available from \url{https://www.electionresults.govt.nz/}.
+#' @source Sourced from the NZ Electoral Commission's official results, available at
+#' \url{https://www.electionresults.govt.nz/}.
 "vote_type"

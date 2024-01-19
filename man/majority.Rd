@@ -7,26 +7,27 @@
 \format{
 A data frame with 696 rows and 7 variables:
 \describe{
-\item{Election}{election year (1996--2023)}
-\item{Electorate}{electorate name (e.g., Auckland Central)}
-\item{Party}{name of the winning candidate's party (e.g., Green Party)}
-\item{Candidate}{name of the winning candidate (e.g., SWARBRICK, Chloe Charlotte}
-\item{Votes}{majority votes: difference in the number of votes between first and second candidate (9--23,376)}
-\item{Percentage}{margin of victory as a percentage: majority votes / total valid votes cast (0.03--72.25)}
-\item{Party_List}{if candidate is also on the party list (Yes, No)}
+\item{Election}{Year of election (1996--2023).}
+\item{Electorate}{Electorate name (e.g., Auckland Central).}
+\item{Party}{Winning candidate's party name (e.g., Green Party).}
+\item{Candidate}{Winning candidate's name (e.g., SWARBRICK, Chloe Charlotte).}
+\item{Votes}{Majority votes: difference in votes between first and second candidates (9--23,376).}
+\item{Percentage}{Margin of victory as a percentage: majority votes / total valid votes cast (0.03--72.25).}
+\item{Party_List}{Whether candidate is also on the party list (Yes, No).}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 majority
 }
 \description{
-The \code{majority} dataset is in a long format and can be used to look up the winning
-candidate in each electorate, their party, and their margin of victory/majority (n & \%).
-For an example of how to use this dataset, refer to the
-\href{https://sarahcgall.github.io/scgElectionsNZ/articles/majority}{Majority article}.
+The \code{majority} dataset in a long format is used for identifying winning candidates in each electorate,
+their party affiliations, and their margins of victory.
+See \href{https://sarahcgall.github.io/scgElectionsNZ/articles/majority}{Majority article} for use cases.
+For methodology, refer to 'Candidate Vote' section in
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#candidate-vote}{NZ Elections Explained}.
 }
 \keyword{datasets}

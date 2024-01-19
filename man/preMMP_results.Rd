@@ -7,22 +7,22 @@
 \format{
 A data frame with 162 rows and 4 variables:
 \describe{
-\item{Election}{election year (1890--1993)}
-\item{Party}{registered party name (e.g., Liberal)}
-\item{Seats}{number of seats won by party (0--67)}
-\item{Percentage}{percentage of popular vote (0--58.7)}
+\item{Election}{Year of election (1890--1993).}
+\item{Party}{Registered party name (e.g., Liberal).}
+\item{Seats}{Number of seats won by the party (0--67).}
+\item{Percentage}{Percentage of the popular vote (0--58.7).}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 preMMP_results
 }
 \description{
-The \code{preMMP_results} dataset is in a long format and can be used to view the results
-by party at each general election between 1890 and 1993. For an example of how to use this
-dataset, refer to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}{Summary article}.
+The \code{preMMP_results} dataset in long a format offers historical insights into party results at general elections between 1890 and 1993.
+This dataset can be used for historical electoral analysis and comparison with the post-MMP era.
+For usage guidance, see the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/summary}{Summary article}.
 }
 \keyword{datasets}

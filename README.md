@@ -8,81 +8,80 @@ scgElectionsNZ <a href="https://sarahcgall.github.io/scgElectionsNZ/"><img src="
 
 ## Overview
 
-`scgElectionsNZ` is an R package which provides data and functions for
-exploring New Zealand’s general election results. All data are from elections occuring between 1996 and 2023, unless stated otherwise.
+`scgElectionsNZ` is an R package providing comprehensive data and tools for analyzing New Zealand’s general election 
+results from 1996 to 2023. It offers a unique insight into the dynamics of the electoral process in New Zealand, 
+presented through a variety of datasets and functions.
 
-This package provides the following datasets:
+#### Datasets Included:
 
-* `summary`: overall results at the national-level by party
-* `turnout`: turnout and informal vote by electorate and ballot type (candidate and party)
-* `vote_type`: valdidity and vote type by electorate and ballot type (candidate and party)
-* `party_votes`: party vote by electorate and party (electorate-level)
-* `candidate_votes`: candidate vote by electorate and party (electorate-level)
-* `majority`: winning candidate and margin of victory by electorate (electorate-level)
-* `split_total`: split-ticket voting (2005 - 2023 only) - the number of voters who cast their party vote for a different party to their candidate vote (national-level by party)
-* `preMMP_results`: overall results between 1890 and 1993 (prior to the introduction of MMP) (national-level by party)
-* `historic_turnout`: turnout between 1879 and 2023 (national-level by year)
+* [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html): National-level overall results by party.
+* [`turnout`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout.html): Electorate and ballot type-specific turnout and informal vote details.
+* [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html): Validity and method of votes by electorate and ballot.
+* [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html): Party votes at the electorate level.
+* [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html): Candidate votes at the electorate level.
+* [`majority`](https://sarahcgall.github.io/scgElectionsNZ/reference/majority.html): Winning candidates and their margins of victory at the electorate level.
+* [`split_electorate`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_electorate.html): Electorate-level split-ticket voting data (2005 - 2023).
+* [`split_total`](https://sarahcgall.github.io/scgElectionsNZ/reference/split_total.html): National-level split-ticket voting data (2005 - 2023).
+* [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html): National-level results from 1890 to 1993, before MMP.
+* [`historic_turnout`](https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html): National-level turnout data from 1879 to 2023.
 
 ## Installation
 
-The code below relies on the development version of `scgElectionsNZ`.
-Install it with:
+To install the development version of `scgElectionsNZ`, use:
 
 ``` r
+# Install the development version from GitHub
 devtools::install_github("sarahcgall/scgElectionsNZ")
 ```
 
 ## Usage
-In addition to the datasets listed above, a number of helper functions exist to aid in the analysis of the data. These include:
+`scgElectionsNZ` includes several helper functions to enhance data analysis:
 
-* `add_data()`: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) or Electorate_Type column 
-(i.e., General or Maori) against a dataset containing electorates.
-* `update_names()`: this function converts pre-2020 electorate names to match post-2020 electorate names so that seats can 
-be tracked from 1996 until 2023 with one exception of Waipareira which merged with Waitakere in 1999 but then split into Kelston and Upper Harbour.
+* [`add_data()`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html): Enhances datasets with regional or electorate type information.
+* [`update_names()`](https://sarahcgall.github.io/scgElectionsNZ/reference/update_names.html): Standardises electorate names for consistent analysis across years or condense unsuccessful party names into "Other" for easier analysis.
 
+Example usage:
 ``` r
-# Load datasets by using the following helper function:
+library(scgElectionsNZ)
+
+# Load a dataset
 df <- scgUtils::get_data("majority")
-# Alternatively, use: 
-data("majority")
 
-# Add a region column to dataset
-df <- add_data(df, output="regions") # default
-# NB "regions" is the default and therefore can be: add_data(df)
-
-# Add a electorate type column to dataset
+# Add additional data
+df <- add_data(df, output="regions")
 df <- add_data(df, output="type")
 
-# Convert pre-2020 electorate names to match name changes that occurred in 2020
+# Standardise names
 df <- update_names(df, output = "electorate")
+df <- update_names(df, output = "party")
 
-# Convert unsuccessful party names to "Other"
-df <- update_names(df, output = "party") # default
 ```
 
-For more in-depth examples of using each dataset included in the `scgElectionsNZ` package, view the data index 
-[here](https://sarahcgall.github.io/scgElectionsNZ/reference/index.html) or view the articles found at:
-https://sarahcgall.github.io/scgElectionsNZ.
+Explore detailed examples and dataset descriptions in the 
+[`scgElectionsNZ` documentation](https://sarahcgall.github.io/scgElectionsNZ/reference/index.html).
 
-## Data Sources
-The election data available within the `scgElectionsNZ` package can be found in the tables below.
-Data have been sourced from the [New Zealand Electoral Commission](https://electionresults.govt.nz/) and are 
-up-to-date as at 3 December, 2023.
+## Data Sources and Disclaimer
+#### Data Sources
+The datasets in the `scgElectionsNZ` package are meticulously curated from the official results provided by the [New Zealand Electoral Commission](https://electionresults.govt.nz/).
+These datasets offer a comprehensive view of New Zealand's electoral outcomes and are crucial for in-depth analysis and research in political science, electoral studies, and related fields.
+
+#### Disclaimer
+While the utmost care has been taken to ensure the accuracy and reliability of the data, the New Zealand Electoral Commission 
+was not involved in the development of this package and thus does not bear responsibility for any errors or omissions in the datasets. 
+Users of `scgElectionsNZ` should note that the package's creators have independently compiled, processed, and presented the data. 
+Any discrepancies or inaccuracies found within the datasets do not reflect on the official records maintained by the Electoral Commission.
+
+#### Currency of Data
+The data included in this package are up-to-date as of 3 December 2023. Users should be aware that subsequent electoral 
+events or data revisions by the Electoral Commission after this date may not be reflected in the current version of `scgElectionsNZ`.
 
 ## Future Additions and Updates
-Additional datasets will include by-election data and the following datasets:
+Planned future additions include by-election and referendum results and enhanced datasets like `results_by_booths`. 
+Upcoming functional updates will focus on visualising election results specific to New Zealand and making boundary
+adjustments for better comparative analysis.
 
-* `results_by_booths`: TBC 
-* `split_electorate`: split voting by electorate (2005 - 2023 only)
+## Feedback and Contributions
+Suggestions and contributions are welcome. For any proposed additions, amendments, or feedback, please [create an issue](https://github.com/sarahcgall/scgElectionsNZ/issues).
 
-In future updates, the following functions will be added:
-
-* `amend_boundary`: a function to convert boundaries into current boundaries for a better comparison across multiple elections (this will replace the `update_EName`
-function which is ok for general tracking of electorates but not for statistical purposes)
-* `plot_parliament`: a function to visualise the number of seats (parliament graph)
-* `plot_cartogram`: a function to visualise the vote by electorate (cartogram)
-
-For any suggested additions or amendments, please get in touch!
-
-## Other Packages
-* [`scgUtils`](https://github.com/sarahcgall/scgUtils): a package which provides functions and plotting capabilities
+## Related Packages
+Check out [`scgUtils`](https://github.com/sarahcgall/scgUtils) for additional functions and visualisation tools.

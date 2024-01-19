@@ -7,22 +7,24 @@
 \format{
 A data frame with 48 rows and 4 variables:
 \describe{
-\item{Election}{election year (1879--2023)}
-\item{MPs}{total number of MPs in parliament (74--123)}
-\item{Electors}{total number of registered electors (82,271--3.68829e+06)}
-\item{Turnout}{turnout as a percentage of the number of electors (60.60--93.70)}
+\item{Election}{Year of election (1879--2023).}
+\item{MPs}{Total number of MPs in parliament.}
+\item{Electors}{Total number of registered electors.}
+\item{Turnout}{Turnout as a percentage of the number of electors.}
 }
 }
 \source{
-This dataset was sourced from the NZ Electoral Commission's official results.
-The raw data are available from \url{https://www.electionresults.govt.nz/}.
+Sourced from the NZ Electoral Commission's official results, available at
+\url{https://www.electionresults.govt.nz/}.
 }
 \usage{
 turnout_historic
 }
 \description{
-The \code{turnout_historic} dataset is in a long format and can be used to look view the elector turnout at
-each general election between 1879 and 2023. For an example of how to use this dataset,
-refer to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/turnout}{Turnout article}
+The \code{turnout_historic} dataset provides a long-term perspective of elector turnout at general elections from 1879 to 2023.
+Essential for historical analysis of voter engagement and turnout trends over time.
+For use case examples, refer to the \href{https://sarahcgall.github.io/scgElectionsNZ/articles/turnout}{Turnout article}.
+Turnout methodology detailed in 'Turnout' section of
+\href{https://sarahcgall.github.io/scgElectionsNZ/articles/nz-elections-explained.html#turnout}{NZ Elections Explained}.
 }
 \keyword{datasets}
