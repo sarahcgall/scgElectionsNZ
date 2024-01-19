@@ -10,6 +10,8 @@ test_that("converts pre-2020 electorate names to match name changes that occurre
   x <- update_names(majority, nameCol = "Electorate", output="electorate")
   expect_length(x, 7)
 
+  x <- update_names(majority, output="electorate")
+
   # testing change for 2020 Flat Bush to Takanini
   expect_equal(nrow(x[x$Election == 2020 & x$Electorate == "Takanini",]), 1)
 
