@@ -52,10 +52,7 @@
     <loc>https://sarahcgall.github.io/scgElectionsNZ/news/index.html</loc>
   </url>
   <url>
-    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/add_region.html</loc>
-  </url>
-  <url>
-    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/add_type.html</loc>
+    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html</loc>
   </url>
   <url>
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html</loc>
@@ -88,7 +85,7 @@
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/turnout_historic.html</loc>
   </url>
   <url>
-    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/update_EName.html</loc>
+    <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/update_names.html</loc>
   </url>
   <url>
     <loc>https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html</loc>

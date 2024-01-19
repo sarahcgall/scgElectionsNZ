@@ -163,17 +163,17 @@ further filtered for the most recent election.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">!=</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    Election    Ballot          Party Seats   Votes Percentage Nominated</span></span>
-<span><span class="co">#&gt; 1      2023 Candidate National Party    43 1192251      43.47        67</span></span>
-<span><span class="co">#&gt; 2      2023     Party National Party     5 1085851      38.08        74</span></span>
-<span><span class="co">#&gt; 3      2023 Candidate   Labour Party    17  855963      31.21        72</span></span>
-<span><span class="co">#&gt; 4      2023     Party   Labour Party    17  767540      26.92        76</span></span>
-<span><span class="co">#&gt; 5      2023     Party    Green Party    12  330907      11.61        49</span></span>
-<span><span class="co">#&gt; 6      2023     Party      ACT Party     9  246473       8.64        60</span></span>
-<span><span class="co">#&gt; 7      2023 Candidate    Green Party     3  226575       8.26        52</span></span>
-<span><span class="co">#&gt; 8      2023     Party       NZ First     8  173553       6.09        35</span></span>
-<span><span class="co">#&gt; 9      2023 Candidate      ACT Party     2  149507       5.45        59</span></span>
-<span><span class="co">#&gt; 10     2023 Candidate    Maori Party     6  106584       3.89        17</span></span>
+<span><span class="co">#&gt;    Election          Party    Ballot Seats   Votes Percentage Nominated</span></span>
+<span><span class="co">#&gt; 1      2023 National Party Candidate    43 1192251      43.47        67</span></span>
+<span><span class="co">#&gt; 2      2023 National Party     Party     5 1085851      38.08        74</span></span>
+<span><span class="co">#&gt; 3      2023   Labour Party Candidate    17  855963      31.21        72</span></span>
+<span><span class="co">#&gt; 4      2023   Labour Party     Party    17  767540      26.92        76</span></span>
+<span><span class="co">#&gt; 5      2023    Green Party     Party    12  330907      11.61        49</span></span>
+<span><span class="co">#&gt; 6      2023      ACT Party     Party     9  246473       8.64        60</span></span>
+<span><span class="co">#&gt; 7      2023    Green Party Candidate     3  226575       8.26        52</span></span>
+<span><span class="co">#&gt; 8      2023       NZ First     Party     8  173553       6.09        35</span></span>
+<span><span class="co">#&gt; 9      2023      ACT Party Candidate     2  149507       5.45        59</span></span>
+<span><span class="co">#&gt; 10     2023    Maori Party Candidate     6  106584       3.89        17</span></span>
 <span><span class="co">#&gt;    Registered Successful</span></span>
 <span><span class="co">#&gt; 1         Yes        Yes</span></span>
 <span><span class="co">#&gt; 2         Yes        Yes</span></span>
@@ -203,14 +203,14 @@ most recent election.</p>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Overhang <span class="op">=</span> <span class="va">Seats</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">120</span><span class="op">*</span><span class="va">`%`</span><span class="op">/</span><span class="fl">100</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 11</span></span></span>
-<span><span class="co">#&gt;   Election Ballot Party       Seats  Votes Percentage Nominated Registered</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Total  ACT Party      11 2.46<span style="color: #949494;">e</span>5       8.64       119 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Total  Green Party    15 3.31<span style="color: #949494;">e</span>5      11.6        101 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Total  Labour Par…    34 7.68<span style="color: #949494;">e</span>5      26.9        148 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Total  Maori Party     6 8.78<span style="color: #949494;">e</span>4       3.08        48 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Total  NZ First        8 1.74<span style="color: #949494;">e</span>5       6.09        69 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Total  National P…    48 1.09<span style="color: #949494;">e</span>6      38.1        141 Yes       </span></span>
+<span><span class="co">#&gt;   Election Party       Ballot Seats  Votes Percentage Nominated Registered</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 ACT Party   Total     11 2.46<span style="color: #949494;">e</span>5       8.64       119 Yes       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Green Party Total     15 3.31<span style="color: #949494;">e</span>5      11.6        101 Yes       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Labour Par… Total     34 7.68<span style="color: #949494;">e</span>5      26.9        148 Yes       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Maori Party Total      6 8.78<span style="color: #949494;">e</span>4       3.08        48 Yes       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 NZ First    Total      8 1.74<span style="color: #949494;">e</span>5       6.09        69 Yes       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 National P… Total     48 1.09<span style="color: #949494;">e</span>6      38.1        141 Yes       </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: Successful &lt;chr&gt;, `%` &lt;dbl&gt;, Overhang &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br></p>
 </div>

@@ -152,22 +152,8 @@ number by the total votes cast to create a percentage figure. <br><br></p>
 through name changes.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert pre-2020 electorate names to match name changes that occurred in 2020 and view</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_EName.html">update_EName</a></span><span class="op">(</span><span class="va">df</span>, column1<span class="op">=</span><span class="va">Electorate</span>, column2<span class="op">=</span><span class="va">Election</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
-<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
-<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
-<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
-<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
-<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
-<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
-<span><span class="co">#&gt;   Votes Percentage Party_List</span></span>
-<span><span class="co">#&gt; 1  3896      11.31        Yes</span></span>
-<span><span class="co">#&gt; 2   396       0.81        Yes</span></span>
-<span><span class="co">#&gt; 3 15405      34.57        Yes</span></span>
-<span><span class="co">#&gt; 4 16323      44.69        Yes</span></span>
-<span><span class="co">#&gt; 5  1841       4.75        Yes</span></span>
-<span><span class="co">#&gt; 6  2397       6.25        Yes</span></span></code></pre></div>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>, nameCol<span class="op">=</span><span class="va">Electorate</span>, yearCol<span class="op">=</span><span class="va">Election</span>, output <span class="op">=</span> <span class="st">"electorate"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -177,22 +163,8 @@ through name changes.</p>
 electorates.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add Electorate Type and filter for General electorates only and view</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_type.html">add_type</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
-<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
-<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
-<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
-<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
-<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
-<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
-<span><span class="co">#&gt;   Votes Percentage Party_List Electorate_Type</span></span>
-<span><span class="co">#&gt; 1  3896      11.31        Yes         General</span></span>
-<span><span class="co">#&gt; 2   396       0.81        Yes         General</span></span>
-<span><span class="co">#&gt; 3 15405      34.57        Yes         General</span></span>
-<span><span class="co">#&gt; 4 16323      44.69        Yes         General</span></span>
-<span><span class="co">#&gt; 5  1841       4.75        Yes         General</span></span>
-<span><span class="co">#&gt; 6  2397       6.25        Yes         General</span></span></code></pre></div>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output<span class="op">=</span><span class="st">"type"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
