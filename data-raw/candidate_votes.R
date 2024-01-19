@@ -1,33 +1,32 @@
-# ABOUT
-# This script combines and cleans all election results
+# 4.4 Percentage of Electorate Candidate Votes of successful registered parties
 # =====================================#
 # LIBRARIES/FUNCTIONS
 source("data-raw/utils.R")
-# =====================================#
-# 4.4 Percentage of Electorate Candidate Votes of successful registered parties
-candidate_votes <- data.frame()
-for (i in year) {
-  tmp <- upload(i, "percentage-candidate-votes-for-registered-parties", 1)
-  tmp <- tmp %>%
-    filter(str_detect(tmp[,1],"Totals") == FALSE) %>%
-    mutate(Election = as.numeric(i)) # add year and convert to numeric
 
-  tmp <- tmp[-1,] # delete first row
-  tmp <- tmp %>%
-    pivot_longer(cols=!c(Election,Electorate,Total.Valid.Votes),
-                 names_to = "Party", values_to = "Votes") %>% # make party names within column "Party"
-    filter(!str_detect(Party, "X"))
+# Function to upload all candidate_votes csvs for each election year and clean
+process_candidate_data <- function(year) {
+  tmp <- upload(year, "percentage-candidate-votes-for-registered-parties", 1) %>%
+    filter(!str_detect(Electorate, "Totals")) %>% # Remove "Totals" from dataset
+    mutate(Election = as.numeric(year)) %>% # Add year and convert to numeric
+    slice(-1) %>% # Delete first row
+    pivot_longer(cols = -c(Election, Electorate, Total.Valid.Votes), # Make party names within column "Party"
+                 names_to = "Party", values_to = "Votes") %>%
+    filter(!str_detect(Party, "X")) %>% # remove percentage figure
+    mutate(Party = str_replace_all(Party, "\\.", " "), # Replace full stop with space
+           Votes = as.numeric(Votes),
+           Percentage = round(Votes / as.numeric(Total.Valid.Votes) * 100, 2),
+           Ballot = "Candidate")
 
-  candidate_votes <- rbind(candidate_votes,tmp)
+  return(tmp)
 }
-# CLEAN
-candidate_votes$Party <- str_replace_all(candidate_votes$Party, "\\.", " ") # replace full stop with space
-candidate_votes <- amend_parties(candidate_votes, Party) # amend party names
-candidate_votes <- candidate_votes %>%
-  mutate(Votes = as.numeric(Votes), Percentage = round(as.numeric(Votes)/as.numeric(Total.Valid.Votes)*100,2),
-         Ballot = "Candidate") %>%
+
+# =====================================#
+# GET DATA
+candidate_votes <- map_dfr(year, process_candidate_data)
+
+# Amend party names
+candidate_votes <- amend_parties(candidate_votes, Party) %>%
   select(Election, Ballot, Electorate, Party, Votes, Percentage)
-# Remove special characters
-candidate_votes$Electorate <- iconv(candidate_votes$Electorate,from="UTF-8",to="ASCII//TRANSLIT")
-# save to .rds
+
+# Save to .rds
 usethis::use_data(candidate_votes, overwrite = TRUE)

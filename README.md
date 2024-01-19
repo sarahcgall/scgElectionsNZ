@@ -35,25 +35,29 @@ devtools::install_github("sarahcgall/scgElectionsNZ")
 ## Usage
 In addition to the datasets listed above, a number of helper functions exist to aid in the analysis of the data. These include:
 
-* `add_region()`: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) against a dataset containing electorates.
-* `add_type()`: adds an Electorate_Type column (i.e., General or Maori) against a dataset containing electorates.
-* `update_EName()`: this function converts pre-2020 electorate names to match post-2020 electorate names so that seats can 
+* `add_data()`: adds a Regions column (e.g., Auckland, Northland, Waikato, etc.) or Electorate_Type column 
+(i.e., General or Maori) against a dataset containing electorates.
+* `update_names()`: this function converts pre-2020 electorate names to match post-2020 electorate names so that seats can 
 be tracked from 1996 until 2023 with one exception of Waipareira which merged with Waitakere in 1999 but then split into Kelston and Upper Harbour.
 
 ``` r
 # Load datasets by using the following helper function:
-df <- get_data("majority")
+df <- scgUtils::get_data("majority")
 # Alternatively, use: 
 data("majority")
 
 # Add a region column to dataset
-df <- add_region(df)
+df <- add_data(df, output="regions") # default
+# NB "regions" is the default and therefore can be: add_data(df)
 
 # Add a electorate type column to dataset
-df <- add_type(df)
+df <- add_data(df, output="type")
 
 # Convert pre-2020 electorate names to match name changes that occurred in 2020
-df <- update_EName(df, column=Electorate)
+df <- update_names(df, output = "electorate")
+
+# Convert unsuccessful party names to "Other"
+df <- update_names(df, output = "party") # default
 ```
 
 For more in-depth examples of using each dataset included in the `scgElectionsNZ` package, view the data index 

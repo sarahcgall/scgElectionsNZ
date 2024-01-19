@@ -42,9 +42,8 @@ reference:
   desc: >
     Functions to add help with the datasets.
   contents:
-  - add_region
-  - add_type
-  - update_EName
+  - add_data
+  - update_names
 
 - title: Visualisations
   desc: >

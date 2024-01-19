@@ -5,7 +5,7 @@
 \alias{candidate_votes}
 \title{Candidate votes for successful registered parties (1996 - 2023)}
 \format{
-A data frame with 5,357 rows and 6 variables:
+A data frame with 5,349 rows and 6 variables:
 \describe{
 \item{Election}{election year (1996--2023)}
 \item{Ballot}{ballot type (Candidate)}

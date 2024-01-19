@@ -90,8 +90,8 @@ df %>%
 
 #### Add region
 Add a column to facet by region.
-```{r vote-type3}
-df <- add_region(df)
+```{r vote-type3, eval = FALSE}
+df <- add_data(df)
 head(df)
 ```
 <br>

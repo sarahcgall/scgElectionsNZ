@@ -9,9 +9,6 @@ Description: scgElectionsNZ allows you to download and explore New Zealand's
 License: MIT + file LICENSE
 URL: https://github.com/sarahcgall/scgElectionsNZ, https://sarahcgall.github.io/scgElectionsNZ/
 BugReports: https://github.com/sarahcgall/scgElectionsNZ/issues
-Imports:
-    dplyr,
-    rlang
 LazyData: true
 Encoding: UTF-8
 Language: en-GB

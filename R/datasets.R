@@ -5,7 +5,7 @@
 #' to the
 #' [Party and Candidate Votes article](https://sarahcgall.github.io/scgElectionsNZ/articles/party-and-candidate-votes).
 #'
-#' @format A data frame with 5,357 rows and 6 variables:
+#' @format A data frame with 5,349 rows and 6 variables:
 #' \describe{
 #'   \item{Election}{election year (1996--2023)}
 #'   \item{Ballot}{ballot type (Candidate)}

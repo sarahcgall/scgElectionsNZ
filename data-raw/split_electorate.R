@@ -1,8 +1,9 @@
-# ABOUT
+# 5.1b Individual Electorates (Split Voting)
 # This script combines and cleans all election results (2005 - 2020 only)
 # =====================================#
 # LIBRARIES/FUNCTIONS
 source("data-raw/utils.R")
+
 # Split function
 get_split <- function(year){
   path <- paths(year, "split")

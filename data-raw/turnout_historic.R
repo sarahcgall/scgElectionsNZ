@@ -1,14 +1,15 @@
-# ABOUT
-# This script cleans and saves pre-MMP results
+# Historic Turnout
 # =====================================#
 # LIBRARIES/FUNCTIONS
 source("data-raw/utils.R")
 # =====================================#
-# 4.3 Winning Electorate Candidate Votes
-turnout_historic <- read.csv("data-raw/vote-data/pre-1994/historic-turnout.csv") # upload raw data from each election folder
-#2126594 79.9
-# CLEAN
+# Upload raw data from pre-1994
+turnout_historic <- read.csv("data-raw/vote-data/pre-1994/historic-turnout.csv")
+
+# Change first column name is Election
 names(turnout_historic)[1] <- "Election"
+
+# Amending data
 turnout_historic <- turnout_historic %>%
   mutate(Election = as.numeric(Election),
          # NB 1978 included hundreds of thousands of duplicated names on the electoral roll.
@@ -18,5 +19,5 @@ turnout_historic <- turnout_historic %>%
 
 # reference: https://web.archive.org/web/20081017191904/http://www1.elections.org.nz/record/resultsdata/elections-dates-turnout.html
 
-# save to .rds
+# Save to .rds
 usethis::use_data(turnout_historic, overwrite = TRUE)

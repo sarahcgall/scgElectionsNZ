@@ -1,36 +1,35 @@
-# ABOUT
+# 5.1b All Electorates (Split Voting)
 # This script combines and cleans all election results (2005 - 2020 only)
 # =====================================#
 # LIBRARIES/FUNCTIONS
 source("data-raw/utils.R")
-# =====================================#
-# 5.1b All Electorates
-split_total <- data.frame()
-for (i in c("2023", "2020", "2017", "2014", "2011", "2008", "2005")) {
-  tmp <- upload(i, "split-votes-all", 0)
-  tmp <- tmp %>%
-    pivot_longer(cols=2:length(tmp), names_to="Electorate_Party",values_to="Votes") %>%
-    rename(List_Party = 1) %>%
-    mutate(Election = as.numeric(i))
 
-  split_total <- rbind(split_total, tmp)
+process_split_votes <- function(years) {
+  split_total <- map_dfr(years, function(year) {
+    tmp <- upload(year, "split-votes-all", 0) %>%
+      pivot_longer(cols = -1, names_to = "Electorate_Party", values_to = "Votes") %>% # pivot all columns except first
+      rename(List_Party = 1) %>% # rename first column
+      mutate(Election = as.numeric(year),
+             Electorate_Party = str_replace_all(Electorate_Party, "\\.", " ")) %>% # replace full stop with space
+      amend_parties(., Electorate_Party) %>% # amend party names
+      amend_parties(., List_Party) %>% # amend party names
+      group_by(Election, List_Party) %>%
+      # Calculate Votes
+      mutate(Percentage = Votes,
+             Votes = Votes / 100 * Votes[Electorate_Party == "Total Party Votes"]) %>%
+      ungroup() %>%
+      filter(List_Party != "Total Party Votes and Percentages",
+             !Electorate_Party %in% c("Total","Total Party Votes")) %>%
+      select(Election, List_Party, Electorate_Party, Votes, Percentage)
+    return(tmp)
+  })
+
+  return(split_total)
 }
-# CLEAN
-split_total$Electorate_Party <- str_replace_all(split_total$Electorate_Party, "\\.", " ") # replace full stop with space
+# =====================================#
+# Execute processing for specified years
+years <- c("2023", "2020", "2017", "2014", "2011", "2008", "2005")
+split_total <- process_split_votes(years)
 
-split_total <- amend_parties(split_total, Electorate_Party) # amend party names
-split_total <- amend_parties(split_total, List_Party) # amend party names
-
-split_total <- split_total %>%
-  group_by(Election, List_Party) %>%
-  mutate(Percentage = Votes,
-         Votes = Votes / 100 * Votes[Electorate_Party == "Total Party Votes"]) %>%
-  ungroup() %>%
-  filter(List_Party != "Total Party Votes and Percentages",
-         !Electorate_Party %in% c("Total  ","Total Party Votes")) %>%
-  select(Election, List_Party, Electorate_Party, Votes, Percentage)
-# Remove special characters
-split_total$Electorate_Party <- iconv(split_total$Electorate_Party,from="UTF-8",to="ASCII//TRANSLIT")
-split_total$List_Party <- iconv(split_total$List_Party,from="UTF-8",to="ASCII//TRANSLIT")
-# save to .rds
+# Save to .rds
 usethis::use_data(split_total, overwrite = TRUE)

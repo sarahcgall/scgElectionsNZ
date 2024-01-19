@@ -1,43 +1,39 @@
-# ABOUT
-# This script combines and cleans all election results
+# 2.1 Party votes and turnout by Electorate + 2.2 Electorate Candidate votes and turnout by Electorate
 # NB original datafiles for pre-2005 (inclusive) have been amended with the addition of an
 # "Ordinary Votes Disallowed" column which has been added to match post-2005 data files.
 # =====================================#
 # LIBRARIES/FUNCTIONS
 source("data-raw/utils.R")
-# =====================================#
-# 2.1 Party votes and turnout by Electorate + 2.2 Electorate Candidate votes and turnout by Electorate
-turnout <- data.frame()
-for (i in year) {
-  tmp <- upload(i, "party-votes-and-turnout-by-electorate", 3)
-  tmp <- tmp[-1,]
-  tmp$Ballot <- "Party"
 
-  tmp1 <- upload(i, "candidate-votes-and-turnout-by-electorate", 3)
-  tmp1 <- tmp1[-1,-14]
-  tmp1$Ballot <- "Candidate"
+process_turnout_data <- function(year, file_type) {
+  tmp <- upload(year, file_type, 3) %>%
+    slice(-1) %>%
+    mutate(Ballot = ifelse(file_type == "party-votes-and-turnout-by-electorate",
+                           "Party", "Candidate")) %>% # create Ballot column
+    filter(!str_detect(Electoral.District, "Totals")) %>%
+    mutate(Election = as.numeric(year)) %>%
+    select(Election, Ballot, Electoral.District, Total.Votes.Cast..c...f...g...h.,
+           Electors.on.Master.Roll, Votes.Cast.to.Electors.on.Master.Roll, Informal.Total..d...e.)
 
-  tmp <- rbind(tmp, tmp1)
-  tmp <- tmp[,c(1,7,10:15)]
-
-  tmp <- tmp %>%
-    filter(str_detect(tmp[,1],"Totals") == FALSE) %>%
-    mutate(Election = as.numeric(i)) # add year column for elections and convert to numeric
-
-  turnout <- rbind(turnout,tmp)
+  return(tmp)
 }
+# =====================================#
+# Process and combine data for all years and both file types
+turnout <- map_dfr(year, ~process_turnout_data(.x, "party-votes-and-turnout-by-electorate")) %>%
+  bind_rows(map_dfr(year, ~process_turnout_data(.x, "candidate-votes-and-turnout-by-electorate")))
 
-# CLEAN
-# rename columns and create Ballot column
+# Rename columns and make numeric
 turnout <- turnout %>%
-  rename(Electorate = Electoral.District, Total = Total.Votes.Cast..c...f...g...h., Electors = Electors.on.Master.Roll,
-         Turnout = Votes.Cast.to.Electors.on.Master.Roll, Informal = Informal.Total..d...e.) %>%
-  mutate(Total = as.numeric(Total), Electors = as.numeric(Electors), Turnout = round(as.numeric(Turnout), 2),
+  rename(Electorate = Electoral.District,
+         Total = Total.Votes.Cast..c...f...g...h.,
+         Electors = Electors.on.Master.Roll,
+         Turnout = Votes.Cast.to.Electors.on.Master.Roll,
+         Informal = Informal.Total..d...e.) %>%
+  mutate(Total = as.numeric(Total),
+         Electors = as.numeric(Electors),
+         Turnout = round(as.numeric(Turnout), 2),
          Informal = as.numeric(Informal)) %>%
   select(Election, Ballot, Electorate, Electors, Turnout, Total, Informal)
-
-# Remove special characters
-turnout$Electorate <- iconv(turnout$Electorate,from="UTF-8",to="ASCII//TRANSLIT")
 
 # save to .rds
 usethis::use_data(turnout, overwrite = TRUE)
