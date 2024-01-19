@@ -65,232 +65,65 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1" id="scgelectionsnz-development-version-001">scgElectionsNZ (development version 0.0.1)<a class="anchor" aria-label="anchor" href="#scgelectionsnz-development-version-001"></a></h2>
-<p>This is the initial release. It contains the following datasets:</p>
-<table class="table"><colgroup><col width="13%"><col width="6%"><col width="6%"><col width="7%"><col width="14%"><col width="10%"><col width="6%"><col width="14%"><col width="9%"><col width="10%"></colgroup><thead><tr class="header"><th align="left">Column Name</th>
-<th align="center"><code>summary</code></th>
-<th align="center"><code>turnout</code></th>
-<th align="center"><code>vote_type</code></th>
-<th align="center">
-<code>party_votes</code><sup>1</sup></th>
-<th align="center"><code>candidate_votes</code></th>
-<th align="center"><code>majority</code></th>
-<th align="center">
-<code>split_total</code><sup>1</sup></th>
-<th align="center"><code>preMMP_results</code></th>
-<th align="center"><code>historic_turnout</code></th>
-</tr></thead><tbody><tr class="odd"><td align="left">Election</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-</tr><tr class="even"><td align="left">Ballot<sup>2</sup></td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">MPs</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-</tr><tr class="even"><td align="left">Electorate</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Electors</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-</tr><tr class="even"><td align="left">Turnout</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-</tr><tr class="odd"><td align="left">Total<sup>3</sup></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">Informal</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Validity</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">Vote_Type</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Party</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">List_Party</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Electorate_Party</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">Candidate<sup>4</sup></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Seats</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">Votes</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Percentage</td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center">✔</td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">Party_List<sup>5</sup></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Nominated<sup>6</sup></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="even"><td align="left">Registered<sup>7</sup></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr><tr class="odd"><td align="left">Successful<sup>8</sup></td>
-<td align="center">✔</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr></tbody></table><p>1 Dataset includes Informal Votes under Party column.<br> 2 Ballot includes “Party”, “Candidate”, or “Total” (Party + Candidate for Seats or Party only for Vote/Percentage).<br> 3 Total refers to the total number of votes cast (Valid + Informal).<br> 4 Candidate column contains the name of the winning candidate for that electorate.<br> 5 Party_List column contains Yes or No values and refers to whether the candidate running in the electorate is also on the Party List.<br> 6 Nominated column refers to the number of candidates nominated as electorate candidates or the number on a party list depending on Vote_Type.<br> 7 Registered column contains Yes or No values and refers to whether the party is a registered party with a list or an unregistered party without a list.<br> 8 Successful column contains Yes or No values and refers to whether or not a party achieved the 5% Party_Vote threshold or won at least one electorate.<br></p>
+<div class="section level4">
+<h4 id="overview-0-0-1">Overview<a class="anchor" aria-label="anchor" href="#overview-0-0-1"></a></h4>
+<p>This is the initial release of scgElectionsNZ, an R package designed to provide comprehensive data and analytical tools for New Zealand’s general election results from 1996 to 2023. This development version marks the first step in offering a robust resource for political scientists, researchers, students, and anyone interested in the intricacies of New Zealand’s electoral processes.</p>
 </div>
-  </main></div>
+<div class="section level4">
+<h4 id="major-features-0-0-1">Major Features<a class="anchor" aria-label="anchor" href="#major-features-0-0-1"></a></h4>
+<p><strong>Datasets Introduced:</strong><br> This version includes several key datasets:</p>
+<ul><li>
+<strong><code>summary</code>:</strong> National-level overall results by party.</li>
+<li>
+<strong><code>turnout</code>:</strong> Electorate and ballot type-specific turnout and informal vote details.</li>
+<li>
+<strong><code>vote_type</code>:</strong> Validity and type of votes by electorate and ballot.</li>
+<li>
+<strong><code>party_votes</code>:</strong> Party votes at the electorate level.</li>
+<li>
+<strong><code>candidate_votes</code>:</strong> Candidate votes at the electorate level.</li>
+<li>
+<strong><code>majority</code>:</strong> Winning candidates and their margins of victory at the electorate level.</li>
+<li>
+<strong><code>split_electorate</code>:</strong> Electorate-level split-ticket voting data (2005 - 2023).</li>
+<li>
+<strong><code>split_total</code>:</strong> National-level split-ticket voting data (2005 - 2023).</li>
+<li>
+<strong><code>preMMP_results</code>:</strong> National-level results from 1890 to 1993, before MMP.</li>
+<li>
+<strong><code>historic_turnout</code>:</strong> National-level turnout data from 1879 to 2023.</li>
+</ul><p><strong>Helper Functions:</strong><br> A set of functions to enhance data handling and analysis:</p>
+<ul><li>
+<strong><code><a href="../reference/add_data.html">add_data()</a></code>:</strong> Augments datasets with regional or electorate type information.</li>
+<li>
+<strong><code><a href="../reference/update_names.html">update_names()</a></code>:</strong> Standardises electorate names for consistent analysis across years or condense unsuccessful party names into “Other” for easier analysis.</li>
+</ul><p><strong>Documentation and Examples:</strong><br> Comprehensive documentation and examples have been provided for each dataset and function, making it easier for users to understand and utilise the package effectively.</p>
+</div>
+<div class="section level4">
+<h4 id="improvements-and-bug-fixes-0-0-1">Improvements and Bug Fixes<a class="anchor" aria-label="anchor" href="#improvements-and-bug-fixes-0-0-1"></a></h4>
+<ul><li>
+<strong>Data Accuracy:</strong> Implementation of rigorous checks to ensure the accuracy and reliability of the datasets.</li>
+<li>
+<strong>Performance Optimisation:</strong> Enhancements made to improve the performance of data processing and analysis functions.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="future-plans-0-0-1">Future Plans<a class="anchor" aria-label="anchor" href="#future-plans-0-0-1"></a></h4>
+<ul><li>
+<strong>Known Data Issues:</strong> Addressing discrepancies in raw split voting files and updating <code>split_electorate</code> and <code>split_total</code> datasets accordingly.</li>
+<li>
+<strong>Data Improvements:</strong> Enhancing the quality of internal datasets that feed into the helper functions.</li>
+<li>
+<strong>Additional Datasets:</strong> Addition of <code>results_by_booths</code> for Party and Candidate Votes, including Advanced voting, to align <code>candidate_votes</code> with <code>party_votes</code>.</li>
+<li>
+<strong>By-Election and Referendum Data:</strong> Inclusion of detailed datasets on by-elections and referendums to provide a more comprehensive electoral analysis.</li>
+<li>
+<strong>New Functions:</strong> Development of new functions such as <code>amend_boundary</code>, <code>plot_parliament</code>, and <code>plot_cartogram</code> for advanced analysis and visualisation.</li>
+<li>
+<strong>CRAN Release:</strong> Plans for releasing the package on CRAN to widen accessibility.</li>
+</ul></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
    </div>
