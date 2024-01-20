@@ -35,11 +35,11 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
-      - name: Install devtools
-        run: install.packages("devtools")
+      - name: Install Other Packages
+        run: install.packages("devtools"), install.packages("gghighlight")
         shell: Rscript {0}
 
-      - name: Install scgUtils
+      - name: Install GitHub Packages
         run: devtools::install_github("sarahcgall/scgUtils")
         shell: Rscript {0}
 
