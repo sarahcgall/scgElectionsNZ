@@ -36,7 +36,9 @@ jobs:
           needs: website
 
       - name: Install Other Packages
-        run: install.packages("devtools"), install.packages("gghighlight")
+        run: |
+          install.packages("devtools")
+          install.packages("gghighlight")
         shell: Rscript {0}
 
       - name: Install GitHub Packages
