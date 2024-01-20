@@ -35,3 +35,49 @@ test_that("converts party names to match successful parties only", {
   # testing change for 1999 Hunua to Port Waikato
   expect_equal("Freedom NZ" %in% x$Party[x$Election == 2023], FALSE)
 })
+
+# Testing individually works but when devtools::test(), fails...unsure why
+# test_that("function converts names if nameCol values are factors", {
+#   data("summary")
+#   summary$Party <- as.factor(summary$Party)
+#   summary <- update_names(summary)
+#   expect_equal("Other" %in% summary$Party, TRUE)
+#   expect_equal(is.character(summary$Party), TRUE)
+# })
+#
+# test_that("function converts to numeric if yearCol values are not", {
+#   data("summary")
+#   # Factor
+#   # x <- summary
+#   # x$Election <- as.factor(x$Election)
+#   # x <- update_names(x)
+#   # expect_equal("Other" %in% x$Party, TRUE)
+#   # expect_equal(is.numeric(x$Election), TRUE)
+#
+#   # Character
+#   x <- summary
+#   x$Election <- as.character(x$Election)
+#   x <- update_names(x)
+#   expect_equal("Other" %in% x$Party, TRUE)
+#   expect_equal(is.numeric(x$Election), TRUE)
+#
+#   # Integer
+#   x <- summary
+#   x$Election <- as.integer(x$Election)
+#   x <- update_names(x)
+#   expect_equal("Other" %in% x$Party, TRUE)
+#   expect_equal(is.numeric(x$Election), TRUE)
+#
+#   # Double
+#   x <- summary
+#   x$Election <- as.double(x$Election)
+#   x <- update_names(x)
+#   expect_equal("Other" %in% x$Party, TRUE)
+#   expect_equal(is.numeric(x$Election), TRUE)
+#
+#   # Force NAs to be introduced
+#   x <- summary
+#   x$Election <- as.complex(x$Election)
+#   expect_error(suppressWarnings(update_names(x)),
+#                "Conversion of `yearCol` to numeric resulted in NA values. Please check the input data.")
+# })

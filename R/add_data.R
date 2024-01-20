@@ -62,11 +62,6 @@ add_data <- function(data,
   # Get default if no "output" set
   output <- match.arg(output)
 
-  # Validate output type
-  if (!output %in% names(output_mappings)) {
-    stop("`output` permits '", paste(names(output_mappings), collapse = "', '"), "' only.")
-  }
-
   # Retrieve data mappings
   mapping <- output_mappings[[output]]
 
