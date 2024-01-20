@@ -19,10 +19,9 @@ Depends:
 Suggests:
     knitr,
     rmarkdown,
+    scgUtils,
     ggplot2,
     testthat (>= 3.0.0)
-Remotes:
-    sarahcgall/scgUtils
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Config/Needs/website: tidyverse/tidytemplate
