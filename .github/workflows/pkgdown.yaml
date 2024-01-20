@@ -36,8 +36,8 @@ jobs:
           needs: website
 
       - name: Install GitHub Package
-        run: |
-            Rscript -e 'remotes::install_github("sarahcgall/scgUtils")'
+        run: devtools::install_github("sarahcgall/scgUtils")
+        shell: Rscript {0}
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
