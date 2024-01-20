@@ -35,6 +35,10 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
+      - name: Install GitHub Package
+        run: |
+            Rscript -e 'remotes::install_github("sarahcgall/scgUtils")'
+
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
