@@ -78,7 +78,6 @@ scgUtils::plot_sankey(
   source = "List_Party", # left side of sankey
   target = "Electorate_Party", # right side of sankey
   value = "Vote",
-  units = "votes", # add units to tooltip
   colours = scgUtils::colour_prep(df, c("List_Party","Electorate_Party"), pal_name = "polNZ"),
   width = 900, # reduce width from default of 1200
   height = 700, # reduce height from default of 800
