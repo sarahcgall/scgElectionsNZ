@@ -23,8 +23,6 @@ knitr::opts_chunk$set(
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(dplyr)
-data("summary")
-df <- summary
 ```
 To determine the order in which seats are allocated to parties, the [NZ Electoral Commission](https://electionresults.govt.nz/electionresults_2023/statistics/sainte-lague-formula.html) follows the below process.
 <br>
@@ -32,11 +30,9 @@ To determine the order in which seats are allocated to parties, the [NZ Electora
 
 #### Step 1: Tally Party Votes
 First, all Party Votes are tallied for each party and the number of electorate seats won are also tallied.
-```{r step, eval = FALSE}
+```{r step1}
 # load dataset
 df <- scgUtils::get_data("summary")
-```
-```{r step1}
 df <- df %>%
   # filter out total ballot type, leaving the candidate and party ballor
   # types only

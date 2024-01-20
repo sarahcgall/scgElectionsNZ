@@ -27,10 +27,6 @@ This article explores the [`summary`](https://sarahcgall.github.io/scgElectionsN
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
-data("summary")
-df <- summary
-data("preMMP_results")
-df1 <- preMMP_results
 ```
 
 ### Summary
@@ -42,25 +38,11 @@ The `summary` dataset contains the overall results at the national-level by Elec
 
 #### Upload data
 View the shape of data frame.
-```{r summary, eval = FALSE}
+```{r summary}
 # Load datasets by using the following helper function:
 df <- scgUtils::get_data("summary")
 # Alternatively, use: data("summary"), then df <- summary
 head(df)
-#>   Election Ballot                            Party Seats  Votes
-#> 1     2023  Party                        ACT Party     9 246473
-#> 2     2023  Party            Animal Justice Party      0   5018
-#> 3     2023  Party Aotearoa Legalise Cannabis Party     0  13025
-#> 4     2023  Party                      DemocracyNZ     0   6786
-#> 5     2023  Party                      Freedoms NZ     0   9586
-#> 6     2023  Party      NZ Outdoors & Freedom Party     0      0
-#>    Percentage Nominated Registered Successful
-#> 1        8.64        60        Yes        Yes
-#> 2        0.18        17        Yes         No
-#> 3        0.46        16        Yes         No
-#> 4        0.24        13        Yes         No
-#> 5        0.34        35        Yes         No
-#> 6        0.00         0        Yes         No
 ```
 <br>
 
@@ -127,16 +109,9 @@ This dataset can be combined with the `preMMP_results` dataset which contains th
 
 #### Upload data
 View the shape of data frame.
-```{r preMMP, eval = FALSE}
+```{r preMMP}
 df1 <- scgUtils::get_data("preMMP_results")
 head(df1)
-#>   Election              Party Seats Percentage
-#> 1     1890            Liberal    38      56.10
-#> 2     1890 Conservative Party    25      28.90
-#> 3     1890       Independents    11      15.00
-#> 4     1893            Liberal    51      57.80
-#> 5     1893 Conservative Party    13      24.49
-#> 6     1893       Independents    10      17.71
 ```
 <br>
 

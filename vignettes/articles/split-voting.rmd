@@ -26,8 +26,6 @@ This article explores the [`split_total`](https://sarahcgall.github.io/scgElecti
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(dplyr)
-data("split_total")
-df <- split_total
 ```
 ### Split Voting
 The `split_total` and `split_electorate` datasets contains the number of voters who cast their party vote for a different party to their candidate vote at the national level, by party. This dataset only has election years 2005 through to 2023 due to there not being split-ticket voting data available for previous years.
@@ -36,7 +34,7 @@ The `split_total` and `split_electorate` datasets contains the number of voters 
 
 #### Upload data
 View the shape of data frame.
-```{r split-voting, eval = FALSE}
+```{r split-voting}
 df <- scgUtils::get_data("split_total")
 # or
 # df <- scgUtils::get_data("split_electorate")

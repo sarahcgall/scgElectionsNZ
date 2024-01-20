@@ -20,41 +20,29 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset.
+This article provides an in-depth exploration of the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset, a key component of the [`scgElectionsNZ`](https://sarahcgall.github.io/scgElectionsNZ/) package, which delves into the intricacies of voting patterns in New Zealand's elections.
 <br>
 
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
-data("vote_type")
-df <- vote_type
 ```
 ### Vote Type
-The `vote_type` dataset contains the validity of the vote (Disallowed, Informal, and Valid) and the vote type (Ordinary,
-Special - NZ, and Special - Overseas) by electorate and ballot type (Candidate and Party).
+The [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset captures the complexities of the New Zealand electoral process by categorising votes based on their validity (Disallowed, Informal, Valid) and method (Ordinary, Special - NZ, Special - Overseas), across electorates and ballot types (Candidate and Party).
 <br>
 <br>
 
-#### Upload data
-View the shape of data frame.
-```{r vote-type, eval = FALSE}
+#### Loading and Exploring the Data
+Begin by loading the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset and examining its structure:
+```{r vote-type}
 df <- scgUtils::get_data("vote_type")
 head(df)
-#> # A tibble: 6 x 6
-#>   Election Ballot    Electorate       Validity   Method             Votes
-#>      <dbl> <chr>     <chr>            <chr>      <chr>              <dbl>
-#> 1     2023 Candidate Auckland Central Disallowed Ordinary               0
-#> 2     2023 Candidate Auckland Central Disallowed Special              988
-#> 3     2023 Candidate Auckland Central Informal   Ordinary             160
-#> 4     2023 Candidate Auckland Central Informal   Special - NZ         129
-#> 5     2023 Candidate Auckland Central Informal   Special - Overseas    14
-#> 6     2023 Candidate Auckland Central Valid      Ordinary           23227
 ```
 <br>
 
-**Disallowed votes (%)**<br>
-View percent of disallowed votes by electorate and ballot type.
+**Analysing Disallowed Votes**<br>
+Gain insights into the percentage of disallowed votes by electorate and ballot type for the 2023 election:
 ```{r vote-type1}
 df %>%
   filter(Election == 2023) %>%
@@ -62,7 +50,7 @@ df %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Ballot, Electorate) %>%
-  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  mutate(Percentage = Votes / sum(Votes) * 100) %>%
   ungroup() %>%
   filter(Validity == "Disallowed") %>%
   arrange(-Percentage) %>%
@@ -70,17 +58,17 @@ df %>%
 ```
 <br>
 
-**Overseas votes (%)**<br>
-View percentage of voters overseas by electorate.
+**Understanding Overseas Voting**<br>
+Examine the proportion of overseas votes by electorate, focusing on the valid and informal votes:
 ```{r vote-type2}
 df %>%
-        # including only valid and informal votes
+  # including only valid and informal votes
   filter(Election == 2023, Validity != "Disallowed") %>%
   group_by(Ballot, Electorate, Method) %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Ballot, Electorate) %>%
-  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  mutate(Percentage = Votes / sum(Votes) * 100) %>%
   ungroup() %>%
   filter(Method == "Special - Overseas") %>%
   arrange(-Percentage) %>%
@@ -88,35 +76,35 @@ df %>%
 ```
 <br>
 
-#### Add region
-Add a column to facet by region.
+#### Augmenting Data with Regional Information
+Enhance the dataset by adding regional data for more a detailed analysis using the [`add_data`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html) function:
 ```{r vote-type3}
 df <- add_data(df, output = "region")
 head(df)
 ```
 <br>
 
-#### Plot
-Filter by Party vote and exclude disallowed votes from the denominator. Visualise the proportion of votes cast overseas by region at each election.
-```{r vote-type4, eval = FALSE}
+#### Visualising Overseas Votes
+Create a visualisation to illustrate the proportion of overseas special Party Votes by region over time:
+```{r vote-type4, dpi=300, out.width = '100%'}
 df <- df %>%
-   # including only valid and informal votes
+  # including only valid and informal votes
   filter(Ballot == "Party", Validity != "Disallowed") %>%
   group_by(Election, Region, Method) %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Election, Region) %>%
-  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  mutate(Percentage = Votes / sum(Votes) * 100) %>%
   ungroup() %>%
   filter(Method == "Special - Overseas") %>%
   arrange(-Percentage)
 
 df %>%
-  ggplot(aes(x=as.character(Election), y=Percentage, group=Region, colour=Region)) +
+  ggplot(aes(x = as.character(Election), y = Percentage, group = Region, colour = Region)) +
   geom_line() +
   geom_point() +
   gghighlight::gghighlight(use_direct_label = F) +
-  facet_wrap(.~reorder(Region, -Percentage)) +
+  facet_wrap(. ~ reorder(Region, -Percentage)) +
   scale_colour_manual(values = c("#374e8e", "#e3b13e", "#df7c18", "#ac004f",
                                  "#704600", "#1b87aa", "#478c5b"),
                       breaks = c("South Island", "Wellington / Wairarapa",
@@ -130,6 +118,6 @@ df %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
         legend.position = "none")
 ```
-```{r OverseasVotes, eval = TRUE, echo=FALSE, out.width = '100%'}
+```{r OverseasVotes, eval = FALSE, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/plot_OverseasVotes.png")
 ```
