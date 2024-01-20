@@ -127,7 +127,7 @@ not being split-ticket voting data available for previous years. <br><br></p>
 </h4>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"split_total"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"split_total"</span><span class="op">)</span></span>
 <span><span class="co"># or</span></span>
 <span><span class="co"># df &lt;- scgUtils::get_data("split_electorate")</span></span></code></pre></div>
 <p><br></p>
@@ -177,12 +177,12 @@ the split vote from the candidate vote (left) to the party vote (right).
 Use the <code>colour_prep</code> function from the same package to match
 the party colours to the correct political party.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">plot_sankey</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/plot_sankey.html" class="external-link">plot_sankey</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">df</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">"List_Party"</span>, <span class="co"># left side of sankey</span></span>
 <span>  target <span class="op">=</span> <span class="st">"Electorate_Party"</span>, <span class="co"># right side of sankey</span></span>
 <span>  value <span class="op">=</span> <span class="st">"Vote"</span>,</span>
-<span>  colours <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">colour_prep</span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"List_Party"</span>,<span class="st">"Electorate_Party"</span><span class="op">)</span>, pal_name <span class="op">=</span> <span class="st">"polNZ"</span><span class="op">)</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_prep.html" class="external-link">colour_prep</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"List_Party"</span>,<span class="st">"Electorate_Party"</span><span class="op">)</span>, pal_name <span class="op">=</span> <span class="st">"polNZ"</span><span class="op">)</span>,</span>
 <span>  width <span class="op">=</span> <span class="fl">900</span>, <span class="co"># reduce width from default of 1200</span></span>
 <span>  height <span class="op">=</span> <span class="fl">700</span>, <span class="co"># reduce height from default of 800</span></span>
 <span>  shiftLabel <span class="op">=</span> <span class="fl">8</span> <span class="co"># manually shift labels to outside of plot if odd number of parties on each side</span></span>

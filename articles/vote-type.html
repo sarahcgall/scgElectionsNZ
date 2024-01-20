@@ -111,34 +111,39 @@
     margin-bottom: 40px;
   }
 </style>
-<p><br> This article explores the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>
-dataset. <br></p>
+<p><br> This article provides an in-depth exploration of the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>
+dataset, a key component of the <a href="https://sarahcgall.github.io/scgElectionsNZ/"><code>scgElectionsNZ</code></a>
+package, which delves into the intricacies of voting patterns in New
+Zealand’s elections. <br></p>
 <div class="section level3">
 <h3 id="vote-type">Vote Type<a class="anchor" aria-label="anchor" href="#vote-type"></a>
 </h3>
-<p>The <code>vote_type</code> dataset contains the validity of the vote
-(Disallowed, Informal, and Valid) and the vote type (Ordinary, Special -
-NZ, and Special - Overseas) by electorate and ballot type (Candidate and
-Party). <br><br></p>
+<p>The <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>
+dataset captures the complexities of the New Zealand electoral process
+by categorising votes based on their validity (Disallowed, Informal,
+Valid) and method (Ordinary, Special - NZ, Special - Overseas), across
+electorates and ballot types (Candidate and Party). <br><br></p>
 <div class="section level4">
-<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+<h4 id="loading-and-exploring-the-data">Loading and Exploring the Data<a class="anchor" aria-label="anchor" href="#loading-and-exploring-the-data"></a>
 </h4>
-<p>View the shape of data frame.</p>
+<p>Begin by loading the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>
+dataset and examining its structure:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">get_data</span><span class="op">(</span><span class="st">"vote_type"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"vote_type"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 6</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
 <span><span class="co">#&gt;   Election Ballot    Electorate       Validity   Method             Votes</span></span>
-<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;      &lt;chr&gt;              &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     2023 Candidate Auckland Central Disallowed Ordinary               0</span></span>
-<span><span class="co">#&gt; 2     2023 Candidate Auckland Central Disallowed Special              988</span></span>
-<span><span class="co">#&gt; 3     2023 Candidate Auckland Central Informal   Ordinary             160</span></span>
-<span><span class="co">#&gt; 4     2023 Candidate Auckland Central Informal   Special - NZ         129</span></span>
-<span><span class="co">#&gt; 5     2023 Candidate Auckland Central Informal   Special - Overseas    14</span></span>
-<span><span class="co">#&gt; 6     2023 Candidate Auckland Central Valid      Ordinary           23227</span></span></code></pre></div>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Ordinary               0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Special              988</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Ordinary             160</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - NZ         129</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - Overseas    14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Valid      Ordinary           <span style="text-decoration: underline;">23</span>227</span></span></code></pre></div>
 <p><br></p>
-<p><strong>Disallowed votes (%)</strong><br> View percent of disallowed
-votes by electorate and ballot type.</p>
+<p><strong>Analysing Disallowed Votes</strong><br> Gain insights into
+the percentage of disallowed votes by electorate and ballot type for the
+2023 election:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -146,7 +151,7 @@ votes by electorate and ballot type.</p>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Validity</span> <span class="op">==</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -165,17 +170,18 @@ votes by electorate and ballot type.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Candidate Ikaroa-Rawhiti  Disallowed  <span style="text-decoration: underline;">1</span>244       4.61</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Candidate Te Tai Tonga    Disallowed  <span style="text-decoration: underline;">1</span>191       4.18</span></span></code></pre></div>
 <p><br></p>
-<p><strong>Overseas votes (%)</strong><br> View percentage of voters
-overseas by electorate.</p>
+<p><strong>Understanding Overseas Voting</strong><br> Examine the
+proportion of overseas votes by electorate, focusing on the valid and
+informal votes:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>        <span class="co"># including only valid and informal votes</span></span>
+<span>  <span class="co"># including only valid and informal votes</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Method</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special - Overseas"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -196,9 +202,11 @@ overseas by electorate.</p>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="add-region">Add region<a class="anchor" aria-label="anchor" href="#add-region"></a>
+<h4 id="augmenting-data-with-regional-information">Augmenting Data with Regional Information<a class="anchor" aria-label="anchor" href="#augmenting-data-with-regional-information"></a>
 </h4>
-<p>Add a column to facet by region.</p>
+<p>Enhance the dataset by adding regional data for more a detailed
+analysis using the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html"><code>add_data</code></a>
+function:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"region"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
@@ -212,30 +220,29 @@ overseas by electorate.</p>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+<h4 id="visualising-overseas-votes">Visualising Overseas Votes<a class="anchor" aria-label="anchor" href="#visualising-overseas-votes"></a>
 </h4>
-<p>Filter by Party vote and exclude disallowed votes from the
-denominator. Visualise the proportion of votes cast overseas by region
-at each election.</p>
+<p>Create a visualisation to illustrate the proportion of overseas
+special Party Votes by region over time:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>   <span class="co"># including only valid and informal votes</span></span>
+<span>  <span class="co"># including only valid and informal votes</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Region</span>, <span class="va">Method</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Region</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special - Overseas"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y<span class="op">=</span><span class="va">Percentage</span>, group<span class="op">=</span><span class="va">Region</span>, colour<span class="op">=</span><span class="va">Region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Percentage</span>, group <span class="op">=</span> <span class="va">Region</span>, colour <span class="op">=</span> <span class="va">Region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu">gghighlight</span><span class="op">(</span>use_direct_label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Region</span>, <span class="op">-</span><span class="va">Percentage</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span>use_direct_label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Region</span>, <span class="op">-</span><span class="va">Percentage</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_colour_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#374e8e"</span>, <span class="st">"#e3b13e"</span>, <span class="st">"#df7c18"</span>, <span class="st">"#ac004f"</span>,</span>
 <span>                                 <span class="st">"#704600"</span>, <span class="st">"#1b87aa"</span>, <span class="st">"#478c5b"</span><span class="op">)</span>,</span>
 <span>                      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"South Island"</span>, <span class="st">"Wellington / Wairarapa"</span>,</span>
@@ -245,10 +252,10 @@ at each election.</p>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Proportion of Overseas Special Party Votes\nby Region over Time (1996 - 2023)"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Percentage (%)\n"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Election"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu">theme_scg</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>        legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="img/plot_OverseasVotes.png" width="100%"></p>
+<p><img src="vote-type_files/figure-html/vote-type4-1.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
