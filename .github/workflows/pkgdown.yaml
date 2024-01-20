@@ -39,6 +39,7 @@ jobs:
         run: |
           install.packages("devtools")
           install.packages("gghighlight")
+          install.packages("ggpmisc")
         shell: Rscript {0}
 
       - name: Install GitHub Packages

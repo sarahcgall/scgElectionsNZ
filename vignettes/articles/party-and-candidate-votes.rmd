@@ -20,44 +20,47 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article explores the [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) and [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) datasets.
+This article offers a detailed analysis of the [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) and [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) datasets in the `scgElectionsNZ` package, shedding light on the voting dynamics in New Zealand's elections.
+<br>
 <br>
 
+#### Overview
+The [`party_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/party_votes.html) and [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) datasets provide comprehensive insights into party preferences and candidate popularity across electorates. These datasets are pivotal for understanding how New Zealand's Mixed-Member Proportional (MMP) system translates individual and party preferences into electoral outcomes.
 ```{r setup, include = FALSE}
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
+suppressPackageStartupMessages(library(ggpmisc))
 ```
-### Party and Candidate Votes
-The `party_votes` and `candidate_votes` datasets contain party and candidate votes, respectively, by electorate and party. Currently, the `party_votes` has all parties listed, including the informal vote, while the `candidate_votes` have only the successful parties listed with the remaining parties listed as "Other". The informal vote is also not included.
-
-Future updates to the `candidate_votes` dataset will replicate the `party_votes` dataset so that the "Other" category is broken down into all parties and the informal vote is included.
-<br>
 <br>
 
-#### Upload data
-View the shape of data frame.
+#### Loading and Exploring the Data
+Initial exploration of these datasets helps us understand their structure and the information they contain:
 
 ***Party Votes***
 ```{r party-votes}
-df <- scgUtils::get_data("party_votes")
-head(df)
+party_df <- scgUtils::get_data("party_votes")
+head(party_df, 10)
 ```
 
 ***Candidate Votes***
 ```{r candidate-votes}
-df1 <- scgUtils::get_data("candidate_votes")
-head(df1)
+candidate_df <- scgUtils::get_data("candidate_votes")
+head(candidate_df, 10)
 ```
+As you can see, the [`candidate_votes`](https://sarahcgall.github.io/scgElectionsNZ/reference/candidate_votes.html) dataset places all unsuccessful parties into "Other" and does not include Informal votes.
+<br>
 <br>
 
-#### Merging datasets
-Merge the two candidate and party vote datasets together in a long form data frame.
+#### Merging Party and Candidate Vote Data
+Combine both datasets for a unified analysis, focusing on votes across different electorates:
 ```{r party-candidate-votes}
-df <- df %>%
-  mutate(Party = ifelse(Party %in% c("Labour Party", "National Party", "Green Party",
-                                     "ACT Party", "NZ First", "Maori Party"), Party,
-                        "Other")) %>%
+# Make party_df in line with candidate_df by making unsuccessful parties "Other"
+# and filtering out Informal data
+party_df <- update_names(party_df)
+
+party_df <- party_df %>%
+  filter(Party != "Informal") %>%
   group_by(Election, Electorate, Ballot, Party) %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
@@ -65,30 +68,37 @@ df <- df %>%
   mutate(Percentage = Votes / sum(Votes) * 100) %>%
   ungroup()
 
-df2 <- rbind(df, df1)
+df <- rbind(party_df, candidate_df)
 
-head(df2)
+head(df)
 ```
 <br>
 
-#### Plot
-Visualise the 2023 candidate vote by party vote in a scatter plot faceted by party.
-```{r party-candidate-votes1, eval = FALSE}
-df2 <- df2 %>%
+#### Reshaping the Data
+Reshape the data to help us understand how party and candidate preferences align or diverge:
+```{r analyse_votes}
+df <- df %>%
   filter(Election == 2023) %>%
   mutate(Ballot = ifelse(Ballot == "Party", "Party Vote", "Candidate Vote")) %>%
   select(Election, Ballot, Electorate, Party, Percentage) %>%
   tidyr::pivot_wider(names_from = Ballot, values_from = Percentage)
 
-df2[is.na(df2)] <- 0
+df[is.na(df)] <- 0
 
-df2 %>%
+head(df, 10)
+```
+<br>
+
+#### Visualising Party and Candidate Votes
+The following visualisation compares party and candidate votes. The scatter plot and linear regression help in understanding the correlation between these two types of votes, which can indicate the degree of [split voting](https://sarahcgall.github.io/scgElectionsNZ/articles/split-voting.html) by electorate:
+```{r party-candidate-votes1}
+df %>%
   filter(Party != "Other") %>%
   ggplot(aes(x = `Candidate Vote`, y = `Party Vote`, colour = Party)) +
   geom_smooth(method = "lm", se = TRUE, formula = y ~ x,
               colour = scgUtils::colour_pal("French Grey"),
-              size = 0.5, fill = "#F4F4F5", alpha = 0.5) +
-  geom_point() +
+              linewidth = 0.5, fill = "#F4F4F5", alpha = 0.5) +
+  geom_point(na.rm = TRUE) +
   ggpmisc::stat_poly_eq(colour = scgUtils::colour_pal("Regent Grey")) +
   facet_wrap(. ~ Party) +
   scale_colour_manual(values = scgUtils::colour_pal("polNZ")) +
@@ -99,6 +109,6 @@ df2 %>%
   scgUtils::theme_scg() +
   theme(legend.position = "none")
 ```
-```{r CandidateByParty, echo=FALSE, out.width = '100%'}
+```{r CandidateByParty, echo=FALSE, out.width = '100%', eval = FALSE}
 knitr::include_graphics("img/plot_CandidateByParty.png")
 ```
