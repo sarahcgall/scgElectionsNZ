@@ -27,6 +27,7 @@ This article explores the [`majority`](https://sarahcgall.github.io/scgElections
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
+library(scgUtils)
 ```
 ### Majority
 The `majority` dataset contains the winning candidate and the margin of victory by electorate. The majority is calculated by subtracting the number of votes of the winning candidate form the number of votes of the second candidate. The margin of victory divides this number by the total votes cast to create a percentage figure.
