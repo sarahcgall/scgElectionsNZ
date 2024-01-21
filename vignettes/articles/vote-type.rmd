@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 <br>
-This article provides an in-depth exploration of the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset, a key component of the [`scgElectionsNZ`](https://sarahcgall.github.io/scgElectionsNZ/) package, which delves into the intricacies of voting patterns in New Zealand's elections.
+This article provides an in-depth exploration of the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset, a key component of the `scgElectionsNZ` package, which delves into the intricacies of voting patterns in New Zealand's elections.
 <br>
 
 ```{r setup, include = FALSE}
@@ -29,95 +29,241 @@ library(dplyr)
 library(ggplot2)
 ```
 ### Vote Type
-The [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset captures the complexities of the New Zealand electoral process by categorising votes based on their validity (Disallowed, Informal, Valid) and method (Ordinary, Special - NZ, Special - Overseas), across electorates and ballot types (Candidate and Party).
+The [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset captures the complexities of the New Zealand electoral process by categorising votes based on their validity (Disallowed, Informal, Valid) and method (Ordinary, Special - NZ, Special - Overseas), across electorates, ballot types (Candidate and Party), and elections.
 <br>
 <br>
 
-#### Loading and Exploring the Data
+#### Loading the Data
 Begin by loading the [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset and examining its structure:
-```{r vote-type}
-df <- scgUtils::get_data("vote_type")
-head(df)
+```{r vote-type, eval = FALSE}
+vote_df <- scgUtils::get_data("vote_type")
+head(vote_df)
 ```
-<br>
-
-**Analysing Disallowed Votes**<br>
-Gain insights into the percentage of disallowed votes by electorate and ballot type for the 2023 election:
-```{r vote-type1}
-df %>%
-  filter(Election == 2023) %>%
-  group_by(Ballot, Electorate, Validity) %>%
-  summarise(Votes = sum(Votes), .groups = 'drop') %>%
-  ungroup() %>%
-  group_by(Ballot, Electorate) %>%
-  mutate(Percentage = Votes / sum(Votes) * 100) %>%
-  ungroup() %>%
-  filter(Validity == "Disallowed") %>%
-  arrange(-Percentage) %>%
-  head(n = 10)
-```
-<br>
-
-**Understanding Overseas Voting**<br>
-Examine the proportion of overseas votes by electorate, focusing on the valid and informal votes:
-```{r vote-type2}
-df %>%
-  # including only valid and informal votes
-  filter(Election == 2023, Validity != "Disallowed") %>%
-  group_by(Ballot, Electorate, Method) %>%
-  summarise(Votes = sum(Votes), .groups = 'drop') %>%
-  ungroup() %>%
-  group_by(Ballot, Electorate) %>%
-  mutate(Percentage = Votes / sum(Votes) * 100) %>%
-  ungroup() %>%
-  filter(Method == "Special - Overseas") %>%
-  arrange(-Percentage) %>%
-  head(n = 10)
+```{r vote-type_table, echo = FALSE}
+vote_df <- scgUtils::get_data("vote_type")
+knitr::kable(head(vote_df))
 ```
 <br>
 
 #### Augmenting Data with Regional Information
 Enhance the dataset by adding regional data for more a detailed analysis using the [`add_data()`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html) function:
-```{r vote-type3}
-df <- add_data(df, output = "region")
+```{r vote-type3, eval = FALSE}
+# Add Regions column
+df <- add_data(vote_df, output = "region")
+
+# View Data
 head(df)
+```
+```{r vote-type3_table, echo = FALSE}
+df <- add_data(vote_df, output = "region")
+knitr::kable(head(df))
 ```
 <br>
 
-#### Visualising Overseas Votes
-Create a visualisation to illustrate the proportion of overseas special Party Votes by region over time:
-```{r vote-type4, dpi=300, out.width = '100%', fig.height = 7}
+#### Visualising Special Votes by Region
+Create a visualisation to illustrate the proportion of Party Special Declaration Votes by Region over time.
+
+***Prepare Data***
+```{r vote-type4, eval = FALSE}
+# Prepare data
 df <- df %>%
-  # including only valid and informal votes
-  filter(Ballot == "Party", Validity != "Disallowed") %>%
+  filter(Ballot == "Party") %>% # Include Party Votes only
+  mutate(Method = ifelse(Method == "Ordinary", Method, "Special")) %>%
+  # Get grouped Votes
+  group_by(Election, Region, Method) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  # Get grouped Percentage
+  group_by(Election, Region) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  filter(Method == "Special") %>% # Get Special Votes only
+  arrange(-Percentage)
+
+# View data
+head(df)
+```
+```{r vote-type4_table, echo = FALSE}
+df <- df %>%
+  filter(Ballot == "Party") %>%
+  mutate(Method = ifelse(Method == "Ordinary", Method, "Special")) %>%
   group_by(Election, Region, Method) %>%
   summarise(Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Election, Region) %>%
-  mutate(Percentage = Votes / sum(Votes) * 100) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
   ungroup() %>%
-  filter(Method == "Special - Overseas") %>%
+  filter(Method == "Special") %>%
   arrange(-Percentage)
 
+knitr::kable(head(df))
+```
+***Create Plot***
+
+Use the [`gghighlight()`](https://yutannihilation.github.io/gghighlight/reference/gghighlight.html) function from the `gghighlight` package to highlight single regions in facets and the [`theme_scg()`](https://sarahcgall.github.io/scgUtils/reference/theme_scg.html) function from the `scgUtils` package can be used to customise the plot's appearance:
+```{r vote-type_graph, dpi=300, out.width = '100%', fig.height = 7}
 df %>%
-  ggplot(aes(x = as.character(Election), y = Percentage, group = Region, colour = Region)) +
-  geom_line() +
-  geom_point() +
-  gghighlight::gghighlight(use_direct_label = F) +
+  ggplot(aes(x = as.character(Election), y = Percentage,
+             group = Region, colour = Region)) +
+  geom_line() + # Add lines
+  geom_point() + # Add points
+  gghighlight::gghighlight(use_direct_label = F) + # Highlight by faceted Regions
   facet_wrap(. ~ reorder(Region, -Percentage)) +
-  scale_colour_manual(values = c("#374e8e", "#e3b13e", "#df7c18", "#ac004f",
+  scale_colour_manual(values = c("#374e8e", "#e3b13e", "#df7c18", "#ac004f", # add colours by Region
                                  "#704600", "#1b87aa", "#478c5b"),
                       breaks = c("South Island", "Wellington / Wairarapa",
                                  "Taranaki / Whanganui / Manawatu",
                                  "Bay of Plenty / Hawke's Bay / Gisborne",
                                  "Waikato", "Auckland", "Northland")) +
-  labs(title = "Proportion of Overseas Special Party Votes\nby Region over Time (1996 - 2023)",
+  labs(title = "Proportion of Special Party Votes\nby Region over Time (1996 - 2023)",
        y = "Percentage (%)\n",
        x = "Election") +
   scgUtils::theme_scg() +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
         legend.position = "none")
 ```
-```{r OverseasVotes, eval = FALSE, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/plot_OverseasVotes.png")
+
+As is evident, there are higher proportions of special votes in 1996 and 1999. This is particularly the case for Northland and Taranaki / Whanganui / Manawatu where the number of Maori to General seats is higher. In addition, the urban region of Auckland has a significantly higher proportion of special votes compared with other regions.
+<br>
+<br>
+
+#### Exploring the Data
+To understand the differences in special votes, break down the special votes by method and validity.
+
+**Overseas Voting**<br>
+To do this, first examine the proportion of overseas votes by electorate, focusing on the valid and informal votes:
+```{r vote-type2, eval = FALSE}
+vote_df %>%
+  filter(Election == 2023, Validity != "Disallowed") %>% # Only valid and informal votes
+  # Get grouped Votes
+  group_by(Ballot, Electorate, Method) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  # Get grouped Percentage
+  group_by(Ballot, Electorate) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  # View only Special - Overseas results
+  filter(Method == "Special - Overseas") %>%
+  arrange(-Percentage) %>% # rank by percentage
+  head(n = 10)
 ```
+```{r vote-type2_table, echo = FALSE}
+overseas <- vote_df %>%
+  add_data(output = "region") %>%
+  filter(Election == 2023, Validity != "Disallowed") %>%
+  group_by(Ballot, Electorate, Region, Method) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Ballot, Electorate) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  filter(Method == "Special - Overseas") %>%
+  arrange(-Percentage) %>%
+  head(n = 10)
+knitr::kable(overseas)
+```
+The table above shows that the urban electorates within Auckland had the greatest number of overseas voters, likely pushing up the special vote count for the region
+<br>
+<br>
+
+**Disallowed Votes**<br>
+Next, gain insights into the percentage of disallowed votes by electorate and ballot type for the 2023 election:
+```{r vote-type1, eval = FALSE}
+vote_df %>%
+  add_data(output = "type") %>%
+  filter(Election == 2023) %>% # Get 2023 Election data only
+  # Get grouped Votes
+  group_by(Ballot, Electorate, Electorate_Type, Validity) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  # Get grouped Percentage
+  group_by(Ballot, Electorate) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  # View only Disallowed results
+  filter(Validity == "Disallowed") %>%
+  arrange(-Percentage) %>% # rank by percentage
+  head(n = 10)
+```
+```{r vote-type1_table, echo = FALSE}
+disallowed <- vote_df %>%
+  add_data(output = "type") %>%
+  filter(Election == 2023) %>%
+  group_by(Ballot, Electorate, Electorate_Type, Validity) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Ballot, Electorate) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  filter(Validity == "Disallowed") %>%
+  arrange(-Percentage) %>%
+  head(n = 10)
+
+knitr::kable(disallowed)
+```
+The table above shows the highest proportion of disallowed votes ranked by electorate. Port Waikato shows 100% of the total vote was disallowed. This was due to the ACT Party candidate dying before polling day and thus the poll cancelled for the Candidate Vote (the Party Vote proceeded).
+
+Of note is that the top ten includes all of the M&#257;ori electorates. This is likely due to the higher proportion of M&#257;ori voters casting special votes. Special votes have an added level of complexity and requirements compared with ordinary votes and thus are more likely to be disallowed.
+<br>
+<br>
+
+#### Visualising Special Votes by Type
+And finally, to understand what is driving the higher proportions in 1996 and 1999, add the electorate type, again using the [`add_data()`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html) function:
+***Prepare Data***<br>
+```{r vote-type6, eval = FALSE}
+# Add Electorate Type column
+df <- add_data(vote_df, output = "type")
+
+# Prepare data
+df <- df %>%
+  filter(Ballot == "Party") %>%
+  mutate(Method = ifelse(Method == "Ordinary", Method, "Special")) %>%
+  group_by(Election, Electorate_Type, Method) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Election, Electorate_Type) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  filter(Method == "Special") %>%
+  arrange(-Percentage)
+
+# View data
+head(df)
+```
+```{r vote-type6_table, echo = FALSE}
+df <- scgUtils::get_data("vote_type")
+df <- add_data(df, output = "type")
+df <- df %>%
+  filter(Ballot == "Party") %>%
+  mutate(Method = ifelse(Method == "Ordinary", Method, "Special")) %>%
+  group_by(Election, Electorate_Type, Method) %>%
+  summarise(Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Election, Electorate_Type) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  filter(Method == "Special") %>%
+  arrange(-Percentage)
+
+knitr::kable(head(df))
+```
+***Create Plot***<br>
+Visualise the proportion of Party Special Declaration Votes by Electorate Type over time.
+```{r vote-type_graph2, dpi=300, out.width = '100%', fig.height = 4}
+df %>%
+  ggplot(aes(x = as.character(Election), y = Percentage,
+             group = Electorate_Type,
+             colour = Electorate_Type)) +
+  geom_line() +
+  geom_point() +
+  scale_colour_manual(values = scgUtils::colour_pal("catSimplified")) +
+  labs(title = "Proportion of Special Party Votes\nby Electorate Type over Time (1996 - 2023)",
+       y = "Percentage (%)\n",
+       x = "Election",
+       colour = "Electorate Type") +
+  scgUtils::theme_scg()
+```
+This graph shows the significantly higher proportions of special votes cast in M&#257;ori electorates compared with General electorates. The cause of this has been noted in a [parliamentary research paper](https://www.parliament.nz/mi/pb/research-papers/document/00PLLawRP03141/origins-of-the-m%C4%81ori-seats) which explained that due to the geographic size of the M&#257;ori electorates and the limited number of M&#257;ori polling booths, these voters are required to travel further to cast an ordinary vote. As such, M&#257;ori voters were more likely to cast a special vote at General electorate polling places.
+
+Between 1993 and 1999, the number of polling places in which M&#257;ori voters could cast their vote was increased from 534 to 1,203. This was seen to aid in the reduction of special votes.

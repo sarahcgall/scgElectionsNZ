@@ -84,4 +84,4 @@ adjustments for better comparative analysis.
 Suggestions and contributions are welcome. For any proposed additions, amendments, or feedback, please [create an issue](https://github.com/sarahcgall/scgElectionsNZ/issues).
 
 ## Related Packages
-Check out [`scgUtils`](https://github.com/sarahcgall/scgUtils) for additional functions and visualisation tools.
+Check out [`scgUtils`](https://sarahcgall.github.io/scgUtils) for additional functions and visualisation tools.

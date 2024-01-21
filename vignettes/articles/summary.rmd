@@ -30,94 +30,120 @@ library(ggplot2)
 ```
 
 ### Summary
-The `summary` dataset contains the overall results at the national-level by Election, Ballot, and Party. It can be used to find the number of seats, votes (n & %), and nominations/on party list by ballot type - Candidate Vote, Party Vote, or Total (Seats column = Candidate + Party; Vote column = Party only). It can also be used to find the number of overhang seats and which party these can be attributed to.
-
-*NB overhang seats occur when the Party Vote entitles that party to fewer seats than the number of electorate seats that it won.*
+The [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset consolidates key electoral information, providing a bird's-eye view of New Zealand's elections. It can be used to find the number of seats, votes (n & %), and nominations/on party list by ballot type - Candidate Vote, Party Vote, or Total (Seats column = Candidate + Party; Vote column = Party only). It can also be used to find the number of overhang seats and which party these can be attributed to.
 <br>
 <br>
 
-#### Upload data
-View the shape of data frame.
-```{r summary}
+#### Loading the Data
+Begin by loading the [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset to understand the structure:
+```{r summary, eval = FALSE}
 # Load datasets by using the following helper function:
 df <- scgUtils::get_data("summary")
 # Alternatively, use: data("summary"), then df <- summary
+
+# View the data
 head(df)
+```
+```{r summary_table, echo = FALSE}
+df <- scgUtils::get_data("summary")
+knitr::kable(head(df))
 ```
 <br>
 
 #### Party and Candidate Votes
-This removes the `Total` ballot type from the dataset, leaving just the Party vote and Candidate vote. The data has been further filtered for the most recent election.
-```{r summary1}
+To view the top performing parties, rank the Party and Candidate Vote by Party for the 2023 election by removing the `Total` ballot type from the dataset:
+```{r summary1, eval = FALSE}
 df %>%
   filter(Ballot != "Total", Election == 2023) %>%
   arrange(-Percentage) %>%
   head(n = 10)
 ```
-<br>
-
-#### Overhang Seats
-Filtering to include only the `Total` ballot type and whether the party was successful (i.e., achieved the eligibility requirements), means that you are able to determine where the overhang seats can be attributed to. The data has been further filtered for the most recent election.
-```{r summary2}
-df %>%
-  filter(Successful == "Yes", Ballot == "Total", Election == 2023) %>%
-  group_by(Election) %>%
-  mutate(`%` = Votes/sum(Votes)*100) %>%
-  ungroup() %>%
-  mutate(Overhang = Seats-round(120*`%`/100,0))
+```{r summary1_table, echo = FALSE}
+p_c <- df %>%
+  filter(Ballot != "Total", Election == 2023) %>%
+  arrange(-Percentage) %>%
+  head(n = 10)
+knitr::kable(p_c)
 ```
 <br>
 
-#### Plot
-Visualise the number of seats won by party at each election using a stacked bar chart.
-```{r summary3, eval = FALSE}
+#### Overhang Seats
+As a reminder, overhang seats occur when the Party Vote entitles that party to fewer seats than the number of electorate seats that it won. To view any overhang seats, remove the `Candidate` and `Party` ballot types and unsuccessful parties from the dataset. Then, calculate the overhang seats by multiplying the 120 total parliamentary seats by the proportion of the party vote for successful parties:
+```{r summary2, eval = FALSE}
+df %>%
+  filter(Successful == "Yes", Ballot == "Total", Election == 2023) %>%
+  group_by(Election) %>%
+  mutate(`Successful_%` = Votes / sum(Votes) * 100) %>%
+  ungroup() %>%
+  mutate(Overhang = Seats - round(120 * `Successful_%` / 100, 0)) %>%
+  arrange(-Overhang)
+```
+```{r summary2_table, echo = FALSE}
+overhang <- df %>%
+  filter(Successful == "Yes", Ballot == "Total", Election == 2023) %>%
+  group_by(Election) %>%
+  mutate(`Successful_%` = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  mutate(Overhang = Seats - round(120 * `Successful_%` / 100, 0)) %>%
+  arrange(-Overhang)
+
+knitr::kable(overhang)
+```
+<br>
+
+***Create Plot***<br>
+To view overhang seats over time, visualise the number of seats won by party at each election:
+```{r summary3, out.width = '100%', dpi = 300, fig.height = 7}
 df %>%
   # remove parties which did not win a seat
   filter(Successful == "Yes", Ballot == "Total") %>%
   ggplot(aes(x = Election, y = Seats,
-             fill = factor(Party, levels = c("National Party","ACT Party","NZ First",
-                                             "United Future","Jim Anderton's Progressive",
-                                             "MANA","Maori Party","Alliance","Green Party",
+             fill = factor(Party, levels = c("National Party", "ACT Party", "NZ First",
+                                             "United Future", "Jim Anderton's Progressive",
+                                             "MANA", "Maori Party", "Alliance", "Green Party",
                                              "Labour Party")))) +
-  geom_bar(stat="identity", colour="white", linewidth=0.15, alpha=0.8) +
+  geom_bar(stat = "identity", colour = "white", linewidth = 0.15, alpha = 0.8) +
   # indicate majority required for a 120 seat parliament
-  geom_hline(yintercept = 60, colour = "white", linewidth=0.5) +
+  geom_hline(yintercept = 60, colour = "white", linewidth = 0.5) +
   # indicate overhang seats
   geom_hline(yintercept = 120, colour = scgUtils::colour_pal("French Grey")) +
-  annotate("text", x=2025, y =120, label = "Overhang",
+  annotate("text", x = 2025, y = 120, label = "Overhang",
            colour = scgUtils::colour_pal("Regent Grey"),
-           size=3.5, fontface=2) +
-  coord_flip(clip = "off", xlim = c(1994.5,2024.5)) +
+           size = 3.5, fontface = 2) +
+  coord_flip(clip = "off", xlim = c(1994.5, 2024.5)) +
   labs(title = "No. of Seats by Election and Party (1996 - 2023)",
        fill = "Party") +
   scale_fill_manual(values = scgUtils::colour_pal("polNZ")) +
-  scale_y_continuous(expand = c(0,0)) +
-  scale_x_continuous(expand = c(0,0), "Election",
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0), "Election",
                      labels = as.character(df$Election), breaks = df$Election) +
   scgUtils::theme_scg() +
   theme(panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank())
 ```
-```{r SeatsByElection, eval = TRUE, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/plot_SeatsByElection.png")
-```
+<br>
+<br>
 
 ### preMMP Results
-This dataset can be combined with the `preMMP_results` dataset which contains the overall results between 1890 and 1993 by party at the national-level.
+The [`summary`](https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html) dataset can be combined with the [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) dataset. The [`preMMP_results`](https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html) dataset contains the overall results between 1890 and 1993 by party at the national-level.
 <br>
 <br>
 
-#### Upload data
+#### Loading the Data
 View the shape of data frame.
-```{r preMMP}
+```{r preMMP, eval = FALSE}
 df1 <- scgUtils::get_data("preMMP_results")
 head(df1)
+```
+```{r preMMP_table, echo = FALSE}
+df1 <- scgUtils::get_data("preMMP_results")
+knitr::kable(head(df1))
 ```
 <br>
 
 #### Merge datasets
-To match the `preMMP_results` dataset, the `summary` dataset is filtered by the ballot variable to include `Total` only.
-```{r preMMP1}
+To match the `preMMP_results` dataset, remove the `summary` dataset `Party` and `Candidate` ballot types.
+```{r preMMP1, eval = FALSE}
 df <- df %>%
   filter(Ballot == "Total") %>%
   mutate(Party = ifelse(Successful == "Yes", Party, "Other")) %>%
@@ -125,35 +151,55 @@ df <- df %>%
   summarise(Seats = sum(Seats), Votes = sum(Votes), .groups = 'drop') %>%
   ungroup() %>%
   group_by(Election) %>%
-  mutate(Percentage = Votes/sum(Votes)*100) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
   ungroup() %>%
-  select(Election, Party, Seats, Percentage)
+  select(Election, Party, Seats, Percentage) %>%
+  arrange(-Election)
+
+# Merge
 df2 <- rbind(df, df1)
 
 # view dataset
 head(df2)
 ```
+```{r preMMP1_table, echo = FALSE}
+df <- df %>%
+  filter(Ballot == "Total") %>%
+  mutate(Party = ifelse(Successful == "Yes", Party, "Other")) %>%
+  group_by(Election, Party) %>%
+  summarise(Seats = sum(Seats), Votes = sum(Votes), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(Election) %>%
+  mutate(Percentage = round(Votes / sum(Votes) * 100, 2)) %>%
+  ungroup() %>%
+  select(Election, Party, Seats, Percentage) %>%
+  arrange(-Election)
+df2 <- rbind(df, df1)
+
+# view dataset
+knitr::kable(head(df2))
+```
 <br>
 
-#### Plot
-Visualise the number of party vote at each election using a stacked bar chart.
-```{r preMMP2, eval = FALSE}
+#### Visualise the Historic Party Vote
+Visualise the party/popular vote at each election:
+```{r preMMP2, out.width = '100%', dpi = 300, fig.height = 8}
 df2 <- df2 %>%
   # filter 1935 until current time (since the beginning of the National and Labour parties)
   filter(Election >= 1935) %>%
   mutate(Party = ifelse(Party %in% c("National Party", "Labour Party"), Party,
-                 ifelse(Party == "United-Reform ('National')", "National Party",
-                        "Other")),
+                        ifelse(Party == "United-Reform ('National')", "National Party",
+                               "Other")),
          Party = factor(Party, levels = c("National Party", "Other", "Labour Party"))) %>%
   group_by(Election, Party) %>%
-  summarise(Percentage = round(sum(Percentage),2), .groups = 'drop') %>%
+  summarise(Percentage = round(sum(Percentage), 2), .groups = 'drop') %>%
   ungroup()
 
 df2 %>%
   ggplot(aes(x = reorder(Election, -Election), y = Percentage,
              fill = Party)) +
   geom_bar(stat = "identity", alpha = 0.8, width = 1, size = 0) +
-  geom_bar(data = df2%>%filter(Election == 2023), aes(x = 1, y = Percentage, fill = Party),
+  geom_bar(data = df2 %>% filter(Election == 2023), aes(x = 1, y = Percentage, fill = Party),
            stat = "identity", alpha = 1, width = 1) +
   # Add 50% line
   geom_hline(yintercept = 50, colour = "white") +
@@ -166,7 +212,7 @@ df2 %>%
   # Add dashed lines for 2023 result
   geom_hline(yintercept = df2$Percentage[df2$Election == 2023 & df2$Party == "Labour Party"],
              colour = "white", linewidth = 0.5, linetype = "dashed") +
-  geom_hline(yintercept = 100-df2$Percentage[df2$Election == 2023 & df2$Party == "National Party"],
+  geom_hline(yintercept = 100 - df2$Percentage[df2$Election == 2023 & df2$Party == "National Party"],
              colour = "white", linewidth = 0.5, linetype = "dashed") +
   # Add introduction of MMP line
   geom_vline(xintercept = 10.5, colour = scgUtils::colour_pal("Black80"),
@@ -179,13 +225,13 @@ df2 %>%
             hjust = 0, size = 3, colour = "white") +
   annotate("text", x = 0, y = 0, label = "Labour", size = 3.5, fontface = 2,
            colour = "#D82A20", hjust = 0) +
-  geom_text(x = 1, y = df2$Percentage[df2$Election == 2023 & df2$Party == "Labour Party"]+
-    (df2$Percentage[df2$Election == 2023 & df2$Party == "Other"]/2),
+  geom_text(x = 1, y = df2$Percentage[df2$Election == 2023 & df2$Party == "Labour Party"] +
+    (df2$Percentage[df2$Election == 2023 & df2$Party == "Other"] / 2),
             label = paste0(format(df2$Percentage[df2$Election == 2023 & df2$Party == "Other"],
-                                  nsmall=2), "%"),
+                                  nsmall = 2), "%"),
             hjust = 0.5, size = 3, colour = scgUtils::colour_pal("Black80")) +
-  annotate("text", x = 0, y = df2$Percentage[df2$Election == 2023 & df2$Party == "Labour Party"]+
-    (df2$Percentage[df2$Election == 2023 & df2$Party == "Other"]/2),
+  annotate("text", x = 0, y = df2$Percentage[df2$Election == 2023 & df2$Party == "Labour Party"] +
+    (df2$Percentage[df2$Election == 2023 & df2$Party == "Other"] / 2),
            label = "Minor Parties", size = 3.5, fontface = 2,
            colour = scgUtils::colour_pal("Regent Grey"), hjust = 0.5) +
   geom_text(x = 1, y = 99,
@@ -195,13 +241,13 @@ df2 %>%
            label = "National", size = 3.5, fontface = 2,
            colour = "#00529F", hjust = 1) +
   labs(title = "% Party Vote by Election between 1935 and 2023") +
-  scale_y_continuous(expand = c(0,0), position = "right",
+  scale_y_continuous(expand = c(0, 0), position = "right",
                      breaks = seq(0, 100, by = 5)) +
   scale_fill_manual(values = scgUtils::colour_pal("polNZ")) +
-  coord_flip(clip = "off", xlim = c(1,30), ylim = c(0,100.25)) +
+  coord_flip(clip = "off", xlim = c(1, 30), ylim = c(0, 100.25)) +
   scgUtils::theme_scg() +
   theme(legend.position = "none",
-        plot.margin = unit(c(1,3,1,1), "cm"),
+        plot.margin = unit(c(1, 3, 1, 1), "cm"),
         plot.title = element_text(vjust = 5, colour = scgUtils::colour_pal("Black80")),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -212,6 +258,4 @@ df2 %>%
         axis.text.x = element_blank()
   )
 ```
-```{r PartyVoteByElection, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/plot_PartyVoteByElection.png")
-```
+

@@ -147,7 +147,7 @@ New Zealand's electoral system encompasses a range of vote types, categorised by
 
 * *Valid Votes:* Properly cast and meeting all criteria.
 * *Informal Votes:* Where voter intent is unclear, due to improper filling, illegibility, or multiple markings.
-* *Disallowed Votes:* Not counted due to late receipt, unauthenticated special votes, or ineligibility of the voter.
+* *Disallowed Votes:* Not counted due to late receipt, unauthenticated special votes (not witnessed or signed), being given the wrong ballot paper, or ineligibility of the voter.
 
 The [`vote_type`](https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html) dataset offers an in-depth breakdown of these types. For analysis examples, see the [Vote Type article](https://sarahcgall.github.io/scgElectionsNZ/articles/vote-type.html).
 <br>

@@ -43,7 +43,7 @@ df <- scgUtils::get_data("split_total")
 
 #### Prepare Sankey
 Prepare sankey data.
-```{r split-voting1}
+```{r split-voting1, eval = FALSE}
 # Filter 2023 election data only
 df <- df[df$Election == 2023, ]
 
@@ -57,14 +57,29 @@ df <- update_names(df, nameCol = "Electorate_Party")
 df <- df %>%
   # Get sum of votes by flow
   group_by(List_Party, Electorate_Party) %>%
-  summarise(Vote = sum(Votes), .groups = 'drop') %>%
+  summarise(Vote = round(sum(Votes)), .groups = 'drop') %>%
   ungroup() %>%
   # Get percent of party vote going to candidate vote
   group_by(List_Party) %>%
-  mutate(Percent = paste0(round(Vote/sum(Vote)*100,2), "%")) %>%
+  mutate(Percent = round(Vote/sum(Vote)*100,2) %>%
   ungroup()
 
 head(df)
+```
+```{r split-voting1_table, echo = FALSE}
+df <- df[df$Election == 2023, ]
+df <- update_names(df, nameCol = "List_Party")
+df <- update_names(df, nameCol = "Electorate_Party")
+
+df <- df %>%
+  group_by(List_Party, Electorate_Party) %>%
+  summarise(Vote = round(sum(Votes),0), .groups = 'drop') %>%
+  ungroup() %>%
+  group_by(List_Party) %>%
+  mutate(Percent = round(Vote/sum(Vote)*100,2)) %>%
+  ungroup()
+
+knitr::kable(head(df))
 ```
 <br>
 
@@ -85,7 +100,7 @@ scgUtils::plot_sankey(
   # htmlwidgets::saveWidget(file="sankey_2023.html", selfcontained = TRUE)
 ```
 ````{=html}
-<iframe width="100%" height="720"
+<iframe width="100%" height="725"
   src="img/sankey_2023.html"
   frameborder="0"
   allowfullscreen></iframe>

@@ -38,7 +38,7 @@ function, making it easier for users to understand and utilise the package effec
 
 ### Future Plans
 * **Known Data Issues:** Addressing discrepancies in raw split voting files and updating `split_electorate` and `split_total` datasets accordingly.
-* **Data Improvements:** Enhancing the quality of internal datasets that feed into the helper functions.
+* **Data Improvements:** Enhancing the quality of internal datasets that feed into the helper functions and including special characters in the datasets.
 * **Additional Datasets:** Addition of `results_by_booths` for Party and Candidate Votes, including Advanced voting, to align `candidate_votes` with `party_votes`.
 * **By-Election and Referendum Data:** Inclusion of detailed datasets on by-elections and referendums to provide a more comprehensive electoral analysis.
 * **New Functions:** Development of new functions such as `amend_boundary`, `plot_parliament`, and `plot_cartogram` for advanced analysis and visualisation.
