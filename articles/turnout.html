@@ -132,14 +132,83 @@ MPs in parliament for that election, and the total number of electors.
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"turnout"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election Ballot           Electorate Electors Turnout Total Informal</span></span>
-<span><span class="co">#&gt; 1     2023  Party     Auckland Central    45426   78.66 35734       85</span></span>
-<span><span class="co">#&gt; 2     2023  Party      Banks Peninsula    59383   84.10 49944      194</span></span>
-<span><span class="co">#&gt; 3     2023  Party        Bay of Plenty    56200   81.53 45822      209</span></span>
-<span><span class="co">#&gt; 4     2023  Party               Botany    53160   71.65 38087      189</span></span>
-<span><span class="co">#&gt; 5     2023  Party Christchurch Central    50999   78.52 40044      166</span></span>
-<span><span class="co">#&gt; 6     2023  Party    Christchurch East    50898   77.37 39378      203</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="10%">
+<col width="30%">
+<col width="13%">
+<col width="11%">
+<col width="8%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Ballot</th>
+<th align="left">Electorate</th>
+<th align="right">Electors</th>
+<th align="right">Turnout</th>
+<th align="right">Total</th>
+<th align="right">Informal</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Auckland Central</td>
+<td align="right">45426</td>
+<td align="right">78.66</td>
+<td align="right">35734</td>
+<td align="right">85</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Banks Peninsula</td>
+<td align="right">59383</td>
+<td align="right">84.10</td>
+<td align="right">49944</td>
+<td align="right">194</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Bay of Plenty</td>
+<td align="right">56200</td>
+<td align="right">81.53</td>
+<td align="right">45822</td>
+<td align="right">209</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Botany</td>
+<td align="right">53160</td>
+<td align="right">71.65</td>
+<td align="right">38087</td>
+<td align="right">189</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Christchurch Central</td>
+<td align="right">50999</td>
+<td align="right">78.52</td>
+<td align="right">40044</td>
+<td align="right">166</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Christchurch East</td>
+<td align="right">50898</td>
+<td align="right">77.37</td>
+<td align="right">39378</td>
+<td align="right">203</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -155,43 +224,137 @@ difference.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Turnout <span class="op">=</span> <span class="va">Turnout.x</span> <span class="op">-</span> <span class="va">Turnout.y</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election Ballot           Electorate Electors.x Turnout.x Total</span></span>
-<span><span class="co">#&gt; 1     2023  Party     Auckland Central      45426     78.66 35734</span></span>
-<span><span class="co">#&gt; 2     2023  Party      Banks Peninsula      59383     84.10 49944</span></span>
-<span><span class="co">#&gt; 3     2023  Party        Bay of Plenty      56200     81.53 45822</span></span>
-<span><span class="co">#&gt; 4     2023  Party               Botany      53160     71.65 38087</span></span>
-<span><span class="co">#&gt; 5     2023  Party Christchurch Central      50999     78.52 40044</span></span>
-<span><span class="co">#&gt; 6     2023  Party    Christchurch East      50898     77.37 39378</span></span>
-<span><span class="co">#&gt;   Informal MPs Electors.y Turnout.y Turnout</span></span>
-<span><span class="co">#&gt; 1       85 123    3688292      78.2    0.46</span></span>
-<span><span class="co">#&gt; 2      194 123    3688292      78.2    5.90</span></span>
-<span><span class="co">#&gt; 3      209 123    3688292      78.2    3.33</span></span>
-<span><span class="co">#&gt; 4      189 123    3688292      78.2   -6.55</span></span>
-<span><span class="co">#&gt; 5      166 123    3688292      78.2    0.32</span></span>
-<span><span class="co">#&gt; 6      203 123    3688292      78.2   -0.83</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="8%">
+<col width="6%">
+<col width="19%">
+<col width="10%">
+<col width="9%">
+<col width="5%">
+<col width="8%">
+<col width="3%">
+<col width="10%">
+<col width="9%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Ballot</th>
+<th align="left">Electorate</th>
+<th align="right">Electors.x</th>
+<th align="right">Turnout.x</th>
+<th align="right">Total</th>
+<th align="right">Informal</th>
+<th align="right">MPs</th>
+<th align="right">Electors.y</th>
+<th align="right">Turnout.y</th>
+<th align="right">Turnout</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Auckland Central</td>
+<td align="right">45426</td>
+<td align="right">78.66</td>
+<td align="right">35734</td>
+<td align="right">85</td>
+<td align="right">123</td>
+<td align="right">3688292</td>
+<td align="right">78.2</td>
+<td align="right">0.46</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Banks Peninsula</td>
+<td align="right">59383</td>
+<td align="right">84.10</td>
+<td align="right">49944</td>
+<td align="right">194</td>
+<td align="right">123</td>
+<td align="right">3688292</td>
+<td align="right">78.2</td>
+<td align="right">5.90</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Bay of Plenty</td>
+<td align="right">56200</td>
+<td align="right">81.53</td>
+<td align="right">45822</td>
+<td align="right">209</td>
+<td align="right">123</td>
+<td align="right">3688292</td>
+<td align="right">78.2</td>
+<td align="right">3.33</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Botany</td>
+<td align="right">53160</td>
+<td align="right">71.65</td>
+<td align="right">38087</td>
+<td align="right">189</td>
+<td align="right">123</td>
+<td align="right">3688292</td>
+<td align="right">78.2</td>
+<td align="right">-6.55</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Christchurch Central</td>
+<td align="right">50999</td>
+<td align="right">78.52</td>
+<td align="right">40044</td>
+<td align="right">166</td>
+<td align="right">123</td>
+<td align="right">3688292</td>
+<td align="right">78.2</td>
+<td align="right">0.32</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Party</td>
+<td align="left">Christchurch East</td>
+<td align="right">50898</td>
+<td align="right">77.37</td>
+<td align="right">39378</td>
+<td align="right">203</td>
+<td align="right">123</td>
+<td align="right">3688292</td>
+<td align="right">78.2</td>
+<td align="right">-0.83</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+<h4 id="visualise-turnout-by-electorate">Visualise Turnout by Electorate<a class="anchor" aria-label="anchor" href="#visualise-turnout-by-electorate"></a>
 </h4>
 <p>Visualise if the electorate turnout was above or below the average
 turnout for that election year (2023).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df2</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Turnout</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Electorate</span>, <span class="va">Turnout</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Turnout</span> <span class="op">&lt;</span> <span class="fl">0</span>,</span>
-<span>                                                                      <span class="st">"Underperformed"</span>,</span>
-<span>                                                                      <span class="st">"Overperformed"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Turnout</span>,</span>
+<span>             y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Electorate</span>, <span class="va">Turnout</span><span class="op">)</span>,</span>
+<span>             fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Turnout</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="st">"Underperformed"</span>, <span class="st">"Overperformed"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"divBlueGreen"</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">16</span>,<span class="fl">16</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">16</span>, <span class="fl">16</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Comparing the National-Level Turnout\nwith the Electorate-Level"</span>,</span>
 <span>       fill <span class="op">=</span> <span class="st">""</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">""</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"% Difference in Turnout\n(Electorate - National)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme</span><span class="op">(</span>panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour<span class="op">=</span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="img/plot_TurnoutByElectorate.png" width="100%"><br></p>
+<span>  <span class="fu">theme</span><span class="op">(</span>panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="turnout_files/figure-html/turnout2-1.png" width="100%"><br></p>
 </div>
 </div>
 <div class="section level3">
@@ -202,49 +365,88 @@ turnout for that election year (2023).</p>
 </h4>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election MPs Electors Turnout</span></span>
-<span><span class="co">#&gt; 1     1879  88    82271    66.5</span></span>
-<span><span class="co">#&gt; 2     1881  95   120972    66.5</span></span>
-<span><span class="co">#&gt; 3     1884  95   137686    60.6</span></span>
-<span><span class="co">#&gt; 4     1887  95   175410    67.1</span></span>
-<span><span class="co">#&gt; 5     1890  74   183171    80.4</span></span>
-<span><span class="co">#&gt; 6     1893  74   302997    75.3</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="right">MPs</th>
+<th align="right">Electors</th>
+<th align="right">Turnout</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1879</td>
+<td align="right">88</td>
+<td align="right">82271</td>
+<td align="right">66.5</td>
+</tr>
+<tr class="even">
+<td align="right">1881</td>
+<td align="right">95</td>
+<td align="right">120972</td>
+<td align="right">66.5</td>
+</tr>
+<tr class="odd">
+<td align="right">1884</td>
+<td align="right">95</td>
+<td align="right">137686</td>
+<td align="right">60.6</td>
+</tr>
+<tr class="even">
+<td align="right">1887</td>
+<td align="right">95</td>
+<td align="right">175410</td>
+<td align="right">67.1</td>
+</tr>
+<tr class="odd">
+<td align="right">1890</td>
+<td align="right">74</td>
+<td align="right">183171</td>
+<td align="right">80.4</td>
+</tr>
+<tr class="even">
+<td align="right">1893</td>
+<td align="right">74</td>
+<td align="right">302997</td>
+<td align="right">75.3</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
+<h4 id="visualise-turnout-over-time">Visualise Turnout over Time<a class="anchor" aria-label="anchor" href="#visualise-turnout-over-time"></a>
 </h4>
 <p>Visualise turnout over time to see how 2023 compares.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Turnout</span>, label <span class="op">=</span> <span class="va">Turnout</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_bar</span><span class="op">(</span>data<span class="op">=</span><span class="va">df1</span>,</span>
+<span>  <span class="fu">geom_bar</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>           <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
 <span>           stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>           fill <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span>,</span>
-<span>           alpha<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>           fill <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Waterloo"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">df1</span><span class="op">$</span><span class="va">Turnout</span><span class="op">[</span><span class="va">df1</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">]</span>,</span>
 <span>             colour <span class="op">=</span> <span class="st">"white"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_text</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, nudge_y <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">3.5</span>, fontface<span class="op">=</span><span class="fl">2</span>,</span>
+<span>  <span class="fu">geom_text</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, nudge_y <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">3.5</span>, fontface <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>            colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Waterloo"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">coord_flip</span><span class="op">(</span>clip <span class="op">=</span> <span class="st">"off"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">Election</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">Election</span><span class="op">)</span><span class="op">+</span><span class="fl">1.5</span>,</span>
+<span>  <span class="fu">coord_flip</span><span class="op">(</span>clip <span class="op">=</span> <span class="st">"off"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">Election</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">Election</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1.5</span>,</span>
 <span>           y <span class="op">=</span> <span class="va">df1</span><span class="op">$</span><span class="va">Turnout</span><span class="op">[</span><span class="va">df1</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">]</span>,</span>
 <span>           label <span class="op">=</span> <span class="st">"2023"</span>,</span>
 <span>           colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Regent Grey"</span><span class="op">)</span>,</span>
-<span>           size<span class="op">=</span><span class="fl">3.5</span>, fontface<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           size <span class="op">=</span> <span class="fl">3.5</span>, fontface <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Turnout Over Time (1879 - 2023)"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Turnout (%)"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Election"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>panel.grid.major.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour<span class="op">=</span><span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="img/plot_TurnoutHistoric.png" width="100%"></p>
+<span>        panel.border <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="turnout_files/figure-html/turnout-over-time1-1.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -128,21 +128,83 @@ number by the total votes cast to create a percentage figure. <br><br></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load dataset</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"majority"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
-<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
-<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
-<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
-<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
-<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
-<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
-<span><span class="co">#&gt;   Votes Percentage Party_List</span></span>
-<span><span class="co">#&gt; 1  3896      11.31        Yes</span></span>
-<span><span class="co">#&gt; 2   396       0.81        Yes</span></span>
-<span><span class="co">#&gt; 3 15405      34.57        Yes</span></span>
-<span><span class="co">#&gt; 4 16323      44.69        Yes</span></span>
-<span><span class="co">#&gt; 5  1841       4.75        Yes</span></span>
-<span><span class="co">#&gt; 6  2397       6.25        Yes</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="21%">
+<col width="15%">
+<col width="27%">
+<col width="6%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Electorate</th>
+<th align="left">Party</th>
+<th align="left">Candidate</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+<th align="left">Party_List</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Auckland Central</td>
+<td align="left">Green Party</td>
+<td align="left">SWARBRICK, Chloe Charlotte</td>
+<td align="right">3896</td>
+<td align="right">11.31</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Banks Peninsula</td>
+<td align="left">National Party</td>
+<td align="left">WEENINK, Vanessa</td>
+<td align="right">396</td>
+<td align="right">0.81</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Bay of Plenty</td>
+<td align="left">National Party</td>
+<td align="left">RUTHERFORD, Tom</td>
+<td align="right">15405</td>
+<td align="right">34.57</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Botany</td>
+<td align="left">National Party</td>
+<td align="left">LUXON, Christopher</td>
+<td align="right">16323</td>
+<td align="right">44.69</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Christchurch Central</td>
+<td align="left">Labour Party</td>
+<td align="left">WEBB, Duncan</td>
+<td align="right">1841</td>
+<td align="right">4.75</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Christchurch East</td>
+<td align="left">Labour Party</td>
+<td align="left">DAVIDSON, Reuben John</td>
+<td align="right">2397</td>
+<td align="right">6.25</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -153,21 +215,83 @@ through name changes.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert pre-2020 electorate names to match name changes that occurred in 2020 and view</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"electorate"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
-<span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
-<span><span class="co">#&gt; 2     2023      Banks Peninsula National Party           WEENINK, Vanessa</span></span>
-<span><span class="co">#&gt; 3     2023        Bay of Plenty National Party            RUTHERFORD, Tom</span></span>
-<span><span class="co">#&gt; 4     2023               Botany National Party         LUXON, Christopher</span></span>
-<span><span class="co">#&gt; 5     2023 Christchurch Central   Labour Party               WEBB, Duncan</span></span>
-<span><span class="co">#&gt; 6     2023    Christchurch East   Labour Party      DAVIDSON, Reuben John</span></span>
-<span><span class="co">#&gt;   Votes Percentage Party_List</span></span>
-<span><span class="co">#&gt; 1  3896      11.31        Yes</span></span>
-<span><span class="co">#&gt; 2   396       0.81        Yes</span></span>
-<span><span class="co">#&gt; 3 15405      34.57        Yes</span></span>
-<span><span class="co">#&gt; 4 16323      44.69        Yes</span></span>
-<span><span class="co">#&gt; 5  1841       4.75        Yes</span></span>
-<span><span class="co">#&gt; 6  2397       6.25        Yes</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="21%">
+<col width="15%">
+<col width="27%">
+<col width="6%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Electorate</th>
+<th align="left">Party</th>
+<th align="left">Candidate</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+<th align="left">Party_List</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Auckland Central</td>
+<td align="left">Green Party</td>
+<td align="left">SWARBRICK, Chloe Charlotte</td>
+<td align="right">3896</td>
+<td align="right">11.31</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Banks Peninsula</td>
+<td align="left">National Party</td>
+<td align="left">WEENINK, Vanessa</td>
+<td align="right">396</td>
+<td align="right">0.81</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Bay of Plenty</td>
+<td align="left">National Party</td>
+<td align="left">RUTHERFORD, Tom</td>
+<td align="right">15405</td>
+<td align="right">34.57</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Botany</td>
+<td align="left">National Party</td>
+<td align="left">LUXON, Christopher</td>
+<td align="right">16323</td>
+<td align="right">44.69</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Christchurch Central</td>
+<td align="left">Labour Party</td>
+<td align="left">WEBB, Duncan</td>
+<td align="right">1841</td>
+<td align="right">4.75</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Christchurch East</td>
+<td align="left">Labour Party</td>
+<td align="left">DAVIDSON, Reuben John</td>
+<td align="right">2397</td>
+<td align="right">6.25</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -178,21 +302,91 @@ electorates.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add Electorate Type and filter for General electorates only and view</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output<span class="op">=</span><span class="st">"type"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         Electorate Election       Party                  Candidate Votes</span></span>
-<span><span class="co">#&gt; 1 Auckland Central     2023 Green Party SWARBRICK, Chloe Charlotte  3896</span></span>
-<span><span class="co">#&gt; 2 Auckland Central     2023 Green Party SWARBRICK, Chloe Charlotte  3896</span></span>
-<span><span class="co">#&gt; 3 Auckland Central     2023 Green Party SWARBRICK, Chloe Charlotte  3896</span></span>
-<span><span class="co">#&gt; 4 Auckland Central     2023 Green Party SWARBRICK, Chloe Charlotte  3896</span></span>
-<span><span class="co">#&gt; 5 Auckland Central     2023 Green Party SWARBRICK, Chloe Charlotte  3896</span></span>
-<span><span class="co">#&gt; 6 Auckland Central     2023 Green Party SWARBRICK, Chloe Charlotte  3896</span></span>
-<span><span class="co">#&gt;   Percentage Party_List Electorate_Type</span></span>
-<span><span class="co">#&gt; 1      11.31        Yes         General</span></span>
-<span><span class="co">#&gt; 2      11.31        Yes         General</span></span>
-<span><span class="co">#&gt; 3      11.31        Yes         General</span></span>
-<span><span class="co">#&gt; 4      11.31        Yes         General</span></span>
-<span><span class="co">#&gt; 5      11.31        Yes         General</span></span>
-<span><span class="co">#&gt; 6      11.31        Yes         General</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="18%">
+<col width="7%">
+<col width="12%">
+<col width="23%">
+<col width="5%">
+<col width="9%">
+<col width="9%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Electorate</th>
+<th align="right">Election</th>
+<th align="left">Party</th>
+<th align="left">Candidate</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+<th align="left">Party_List</th>
+<th align="left">Electorate_Type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Auckland Central</td>
+<td align="right">2023</td>
+<td align="left">Green Party</td>
+<td align="left">SWARBRICK, Chloe Charlotte</td>
+<td align="right">3896</td>
+<td align="right">11.31</td>
+<td align="left">Yes</td>
+<td align="left">General</td>
+</tr>
+<tr class="even">
+<td align="left">Banks Peninsula</td>
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="left">WEENINK, Vanessa</td>
+<td align="right">396</td>
+<td align="right">0.81</td>
+<td align="left">Yes</td>
+<td align="left">General</td>
+</tr>
+<tr class="odd">
+<td align="left">Bay of Plenty</td>
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="left">RUTHERFORD, Tom</td>
+<td align="right">15405</td>
+<td align="right">34.57</td>
+<td align="left">Yes</td>
+<td align="left">General</td>
+</tr>
+<tr class="even">
+<td align="left">Botany</td>
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="left">LUXON, Christopher</td>
+<td align="right">16323</td>
+<td align="right">44.69</td>
+<td align="left">Yes</td>
+<td align="left">General</td>
+</tr>
+<tr class="odd">
+<td align="left">Christchurch Central</td>
+<td align="right">2023</td>
+<td align="left">Labour Party</td>
+<td align="left">WEBB, Duncan</td>
+<td align="right">1841</td>
+<td align="right">4.75</td>
+<td align="left">Yes</td>
+<td align="left">General</td>
+</tr>
+<tr class="even">
+<td align="left">Christchurch East</td>
+<td align="right">2023</td>
+<td align="left">Labour Party</td>
+<td align="left">DAVIDSON, Reuben John</td>
+<td align="right">2397</td>
+<td align="right">6.25</td>
+<td align="left">Yes</td>
+<td align="left">General</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">

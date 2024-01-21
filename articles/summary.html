@@ -117,166 +117,496 @@ datasets. <br></p>
 <div class="section level3">
 <h3 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h3>
-<p>The <code>summary</code> dataset contains the overall results at the
-national-level by Election, Ballot, and Party. It can be used to find
-the number of seats, votes (n &amp; %), and nominations/on party list by
-ballot type - Candidate Vote, Party Vote, or Total (Seats column =
-Candidate + Party; Vote column = Party only). It can also be used to
-find the number of overhang seats and which party these can be
-attributed to.</p>
-<p><em>NB overhang seats occur when the Party Vote entitles that party
-to fewer seats than the number of electorate seats that it won.</em>
-<br><br></p>
+<p>The <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>summary</code></a>
+dataset consolidates key electoral information, providing a bird’s-eye
+view of New Zealand’s elections. It can be used to find the number of
+seats, votes (n &amp; %), and nominations/on party list by ballot type -
+Candidate Vote, Party Vote, or Total (Seats column = Candidate + Party;
+Vote column = Party only). It can also be used to find the number of
+overhang seats and which party these can be attributed to. <br><br></p>
 <div class="section level4">
-<h4 id="upload-data">Upload data<a class="anchor" aria-label="anchor" href="#upload-data"></a>
+<h4 id="loading-the-data">Loading the Data<a class="anchor" aria-label="anchor" href="#loading-the-data"></a>
 </h4>
-<p>View the shape of data frame.</p>
+<p>Begin by loading the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>summary</code></a>
+dataset to understand the structure:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load datasets by using the following helper function:</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"summary"</span><span class="op">)</span></span>
 <span><span class="co"># Alternatively, use: data("summary"), then df &lt;- summary</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election                            Party    Ballot Seats  Votes</span></span>
-<span><span class="co">#&gt; 1     2023                        ACT Party Candidate     2 149507</span></span>
-<span><span class="co">#&gt; 2     2023             Animal Justice Party Candidate     0   5829</span></span>
-<span><span class="co">#&gt; 3     2023 Aotearoa Legalise Cannabis Party Candidate     0  12566</span></span>
-<span><span class="co">#&gt; 4     2023                      DemocracyNZ Candidate     0  12060</span></span>
-<span><span class="co">#&gt; 5     2023                      Freedoms NZ Candidate     0      0</span></span>
-<span><span class="co">#&gt; 6     2023      NZ Outdoors &amp; Freedom Party Candidate     0   3030</span></span>
-<span><span class="co">#&gt;   Percentage Nominated Registered Successful</span></span>
-<span><span class="co">#&gt; 1       5.45        59        Yes        Yes</span></span>
-<span><span class="co">#&gt; 2       0.21        17        Yes         No</span></span>
-<span><span class="co">#&gt; 3       0.46        14        Yes         No</span></span>
-<span><span class="co">#&gt; 4       0.44        13        Yes         No</span></span>
-<span><span class="co">#&gt; 5       0.00         0        Yes         No</span></span>
-<span><span class="co">#&gt; 6       0.11         3        Yes         No</span></span></code></pre></div>
+<span></span>
+<span><span class="co"># View the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="30%">
+<col width="9%">
+<col width="5%">
+<col width="6%">
+<col width="10%">
+<col width="9%">
+<col width="10%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Party</th>
+<th align="left">Ballot</th>
+<th align="right">Seats</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+<th align="right">Nominated</th>
+<th align="left">Registered</th>
+<th align="left">Successful</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">ACT Party</td>
+<td align="left">Candidate</td>
+<td align="right">2</td>
+<td align="right">149507</td>
+<td align="right">5.45</td>
+<td align="right">59</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Animal Justice Party</td>
+<td align="left">Candidate</td>
+<td align="right">0</td>
+<td align="right">5829</td>
+<td align="right">0.21</td>
+<td align="right">17</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Aotearoa Legalise Cannabis Party</td>
+<td align="left">Candidate</td>
+<td align="right">0</td>
+<td align="right">12566</td>
+<td align="right">0.46</td>
+<td align="right">14</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">DemocracyNZ</td>
+<td align="left">Candidate</td>
+<td align="right">0</td>
+<td align="right">12060</td>
+<td align="right">0.44</td>
+<td align="right">13</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Freedoms NZ</td>
+<td align="left">Candidate</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">NZ Outdoors &amp; Freedom Party</td>
+<td align="left">Candidate</td>
+<td align="right">0</td>
+<td align="right">3030</td>
+<td align="right">0.11</td>
+<td align="right">3</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
 <h4 id="party-and-candidate-votes">Party and Candidate Votes<a class="anchor" aria-label="anchor" href="#party-and-candidate-votes"></a>
 </h4>
-<p>This removes the <code>Total</code> ballot type from the dataset,
-leaving just the Party vote and Candidate vote. The data has been
-further filtered for the most recent election.</p>
+<p>To view the top performing parties, rank the Party and Candidate Vote
+by Party for the 2023 election by removing the <code>Total</code> ballot
+type from the dataset:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">!=</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    Election          Party    Ballot Seats   Votes Percentage Nominated</span></span>
-<span><span class="co">#&gt; 1      2023 National Party Candidate    43 1192251      43.47        67</span></span>
-<span><span class="co">#&gt; 2      2023 National Party     Party     5 1085851      38.08        74</span></span>
-<span><span class="co">#&gt; 3      2023   Labour Party Candidate    17  855963      31.21        72</span></span>
-<span><span class="co">#&gt; 4      2023   Labour Party     Party    17  767540      26.92        76</span></span>
-<span><span class="co">#&gt; 5      2023    Green Party     Party    12  330907      11.61        49</span></span>
-<span><span class="co">#&gt; 6      2023      ACT Party     Party     9  246473       8.64        60</span></span>
-<span><span class="co">#&gt; 7      2023    Green Party Candidate     3  226575       8.26        52</span></span>
-<span><span class="co">#&gt; 8      2023       NZ First     Party     8  173553       6.09        35</span></span>
-<span><span class="co">#&gt; 9      2023      ACT Party Candidate     2  149507       5.45        59</span></span>
-<span><span class="co">#&gt; 10     2023    Maori Party Candidate     6  106584       3.89        17</span></span>
-<span><span class="co">#&gt;    Registered Successful</span></span>
-<span><span class="co">#&gt; 1         Yes        Yes</span></span>
-<span><span class="co">#&gt; 2         Yes        Yes</span></span>
-<span><span class="co">#&gt; 3         Yes        Yes</span></span>
-<span><span class="co">#&gt; 4         Yes        Yes</span></span>
-<span><span class="co">#&gt; 5         Yes        Yes</span></span>
-<span><span class="co">#&gt; 6         Yes        Yes</span></span>
-<span><span class="co">#&gt; 7         Yes        Yes</span></span>
-<span><span class="co">#&gt; 8         Yes        Yes</span></span>
-<span><span class="co">#&gt; 9         Yes        Yes</span></span>
-<span><span class="co">#&gt; 10        Yes        Yes</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="16%">
+<col width="10%">
+<col width="6%">
+<col width="8%">
+<col width="12%">
+<col width="10%">
+<col width="12%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Party</th>
+<th align="left">Ballot</th>
+<th align="right">Seats</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+<th align="right">Nominated</th>
+<th align="left">Registered</th>
+<th align="left">Successful</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="left">Candidate</td>
+<td align="right">43</td>
+<td align="right">1192251</td>
+<td align="right">43.47</td>
+<td align="right">67</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="left">Party</td>
+<td align="right">5</td>
+<td align="right">1085851</td>
+<td align="right">38.08</td>
+<td align="right">74</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Labour Party</td>
+<td align="left">Candidate</td>
+<td align="right">17</td>
+<td align="right">855963</td>
+<td align="right">31.21</td>
+<td align="right">72</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Labour Party</td>
+<td align="left">Party</td>
+<td align="right">17</td>
+<td align="right">767540</td>
+<td align="right">26.92</td>
+<td align="right">76</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Green Party</td>
+<td align="left">Party</td>
+<td align="right">12</td>
+<td align="right">330907</td>
+<td align="right">11.61</td>
+<td align="right">49</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">ACT Party</td>
+<td align="left">Party</td>
+<td align="right">9</td>
+<td align="right">246473</td>
+<td align="right">8.64</td>
+<td align="right">60</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Green Party</td>
+<td align="left">Candidate</td>
+<td align="right">3</td>
+<td align="right">226575</td>
+<td align="right">8.26</td>
+<td align="right">52</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">NZ First</td>
+<td align="left">Party</td>
+<td align="right">8</td>
+<td align="right">173553</td>
+<td align="right">6.09</td>
+<td align="right">35</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">ACT Party</td>
+<td align="left">Candidate</td>
+<td align="right">2</td>
+<td align="right">149507</td>
+<td align="right">5.45</td>
+<td align="right">59</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Maori Party</td>
+<td align="left">Candidate</td>
+<td align="right">6</td>
+<td align="right">106584</td>
+<td align="right">3.89</td>
+<td align="right">17</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
 <h4 id="overhang-seats">Overhang Seats<a class="anchor" aria-label="anchor" href="#overhang-seats"></a>
 </h4>
-<p>Filtering to include only the <code>Total</code> ballot type and
-whether the party was successful (i.e., achieved the eligibility
-requirements), means that you are able to determine where the overhang
-seats can be attributed to. The data has been further filtered for the
-most recent election.</p>
+<p>As a reminder, overhang seats occur when the Party Vote entitles that
+party to fewer seats than the number of electorate seats that it won. To
+view any overhang seats, remove the <code>Candidate</code> and
+<code>Party</code> ballot types and unsuccessful parties from the
+dataset. Then, calculate the overhang seats by multiplying the 120 total
+parliamentary seats by the proportion of the party vote for successful
+parties:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span>, <span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span>, <span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>`%` <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>`Successful_%` <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Overhang <span class="op">=</span> <span class="va">Seats</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">120</span><span class="op">*</span><span class="va">`%`</span><span class="op">/</span><span class="fl">100</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 11</span></span></span>
-<span><span class="co">#&gt;   Election Party       Ballot Seats  Votes Percentage Nominated Registered</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 ACT Party   Total     11 2.46<span style="color: #949494;">e</span>5       8.64       119 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Green Party Total     15 3.31<span style="color: #949494;">e</span>5      11.6        101 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Labour Par… Total     34 7.68<span style="color: #949494;">e</span>5      26.9        148 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Maori Party Total      6 8.78<span style="color: #949494;">e</span>4       3.08        48 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 NZ First    Total      8 1.74<span style="color: #949494;">e</span>5       6.09        69 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 National P… Total     48 1.09<span style="color: #949494;">e</span>6      38.1        141 Yes       </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: Successful &lt;chr&gt;, `%` &lt;dbl&gt;, Overhang &lt;dbl&gt;</span></span></span></code></pre></div>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Overhang <span class="op">=</span> <span class="va">Seats</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">120</span> <span class="op">*</span> <span class="va">`Successful_%`</span> <span class="op">/</span> <span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Overhang</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="8%">
+<col width="13%">
+<col width="6%">
+<col width="5%">
+<col width="7%">
+<col width="10%">
+<col width="9%">
+<col width="10%">
+<col width="10%">
+<col width="11%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Party</th>
+<th align="left">Ballot</th>
+<th align="right">Seats</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+<th align="right">Nominated</th>
+<th align="left">Registered</th>
+<th align="left">Successful</th>
+<th align="right">Successful_%</th>
+<th align="right">Overhang</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Maori Party</td>
+<td align="left">Total</td>
+<td align="right">6</td>
+<td align="right">87844</td>
+<td align="right">3.08</td>
+<td align="right">48</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="right">3.26</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">ACT Party</td>
+<td align="left">Total</td>
+<td align="right">11</td>
+<td align="right">246473</td>
+<td align="right">8.64</td>
+<td align="right">119</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="right">9.16</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Green Party</td>
+<td align="left">Total</td>
+<td align="right">15</td>
+<td align="right">330907</td>
+<td align="right">11.61</td>
+<td align="right">101</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="right">12.29</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Labour Party</td>
+<td align="left">Total</td>
+<td align="right">34</td>
+<td align="right">767540</td>
+<td align="right">26.92</td>
+<td align="right">148</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="right">28.51</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">NZ First</td>
+<td align="left">Total</td>
+<td align="right">8</td>
+<td align="right">173553</td>
+<td align="right">6.09</td>
+<td align="right">69</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="right">6.45</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="left">Total</td>
+<td align="right">48</td>
+<td align="right">1085851</td>
+<td align="right">38.08</td>
+<td align="right">141</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="right">40.33</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
-</div>
-<div class="section level4">
-<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
-</h4>
-<p>Visualise the number of seats won by party at each election using a
-stacked bar chart.</p>
+<p><strong><em>Create Plot</em></strong><br> To view overhang seats over
+time, visualise the number of seats won by party at each election:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># remove parties which did not win a seat</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Successful</span> <span class="op">==</span> <span class="st">"Yes"</span>, <span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Election</span>, y <span class="op">=</span> <span class="va">Seats</span>,</span>
-<span>             fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Party</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National Party"</span>,<span class="st">"ACT Party"</span>,<span class="st">"NZ First"</span>,</span>
-<span>                                             <span class="st">"United Future"</span>,<span class="st">"Jim Anderton's Progressive"</span>,</span>
-<span>                                             <span class="st">"MANA"</span>,<span class="st">"Maori Party"</span>,<span class="st">"Alliance"</span>,<span class="st">"Green Party"</span>,</span>
+<span>             fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Party</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National Party"</span>, <span class="st">"ACT Party"</span>, <span class="st">"NZ First"</span>,</span>
+<span>                                             <span class="st">"United Future"</span>, <span class="st">"Jim Anderton's Progressive"</span>,</span>
+<span>                                             <span class="st">"MANA"</span>, <span class="st">"Maori Party"</span>, <span class="st">"Alliance"</span>, <span class="st">"Green Party"</span>,</span>
 <span>                                             <span class="st">"Labour Party"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_bar</span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span>, colour<span class="op">=</span><span class="st">"white"</span>, linewidth<span class="op">=</span><span class="fl">0.15</span>, alpha<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, colour <span class="op">=</span> <span class="st">"white"</span>, linewidth <span class="op">=</span> <span class="fl">0.15</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># indicate majority required for a 120 seat parliament</span></span>
-<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">60</span>, colour <span class="op">=</span> <span class="st">"white"</span>, linewidth<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">60</span>, colour <span class="op">=</span> <span class="st">"white"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># indicate overhang seats</span></span>
 <span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">120</span>, colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"French Grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x<span class="op">=</span><span class="fl">2025</span>, y <span class="op">=</span><span class="fl">120</span>, label <span class="op">=</span> <span class="st">"Overhang"</span>,</span>
+<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fl">2025</span>, y <span class="op">=</span> <span class="fl">120</span>, label <span class="op">=</span> <span class="st">"Overhang"</span>,</span>
 <span>           colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Regent Grey"</span><span class="op">)</span>,</span>
-<span>           size<span class="op">=</span><span class="fl">3.5</span>, fontface<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">coord_flip</span><span class="op">(</span>clip <span class="op">=</span> <span class="st">"off"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1994.5</span>,<span class="fl">2024.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           size <span class="op">=</span> <span class="fl">3.5</span>, fontface <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">coord_flip</span><span class="op">(</span>clip <span class="op">=</span> <span class="st">"off"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1994.5</span>, <span class="fl">2024.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"No. of Seats by Election and Party (1996 - 2023)"</span>,</span>
 <span>       fill <span class="op">=</span> <span class="st">"Party"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"polNZ"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="st">"Election"</span>,</span>
+<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="st">"Election"</span>,</span>
 <span>                     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Election</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">Election</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>panel.grid.major.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.grid.minor.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="img/plot_SeatsByElection.png" width="100%"></p>
+<p><img src="summary_files/figure-html/summary3-1.png" width="100%"><br><br></p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="premmp-results">preMMP Results<a class="anchor" aria-label="anchor" href="#premmp-results"></a>
 </h3>
-<p>This dataset can be combined with the <code>preMMP_results</code>
-dataset which contains the overall results between 1890 and 1993 by
-party at the national-level. <br><br></p>
+<p>The <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/summary.html"><code>summary</code></a>
+dataset can be combined with the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html"><code>preMMP_results</code></a>
+dataset. The <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/preMMP_results.html"><code>preMMP_results</code></a>
+dataset contains the overall results between 1890 and 1993 by party at
+the national-level. <br><br></p>
 <div class="section level4">
-<h4 id="upload-data-1">Upload data<a class="anchor" aria-label="anchor" href="#upload-data-1"></a>
+<h4 id="loading-the-data-1">Loading the Data<a class="anchor" aria-label="anchor" href="#loading-the-data-1"></a>
 </h4>
 <p>View the shape of data frame.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"preMMP_results"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Election              Party Seats Percentage</span></span>
-<span><span class="co">#&gt; 1     1890            Liberal    38      56.10</span></span>
-<span><span class="co">#&gt; 2     1890 Conservative Party    25      28.90</span></span>
-<span><span class="co">#&gt; 3     1890       Independents    11      15.00</span></span>
-<span><span class="co">#&gt; 4     1893            Liberal    51      57.80</span></span>
-<span><span class="co">#&gt; 5     1893 Conservative Party    13      24.49</span></span>
-<span><span class="co">#&gt; 6     1893       Independents    10      17.71</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Party</th>
+<th align="right">Seats</th>
+<th align="right">Percentage</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1890</td>
+<td align="left">Liberal</td>
+<td align="right">38</td>
+<td align="right">56.10</td>
+</tr>
+<tr class="even">
+<td align="right">1890</td>
+<td align="left">Conservative Party</td>
+<td align="right">25</td>
+<td align="right">28.90</td>
+</tr>
+<tr class="odd">
+<td align="right">1890</td>
+<td align="left">Independents</td>
+<td align="right">11</td>
+<td align="right">15.00</td>
+</tr>
+<tr class="even">
+<td align="right">1893</td>
+<td align="left">Liberal</td>
+<td align="right">51</td>
+<td align="right">57.80</td>
+</tr>
+<tr class="odd">
+<td align="right">1893</td>
+<td align="left">Conservative Party</td>
+<td align="right">13</td>
+<td align="right">24.49</td>
+</tr>
+<tr class="even">
+<td align="right">1893</td>
+<td align="left">Independents</td>
+<td align="right">10</td>
+<td align="right">17.71</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
 <h4 id="merge-datasets">Merge datasets<a class="anchor" aria-label="anchor" href="#merge-datasets"></a>
 </h4>
-<p>To match the <code>preMMP_results</code> dataset, the
-<code>summary</code> dataset is filtered by the ballot variable to
-include <code>Total</code> only.</p>
+<p>To match the <code>preMMP_results</code> dataset, remove the
+<code>summary</code> dataset <code>Party</code> and
+<code>Candidate</code> ballot types.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Total"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -285,46 +615,85 @@ include <code>Total</code> only.</p>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Seats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Seats</span><span class="op">)</span>, Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Party</span>, <span class="va">Seats</span>, <span class="va">Percentage</span><span class="op">)</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Party</span>, <span class="va">Seats</span>, <span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Election</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Merge</span></span>
 <span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">df1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># view dataset</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
-<span><span class="co">#&gt;   Election Party          Seats Percentage</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">1</span>996 ACT Party          8       6.10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">1</span>996 Alliance          13      10.1 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">1</span>996 Labour Party      37      28.2 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">1</span>996 NZ First          17      13.3 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">1</span>996 National Party    44      33.8 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">1</span>996 Other              0       7.54</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Party</th>
+<th align="right">Seats</th>
+<th align="right">Percentage</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">ACT Party</td>
+<td align="right">11</td>
+<td align="right">8.64</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Green Party</td>
+<td align="right">15</td>
+<td align="right">11.61</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Labour Party</td>
+<td align="right">34</td>
+<td align="right">26.92</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Maori Party</td>
+<td align="right">6</td>
+<td align="right">3.08</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">NZ First</td>
+<td align="right">8</td>
+<td align="right">6.09</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">National Party</td>
+<td align="right">48</td>
+<td align="right">38.08</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
+<h4 id="visualise-the-historic-party-vote">Visualise the Historic Party Vote<a class="anchor" aria-label="anchor" href="#visualise-the-historic-party-vote"></a>
 </h4>
-<p>Visualise the number of party vote at each election using a stacked
-bar chart.</p>
+<p>Visualise the party/popular vote at each election:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="co"># filter 1935 until current time (since the beginning of the National and Labour parties)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">&gt;=</span> <span class="fl">1935</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Party <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Party</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National Party"</span>, <span class="st">"Labour Party"</span><span class="op">)</span>, <span class="va">Party</span>,</span>
-<span>                 <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"United-Reform ('National')"</span>, <span class="st">"National Party"</span>,</span>
-<span>                        <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"United-Reform ('National')"</span>, <span class="st">"National Party"</span>,</span>
+<span>                               <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>         Party <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Party</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National Party"</span>, <span class="st">"Other"</span>, <span class="st">"Labour Party"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Party</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Percentage</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Percentage</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df2</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Election</span>, <span class="op">-</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Percentage</span>,</span>
 <span>             fill <span class="op">=</span> <span class="va">Party</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, alpha <span class="op">=</span> <span class="fl">0.8</span>, width <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_bar</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df2</span><span class="op">%&gt;%</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="va">Percentage</span>, fill <span class="op">=</span> <span class="va">Party</span><span class="op">)</span>,</span>
+<span>  <span class="fu">geom_bar</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="va">Percentage</span>, fill <span class="op">=</span> <span class="va">Party</span><span class="op">)</span>,</span>
 <span>           stat <span class="op">=</span> <span class="st">"identity"</span>, alpha <span class="op">=</span> <span class="fl">1</span>, width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># Add 50% line</span></span>
 <span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">50</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -337,7 +706,7 @@ bar chart.</p>
 <span>  <span class="co"># Add dashed lines for 2023 result</span></span>
 <span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Labour Party"</span><span class="op">]</span>,</span>
 <span>             colour <span class="op">=</span> <span class="st">"white"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">100</span><span class="op">-</span><span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"National Party"</span><span class="op">]</span>,</span>
+<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">100</span> <span class="op">-</span> <span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"National Party"</span><span class="op">]</span>,</span>
 <span>             colour <span class="op">=</span> <span class="st">"white"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># Add introduction of MMP line</span></span>
 <span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">10.5</span>, colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Black80"</span><span class="op">)</span>,</span>
@@ -350,13 +719,13 @@ bar chart.</p>
 <span>            hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0</span>, label <span class="op">=</span> <span class="st">"Labour"</span>, size <span class="op">=</span> <span class="fl">3.5</span>, fontface <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>           colour <span class="op">=</span> <span class="st">"#D82A20"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_text</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Labour Party"</span><span class="op">]</span><span class="op">+</span></span>
-<span>    <span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">]</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>  <span class="fu">geom_text</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Labour Party"</span><span class="op">]</span> <span class="op">+</span></span>
+<span>    <span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">]</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>            label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">]</span>,</span>
-<span>                                  nsmall<span class="op">=</span><span class="fl">2</span><span class="op">)</span>, <span class="st">"%"</span><span class="op">)</span>,</span>
+<span>                                  nsmall <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, <span class="st">"%"</span><span class="op">)</span>,</span>
 <span>            hjust <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">3</span>, colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Black80"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Labour Party"</span><span class="op">]</span><span class="op">+</span></span>
-<span>    <span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">]</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Labour Party"</span><span class="op">]</span> <span class="op">+</span></span>
+<span>    <span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">Percentage</span><span class="op">[</span><span class="va">df2</span><span class="op">$</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">df2</span><span class="op">$</span><span class="va">Party</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">]</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>           label <span class="op">=</span> <span class="st">"Minor Parties"</span>, size <span class="op">=</span> <span class="fl">3.5</span>, fontface <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>           colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Regent Grey"</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_text</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">99</span>,</span>
@@ -366,13 +735,13 @@ bar chart.</p>
 <span>           label <span class="op">=</span> <span class="st">"National"</span>, size <span class="op">=</span> <span class="fl">3.5</span>, fontface <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>           colour <span class="op">=</span> <span class="st">"#00529F"</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"% Party Vote by Election between 1935 and 2023"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, position <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, position <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>                     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"polNZ"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">coord_flip</span><span class="op">(</span>clip <span class="op">=</span> <span class="st">"off"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">30</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">100.25</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">coord_flip</span><span class="op">(</span>clip <span class="op">=</span> <span class="st">"off"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">30</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100.25</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
-<span>        plot.margin <span class="op">=</span> <span class="fu">unit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
+<span>        plot.margin <span class="op">=</span> <span class="fu">unit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
 <span>        plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>vjust <span class="op">=</span> <span class="fl">5</span>, colour <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"Black80"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>        panel.grid.major <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
@@ -381,8 +750,13 @@ bar chart.</p>
 <span>        axis.title.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.title.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.text.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="img/plot_PartyVoteByElection.png" width="100%"></p>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span></code></pre></div>
+<p><img src="summary_files/figure-html/preMMP2-1.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

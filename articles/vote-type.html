@@ -112,9 +112,9 @@
   }
 </style>
 <p><br> This article provides an in-depth exploration of the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>
-dataset, a key component of the <a href="https://sarahcgall.github.io/scgElectionsNZ/"><code>scgElectionsNZ</code></a>
-package, which delves into the intricacies of voting patterns in New
-Zealand’s elections. <br></p>
+dataset, a key component of the <code>scgElectionsNZ</code> package,
+which delves into the intricacies of voting patterns in New Zealand’s
+elections. <br></p>
 <div class="section level3">
 <h3 id="vote-type">Vote Type<a class="anchor" aria-label="anchor" href="#vote-type"></a>
 </h3>
@@ -122,83 +122,83 @@ Zealand’s elections. <br></p>
 dataset captures the complexities of the New Zealand electoral process
 by categorising votes based on their validity (Disallowed, Informal,
 Valid) and method (Ordinary, Special - NZ, Special - Overseas), across
-electorates and ballot types (Candidate and Party). <br><br></p>
+electorates, ballot types (Candidate and Party), and elections. <br><br></p>
 <div class="section level4">
-<h4 id="loading-and-exploring-the-data">Loading and Exploring the Data<a class="anchor" aria-label="anchor" href="#loading-and-exploring-the-data"></a>
+<h4 id="loading-the-data">Loading the Data<a class="anchor" aria-label="anchor" href="#loading-the-data"></a>
 </h4>
 <p>Begin by loading the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/vote_type.html"><code>vote_type</code></a>
 dataset and examining its structure:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"vote_type"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
-<span><span class="co">#&gt;   Election Ballot    Electorate       Validity   Method             Votes</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Ordinary               0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Disallowed Special              988</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Ordinary             160</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - NZ         129</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Informal   Special - Overseas    14</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     <span style="text-decoration: underline;">2</span>023 Candidate Auckland Central Valid      Ordinary           <span style="text-decoration: underline;">23</span>227</span></span></code></pre></div>
-<p><br></p>
-<p><strong>Analysing Disallowed Votes</strong><br> Gain insights into
-the percentage of disallowed votes by electorate and ballot type for the
-2023 election:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Validity</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Validity</span> <span class="op">==</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 5</span></span></span>
-<span><span class="co">#&gt;    Ballot    Electorate      Validity   Votes Percentage</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Candidate Port Waikato    Disallowed   804      11.7 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Candidate Hauraki-Waikato Disallowed  <span style="text-decoration: underline;">1</span>767       6.77</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Candidate Tamaki Makaurau Disallowed  <span style="text-decoration: underline;">1</span>749       6.59</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Candidate Manurewa        Disallowed  <span style="text-decoration: underline;">1</span>652       5.59</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Candidate Te Tai Tokerau  Disallowed  <span style="text-decoration: underline;">1</span>553       5.42</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Candidate Waiariki        Disallowed  <span style="text-decoration: underline;">1</span>502       5.10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Candidate Te Tai Hauauru  Disallowed  <span style="text-decoration: underline;">1</span>324       4.91</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Candidate Panmure-Otahuhu Disallowed  <span style="text-decoration: underline;">1</span>416       4.68</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Candidate Ikaroa-Rawhiti  Disallowed  <span style="text-decoration: underline;">1</span>244       4.61</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Candidate Te Tai Tonga    Disallowed  <span style="text-decoration: underline;">1</span>191       4.18</span></span></code></pre></div>
-<p><br></p>
-<p><strong>Understanding Overseas Voting</strong><br> Examine the
-proportion of overseas votes by electorate, focusing on the valid and
-informal votes:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="co"># including only valid and informal votes</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Method</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special - Overseas"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 5</span></span></span>
-<span><span class="co">#&gt;    Ballot    Electorate         Method             Votes Percentage</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Candidate Port Waikato       Special - Overseas   478       7.89</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Candidate Wellington Central Special - Overseas  <span style="text-decoration: underline;">3</span>307       7.80</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Party     Wellington Central Special - Overseas  <span style="text-decoration: underline;">3</span>312       7.76</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Candidate Auckland Central   Special - Overseas  <span style="text-decoration: underline;">2</span>232       6.79</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Party     Auckland Central   Special - Overseas  <span style="text-decoration: underline;">2</span>239       6.72</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Candidate Epsom              Special - Overseas  <span style="text-decoration: underline;">2</span>352       6.29</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Party     Epsom              Special - Overseas  <span style="text-decoration: underline;">2</span>354       6.21</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Candidate Mt Albert          Special - Overseas  <span style="text-decoration: underline;">1</span>928       5.27</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Party     Mt Albert          Special - Overseas  <span style="text-decoration: underline;">1</span>935       5.24</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Candidate Rongotai           Special - Overseas  <span style="text-decoration: underline;">2</span>027       4.96</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">vote_df</span> <span class="op">&lt;-</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/get_data.html" class="external-link">get_data</a></span><span class="op">(</span><span class="st">"vote_type"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">vote_df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="13%">
+<col width="23%">
+<col width="15%">
+<col width="26%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Ballot</th>
+<th align="left">Electorate</th>
+<th align="left">Validity</th>
+<th align="left">Method</th>
+<th align="right">Votes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Disallowed</td>
+<td align="left">Ordinary</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Disallowed</td>
+<td align="left">Special</td>
+<td align="right">988</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Informal</td>
+<td align="left">Ordinary</td>
+<td align="right">160</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Informal</td>
+<td align="left">Special - NZ</td>
+<td align="right">135</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Informal</td>
+<td align="left">Special - Overseas</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Valid</td>
+<td align="left">Ordinary</td>
+<td align="right">23227</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -207,55 +207,561 @@ informal votes:</p>
 <p>Enhance the dataset by adding regional data for more a detailed
 analysis using the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html"><code>add_data()</code></a>
 function:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"region"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Electorate Election Ballot   Validity             Method Votes   Region</span></span>
-<span><span class="co">#&gt; 1     Albany     1999  Party   Informal Special - Overseas     0 Auckland</span></span>
-<span><span class="co">#&gt; 2     Albany     1999  Party   Informal Special - Overseas     0 Auckland</span></span>
-<span><span class="co">#&gt; 3     Albany     1996  Party   Informal       Special - NZ    11 Auckland</span></span>
-<span><span class="co">#&gt; 4     Albany     1996  Party   Informal       Special - NZ    11 Auckland</span></span>
-<span><span class="co">#&gt; 5     Albany     1999  Party Disallowed            Special   592 Auckland</span></span>
-<span><span class="co">#&gt; 6     Albany     1999  Party Disallowed            Special   592 Auckland</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Add Regions column</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">vote_df</span>, output <span class="op">=</span> <span class="st">"region"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># View Data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="15%">
+<col width="12%">
+<col width="9%">
+<col width="15%">
+<col width="26%">
+<col width="8%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Electorate</th>
+<th align="right">Election</th>
+<th align="left">Ballot</th>
+<th align="left">Validity</th>
+<th align="left">Method</th>
+<th align="right">Votes</th>
+<th align="left">Region</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Albany</td>
+<td align="right">1999</td>
+<td align="left">Party</td>
+<td align="left">Informal</td>
+<td align="left">Special - Overseas</td>
+<td align="right">0</td>
+<td align="left">Auckland</td>
+</tr>
+<tr class="even">
+<td align="left">Albany</td>
+<td align="right">1999</td>
+<td align="left">Party</td>
+<td align="left">Informal</td>
+<td align="left">Special - Overseas</td>
+<td align="right">0</td>
+<td align="left">Auckland</td>
+</tr>
+<tr class="odd">
+<td align="left">Albany</td>
+<td align="right">1996</td>
+<td align="left">Party</td>
+<td align="left">Informal</td>
+<td align="left">Special - NZ</td>
+<td align="right">11</td>
+<td align="left">Auckland</td>
+</tr>
+<tr class="even">
+<td align="left">Albany</td>
+<td align="right">1996</td>
+<td align="left">Party</td>
+<td align="left">Informal</td>
+<td align="left">Special - NZ</td>
+<td align="right">11</td>
+<td align="left">Auckland</td>
+</tr>
+<tr class="odd">
+<td align="left">Albany</td>
+<td align="right">1999</td>
+<td align="left">Party</td>
+<td align="left">Disallowed</td>
+<td align="left">Special</td>
+<td align="right">592</td>
+<td align="left">Auckland</td>
+</tr>
+<tr class="even">
+<td align="left">Albany</td>
+<td align="right">1999</td>
+<td align="left">Party</td>
+<td align="left">Disallowed</td>
+<td align="left">Special</td>
+<td align="right">592</td>
+<td align="left">Auckland</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="visualising-overseas-votes">Visualising Overseas Votes<a class="anchor" aria-label="anchor" href="#visualising-overseas-votes"></a>
+<h4 id="visualising-special-votes-by-region">Visualising Special Votes by Region<a class="anchor" aria-label="anchor" href="#visualising-special-votes-by-region"></a>
 </h4>
-<p>Create a visualisation to illustrate the proportion of overseas
-special Party Votes by region over time:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="co"># including only valid and informal votes</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<p>Create a visualisation to illustrate the proportion of Party Special
+Declaration Votes by Region over time.</p>
+<p><strong><em>Prepare Data</em></strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Prepare data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Include Party Votes only</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Ordinary"</span>, <span class="va">Method</span>, <span class="st">"Special"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Get grouped Votes</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Region</span>, <span class="va">Method</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Get grouped Percentage</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Region</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special - Overseas"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Get Special Votes only</span></span>
 <span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Percentage</span>, group <span class="op">=</span> <span class="va">Region</span>, colour <span class="op">=</span> <span class="va">Region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span>use_direct_label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># View data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Region</th>
+<th align="left">Method</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Auckland</td>
+<td align="left">Special</td>
+<td align="right">1414386</td>
+<td align="right">22.32</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Auckland</td>
+<td align="left">Special</td>
+<td align="right">1402180</td>
+<td align="right">20.79</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Auckland</td>
+<td align="left">Special</td>
+<td align="right">1377902</td>
+<td align="right">20.42</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">Wellington / Wairarapa</td>
+<td align="left">Special</td>
+<td align="right">477612</td>
+<td align="right">18.05</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Wellington / Wairarapa</td>
+<td align="left">Special</td>
+<td align="right">439248</td>
+<td align="right">17.82</td>
+</tr>
+<tr class="even">
+<td align="right">2023</td>
+<td align="left">Waikato</td>
+<td align="left">Special</td>
+<td align="right">440058</td>
+<td align="right">17.80</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Create Plot</em></strong></p>
+<p>Use the <a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link"><code>gghighlight()</code></a>
+function from the <code>gghighlight</code> package to highlight single
+regions in facets and the <a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link"><code>theme_scg()</code></a>
+function from the <code>scgUtils</code> package can be used to customise
+the plot’s appearance:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Percentage</span>,</span>
+<span>             group <span class="op">=</span> <span class="va">Region</span>, colour <span class="op">=</span> <span class="va">Region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Add lines</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Add points</span></span>
+<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span>use_direct_label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Highlight by faceted Regions</span></span>
 <span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">Region</span>, <span class="op">-</span><span class="va">Percentage</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_colour_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#374e8e"</span>, <span class="st">"#e3b13e"</span>, <span class="st">"#df7c18"</span>, <span class="st">"#ac004f"</span>,</span>
+<span>  <span class="fu">scale_colour_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#374e8e"</span>, <span class="st">"#e3b13e"</span>, <span class="st">"#df7c18"</span>, <span class="st">"#ac004f"</span>, <span class="co"># add colours by Region</span></span>
 <span>                                 <span class="st">"#704600"</span>, <span class="st">"#1b87aa"</span>, <span class="st">"#478c5b"</span><span class="op">)</span>,</span>
 <span>                      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"South Island"</span>, <span class="st">"Wellington / Wairarapa"</span>,</span>
 <span>                                 <span class="st">"Taranaki / Whanganui / Manawatu"</span>,</span>
 <span>                                 <span class="st">"Bay of Plenty / Hawke's Bay / Gisborne"</span>,</span>
 <span>                                 <span class="st">"Waikato"</span>, <span class="st">"Auckland"</span>, <span class="st">"Northland"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Proportion of Overseas Special Party Votes\nby Region over Time (1996 - 2023)"</span>,</span>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Proportion of Special Party Votes\nby Region over Time (1996 - 2023)"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Percentage (%)\n"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Election"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>        legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="vote-type_files/figure-html/vote-type4-1.png" width="100%"></p>
+<p><img src="vote-type_files/figure-html/vote-type_graph-1.png" width="100%"></p>
+<p>As is evident, there are higher proportions of special votes in 1996
+and 1999. This is particularly the case for Northland and Taranaki /
+Whanganui / Manawatu where the number of Maori to General seats is
+higher. In addition, the urban region of Auckland has a significantly
+higher proportion of special votes compared with other regions. <br><br></p>
+</div>
+<div class="section level4">
+<h4 id="exploring-the-data">Exploring the Data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
+</h4>
+<p>To understand the differences in special votes, break down the
+special votes by method and validity.</p>
+<p><strong>Overseas Voting</strong><br> To do this, first examine the
+proportion of overseas votes by electorate, focusing on the valid and
+informal votes:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vote_df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span>, <span class="va">Validity</span> <span class="op">!=</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Only valid and informal votes</span></span>
+<span>  <span class="co"># Get grouped Votes</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Method</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Get grouped Percentage</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># View only Special - Overseas results</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special - Overseas"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># rank by percentage</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="21%">
+<col width="26%">
+<col width="21%">
+<col width="6%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Ballot</th>
+<th align="left">Electorate</th>
+<th align="left">Region</th>
+<th align="left">Method</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Wellington Central</td>
+<td align="left">Wellington / Wairarapa</td>
+<td align="left">Special - Overseas</td>
+<td align="right">39200</td>
+<td align="right">8.62</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Epsom</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">34100</td>
+<td align="right">8.50</td>
+</tr>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Auckland Central</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">28880</td>
+<td align="right">8.31</td>
+</tr>
+<tr class="even">
+<td align="left">Party</td>
+<td align="left">Wellington Central</td>
+<td align="left">Wellington / Wairarapa</td>
+<td align="left">Special - Overseas</td>
+<td align="right">33120</td>
+<td align="right">7.76</td>
+</tr>
+<tr class="odd">
+<td align="left">Party</td>
+<td align="left">Auckland Central</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">22390</td>
+<td align="right">6.72</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Mt Albert</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">22374</td>
+<td align="right">6.33</td>
+</tr>
+<tr class="odd">
+<td align="left">Party</td>
+<td align="left">Epsom</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">23540</td>
+<td align="right">6.21</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Rongotai</td>
+<td align="left">Wellington / Wairarapa</td>
+<td align="left">Special - Overseas</td>
+<td align="right">26000</td>
+<td align="right">6.12</td>
+</tr>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Tamaki</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">23460</td>
+<td align="right">5.67</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">North Shore</td>
+<td align="left">Auckland</td>
+<td align="left">Special - Overseas</td>
+<td align="right">21960</td>
+<td align="right">5.36</td>
+</tr>
+</tbody>
+</table>
+<p>The table above shows that the urban electorates within Auckland had
+the greatest number of overseas voters, likely pushing up the special
+vote count for the region <br><br></p>
+<p><strong>Disallowed Votes</strong><br> Next, gain insights into the
+percentage of disallowed votes by electorate and ballot type for the
+2023 election:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vote_df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span>output <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Election</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Get 2023 Election data only</span></span>
+<span>  <span class="co"># Get grouped Votes</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span>, <span class="va">Electorate_Type</span>, <span class="va">Validity</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Get grouped Percentage</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Ballot</span>, <span class="va">Electorate</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># View only Disallowed results</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Validity</span> <span class="op">==</span> <span class="st">"Disallowed"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># rank by percentage</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="22%">
+<col width="22%">
+<col width="15%">
+<col width="8%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Ballot</th>
+<th align="left">Electorate</th>
+<th align="left">Electorate_Type</th>
+<th align="left">Validity</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Port Waikato</td>
+<td align="left">General</td>
+<td align="left">Disallowed</td>
+<td align="right">4824</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Hauraki-Waikato</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">10602</td>
+<td align="right">6.59</td>
+</tr>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Tamaki Makaurau</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">13992</td>
+<td align="right">6.39</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Manurewa</td>
+<td align="left">General</td>
+<td align="left">Disallowed</td>
+<td align="right">16520</td>
+<td align="right">5.38</td>
+</tr>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Te Tai Tokerau</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">15530</td>
+<td align="right">5.30</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Waiariki</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">13518</td>
+<td align="right">4.93</td>
+</tr>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Te Tai Hauauru</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">13240</td>
+<td align="right">4.82</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Ikaroa-Rawhiti</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">11196</td>
+<td align="right">4.55</td>
+</tr>
+<tr class="odd">
+<td align="left">Candidate</td>
+<td align="left">Panmure-Otahuhu</td>
+<td align="left">General</td>
+<td align="left">Disallowed</td>
+<td align="right">2832</td>
+<td align="right">4.54</td>
+</tr>
+<tr class="even">
+<td align="left">Candidate</td>
+<td align="left">Te Tai Tonga</td>
+<td align="left">Maori</td>
+<td align="left">Disallowed</td>
+<td align="right">11910</td>
+<td align="right">4.16</td>
+</tr>
+</tbody>
+</table>
+<p>The table above shows the highest proportion of disallowed votes
+ranked by electorate. Port Waikato shows 100% of the total vote was
+disallowed. This was due to the ACT Party candidate dying before polling
+day and thus the poll cancelled for the Candidate Vote (the Party Vote
+proceeded).</p>
+<p>Of note is that the top ten includes all of the Māori electorates.
+This is likely due to the higher proportion of Māori voters casting
+special votes. Special votes have an added level of complexity and
+requirements compared with ordinary votes and thus are more likely to be
+disallowed. <br><br></p>
+</div>
+<div class="section level4">
+<h4 id="visualising-special-votes-by-type">Visualising Special Votes by Type<a class="anchor" aria-label="anchor" href="#visualising-special-votes-by-type"></a>
+</h4>
+<p>And finally, to understand what is driving the higher proportions in
+1996 and 1999, add the electorate type, again using the <a href="https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html"><code>add_data()</code></a>
+function: <strong><em>Prepare Data</em></strong><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Add Electorate Type column</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_data.html">add_data</a></span><span class="op">(</span><span class="va">vote_df</span>, output <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Prepare data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Ballot</span> <span class="op">==</span> <span class="st">"Party"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Ordinary"</span>, <span class="va">Method</span>, <span class="st">"Special"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Electorate_Type</span>, <span class="va">Method</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">'drop'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Election</span>, <span class="va">Electorate_Type</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">Votes</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Votes</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Method</span> <span class="op">==</span> <span class="st">"Special"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">Percentage</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># View data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">Election</th>
+<th align="left">Electorate_Type</th>
+<th align="left">Method</th>
+<th align="right">Votes</th>
+<th align="right">Percentage</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1996</td>
+<td align="left">Maori</td>
+<td align="left">Special</td>
+<td align="right">297531</td>
+<td align="right">41.88</td>
+</tr>
+<tr class="even">
+<td align="right">1999</td>
+<td align="left">Maori</td>
+<td align="left">Special</td>
+<td align="right">251558</td>
+<td align="right">27.09</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="left">Maori</td>
+<td align="left">Special</td>
+<td align="right">430250</td>
+<td align="right">25.45</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Maori</td>
+<td align="left">Special</td>
+<td align="right">420225</td>
+<td align="right">24.74</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Maori</td>
+<td align="left">Special</td>
+<td align="right">352229</td>
+<td align="right">23.59</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="left">Maori</td>
+<td align="left">Special</td>
+<td align="right">254629</td>
+<td align="right">18.39</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Create Plot</em></strong><br> Visualise the proportion of
+Party Special Declaration Votes by Electorate Type over time.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">Election</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">Percentage</span>,</span>
+<span>             group <span class="op">=</span> <span class="va">Electorate_Type</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">Electorate_Type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_colour_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/colour_pal.html" class="external-link">colour_pal</a></span><span class="op">(</span><span class="st">"catSimplified"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Proportion of Special Party Votes\nby Electorate Type over Time (1996 - 2023)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Percentage (%)\n"</span>,</span>
+<span>       x <span class="op">=</span> <span class="st">"Election"</span>,</span>
+<span>       colour <span class="op">=</span> <span class="st">"Electorate Type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scgUtils</span><span class="fu">::</span><span class="fu"><a href="https://sarahcgall.github.io/scgUtils/reference/theme_scg.html" class="external-link">theme_scg</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="vote-type_files/figure-html/vote-type_graph2-1.png" width="100%">
+This graph shows the significantly higher proportions of special votes
+cast in Māori electorates compared with General electorates. The cause
+of this has been noted in a <a href="https://www.parliament.nz/mi/pb/research-papers/document/00PLLawRP03141/origins-of-the-m%C4%81ori-seats" class="external-link">parliamentary
+research paper</a> which explained that due to the geographic size of
+the Māori electorates and the limited number of Māori polling booths,
+these voters are required to travel further to cast an ordinary vote. As
+such, Māori voters were more likely to cast a special vote at General
+electorate polling places.</p>
+<p>Between 1993 and 1999, the number of polling places in which Māori
+voters could cast their vote was increased from 534 to 1,203. This was
+seen to aid in the reduction of special votes.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
