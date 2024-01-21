@@ -27,9 +27,6 @@ This article explores the [`majority`](https://sarahcgall.github.io/scgElections
 library(scgElectionsNZ)
 library(dplyr)
 library(ggplot2)
-if (!requireNamespace("scgUtils", quietly = TRUE)) {
-    remotes::install_github("sarahcgall/scgUtils")
-}
 ```
 ### Majority
 The `majority` dataset contains the winning candidate and the margin of victory by electorate. The majority is calculated by subtracting the number of votes of the winning candidate form the number of votes of the second candidate. The margin of victory divides this number by the total votes cast to create a percentage figure.
@@ -49,9 +46,7 @@ head(df)
 Update of the names of electorates so that they can be traced back through name changes.
 ```{r majority1}
 # Convert pre-2020 electorate names to match name changes that occurred in 2020 and view
-df <- update_names(df,
-                   nameCol="Electorate",
-                   output = "electorate")
+df <- update_names(df, output = "electorate")
 head(df)
 ```
 <br>

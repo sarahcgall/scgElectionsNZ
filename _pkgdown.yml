@@ -60,10 +60,10 @@ articles:
   navbar: Dataset Usage
   contents:
   - articles/summary
-  - articles/turnout
-  - articles/vote-type
   - articles/party-and-candidate-votes
   - articles/majority
+  - articles/turnout
+  - articles/vote-type
   - articles/split-voting
 
 - title: Analysis

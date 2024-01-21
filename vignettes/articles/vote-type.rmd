@@ -77,7 +77,7 @@ df %>%
 <br>
 
 #### Augmenting Data with Regional Information
-Enhance the dataset by adding regional data for more a detailed analysis using the [`add_data`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html) function:
+Enhance the dataset by adding regional data for more a detailed analysis using the [`add_data()`](https://sarahcgall.github.io/scgElectionsNZ/reference/add_data.html) function:
 ```{r vote-type3}
 df <- add_data(df, output = "region")
 head(df)
@@ -86,7 +86,7 @@ head(df)
 
 #### Visualising Overseas Votes
 Create a visualisation to illustrate the proportion of overseas special Party Votes by region over time:
-```{r vote-type4, dpi=300, out.width = '100%'}
+```{r vote-type4, dpi=300, out.width = '100%', fig.height = 7}
 df <- df %>%
   # including only valid and informal votes
   filter(Ballot == "Party", Validity != "Disallowed") %>%

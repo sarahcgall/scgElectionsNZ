@@ -58,11 +58,11 @@ df <- update_names(df, output = "party")
 ```
 
 Explore detailed examples and dataset descriptions in the 
-[`scgElectionsNZ` documentation](https://sarahcgall.github.io/scgElectionsNZ/reference/index.html).
+[package documentation](https://sarahcgall.github.io/scgElectionsNZ/reference/index.html).
 
 ## Data Sources and Disclaimer
 #### Data Sources
-The datasets in the `scgElectionsNZ` package are meticulously curated from the official results provided by the [New Zealand Electoral Commission](https://electionresults.govt.nz/).
+The datasets in the `scgElectionsNZ` package are meticulously curated from the official results sourced from the [New Zealand Electoral Commission](https://electionresults.govt.nz/).
 These datasets offer a comprehensive view of New Zealand's electoral outcomes and are crucial for in-depth analysis and research in political science, electoral studies, and related fields.
 
 #### Disclaimer
