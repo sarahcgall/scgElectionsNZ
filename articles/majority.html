@@ -55,10 +55,10 @@
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Dataset Usage</h6>
     <a class="dropdown-item" href="../articles/summary.html">Summary</a>
-    <a class="dropdown-item" href="../articles/turnout.html">Turnout</a>
-    <a class="dropdown-item" href="../articles/vote-type.html">Vote Type</a>
     <a class="dropdown-item" href="../articles/party-and-candidate-votes.html">Party and Candidate Votes</a>
     <a class="dropdown-item" href="../articles/majority.html">Majority</a>
+    <a class="dropdown-item" href="../articles/turnout.html">Turnout</a>
+    <a class="dropdown-item" href="../articles/vote-type.html">Vote Type</a>
     <a class="dropdown-item" href="../articles/split-voting.html">Split Voting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
@@ -152,9 +152,7 @@ number by the total votes cast to create a percentage figure. <br><br></p>
 through name changes.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert pre-2020 electorate names to match name changes that occurred in 2020 and view</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>,</span>
-<span>                   nameCol<span class="op">=</span><span class="st">"Electorate"</span>,</span>
-<span>                   output <span class="op">=</span> <span class="st">"electorate"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_names.html">update_names</a></span><span class="op">(</span><span class="va">df</span>, output <span class="op">=</span> <span class="st">"electorate"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Election           Electorate          Party                  Candidate</span></span>
 <span><span class="co">#&gt; 1     2023     Auckland Central    Green Party SWARBRICK, Chloe Charlotte</span></span>
