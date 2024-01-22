@@ -49,7 +49,8 @@ region <- data %>%
     .default = NULL
   )) %>%
   arrange(Electorate) %>%
-  select(Electorate, Region)
+  select(Electorate, Region) %>%
+  distinct()
 
 # save to .rds
 usethis::use_data(region, internal = TRUE, overwrite = TRUE)
@@ -62,7 +63,8 @@ type <- data %>%
                       "Ikaroa-Rawhiti", "Waiariki", "Te Puku O Te Whenua", "Te Tai Rawhiti", "Hauraki", "Tainui"),
     "Maori", "General"
   )) %>%
-  arrange(Electorate) # reorder data
+  arrange(Electorate) %>% # reorder data
+  distinct()
 
 # Save type data
 save_to_rds("type")

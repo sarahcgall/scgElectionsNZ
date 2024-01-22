@@ -70,8 +70,7 @@ head(df)
 ```
 ```{r majority2_table, echo = FALSE}
 # Add Electorate Type and filter for General electorates only and view
-df <- unique(add_data(df, output="type"))
-df <- arrange(df, -Election, Electorate)
+df <- add_data(df, output="type")
 knitr::kable(head(df))
 ```
 <br>

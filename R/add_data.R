@@ -39,8 +39,8 @@ add_data <- function(data,
   # Define a mapping of output types to datasets and column names
   output_mappings <- list(
     region = list(data = region,
-                   column_name = "Region",
-                   key = "Electorate"),
+                  column_name = "Region",
+                  key = "Electorate"),
     type = list(data = type,
                 column_name = "Electorate_Type",
                 key = "Electorate")

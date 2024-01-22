@@ -145,6 +145,7 @@ vote_df %>%
   ungroup() %>%
   # View only Special - Overseas results
   filter(Method == "Special - Overseas") %>%
+  add_data(output = "region") %>% # # add region
   arrange(-Percentage) %>% # rank by percentage
   head(n = 10)
 ```
@@ -171,7 +172,6 @@ The table above shows that the urban electorates within Auckland had the greates
 Next, gain insights into the percentage of disallowed votes by electorate and ballot type for the 2023 election:
 ```{r vote-type1, eval = FALSE}
 vote_df %>%
-  add_data(output = "type") %>%
   filter(Election == 2023) %>% # Get 2023 Election data only
   # Get grouped Votes
   group_by(Ballot, Electorate, Electorate_Type, Validity) %>%
@@ -183,6 +183,7 @@ vote_df %>%
   ungroup() %>%
   # View only Disallowed results
   filter(Validity == "Disallowed") %>%
+  add_data(output = "type") %>% # add electorate type
   arrange(-Percentage) %>% # rank by percentage
   head(n = 10)
 ```
